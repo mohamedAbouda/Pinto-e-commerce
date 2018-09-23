@@ -28,7 +28,6 @@ class ProductController extends BaseController
     public function index(Request $request)
     {
         $input = $request->all();
-        $data['merchants'] = Merchant::pluck('name' ,'id')->toArray();
         $query = Product::with('stocks');
 
         if($request->has('from') && $request->has('to')){
@@ -42,45 +41,20 @@ class ProductController extends BaseController
         if ($request->has('to')) {
             $query = $query->where('created_at' ,'<=' ,$input['to']);
         }
-
-        if(Auth::user()->getTable() != 'merchant_admins')
-        {
-            if ($request->has('merchant_id')) {
-                $query = $query->where('merchant_id' ,$input['merchant_id']);
-            }
-            $data['products'] = $query->paginate(20);
-        }else{
-            $data['products'] = $query->where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->paginate(20);
-        }
+        $data['products'] = $query->paginate(20);
 
         return view('dashboardV2.products.index' ,$data);
     }
 
     public function approvedProducts()
     {
-        if(Auth::user()->getTable() != 'merchants')
-        {
-            $products = Product::where('approved',1)->paginate(20);
-        }else{
-
-            $products = Product::where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->paginate(20);
-
-        }
-
+        $products = Product::where('approved',1)->paginate(20);
         return view('dashboardV2.products.approvedProducts', compact('products'));
     }
 
     public function disapprovedProducts()
     {
-        if(Auth::user()->getTable() != 'merchants')
-        {
-            $products = Product::where('approved',0)->paginate(20);
-        }else{
-
-            $products = Product::where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->paginate(20);
-
-        }
-
+        $products = Product::where('approved',0)->paginate(20);
         return view('dashboardV2.products.disApprovedProducts', compact('products'));
     }
 
@@ -96,8 +70,7 @@ class ProductController extends BaseController
         $sizes = Size::all();
         $colors = Color::all();
         $brands = Brand::all();
-        $merchants = Merchant::all();
-        return view('dashboardV2.products.create', compact('subcategories','categories', 'sizes', 'colors' , 'brands','merchants'));
+        return view('dashboardV2.products.create', compact('subcategories','categories', 'sizes', 'colors' , 'brands'));
     }
 
     /**
@@ -138,31 +111,20 @@ class ProductController extends BaseController
             $sizes = Size::all();
             $colors = Color::all();
             $brands = Brand::all();
-            $merchants = Merchant::all();
             $subCategory = SubCategory::where('id',$product->sub_category_id)->first();
             $productIds = GeneralProduct::where('product_id',$id)->pluck('related_products')->first();
             $relatedProductIds = explode(',', $productIds);
             $relatedProducts = Product::whereIn('id',$relatedProductIds)->get();
+            $productsRelated = Product::get();
 
-            if(Auth::user()->getTable() != 'merchant_admins'){
-                $productsRelated = Product::where('merchant_id',$product->merchant_id)->get();
-            }else{
-                $productsRelated = Product::where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->get();
-            }
-
-
-
-            return view('dashboardV2.products.edit', compact('product', 'subcategories', 'categories', 'sizes', 'colors' ,'brands','merchants','relatedProductIds','productsRelated','subCategory'));
+            return view('dashboardV2.products.edit', compact('product', 'subcategories', 'categories', 'sizes', 'colors' ,'brands','relatedProductIds','productsRelated','subCategory'));
         }
         return back()->with('info', 'Item did not found in database.');
     }
 
     public function show($id)
     {
-        if ($product = Product::where('id',$id)->with('sizes','colors','subcategory','brand','merchant','stocks','GeneralProduct','discountCount')->first()) {
-
-
-
+        if ($product = Product::where('id',$id)->with('sizes','colors','subcategory','brand','stocks','GeneralProduct','discountCount')->first()) {
             return view('dashboardV2.products.show', compact('product'));
         }
         return back()->with('info', 'Item did not found in database.');
@@ -289,13 +251,7 @@ class ProductController extends BaseController
 
     public function featuredProductsRequests()
     {
-        if(Auth::user()->getTable() != 'merchants')
-        {
-            $products = Product::whereNotIn('featured',[1])->paginate(20);
-        }else{
-            $products = Product::whereNotIn('featured',[1])->where('merchant_id',Auth::id())->paginate(20);
-        }
-
+        $products = Product::whereNotIn('featured',[1])->paginate(20);
         return view('dashboardV2.products.featuredProducts', compact('products'));
     }
     public function changeFeaturedStatusAjax(Request $request)
@@ -371,12 +327,7 @@ class ProductController extends BaseController
             $shippingMerchantCost = GeneralProduct::where('product_id',$request->input('product_id'))->first();
             $shippingMerchantCost->update($data);
         }
-
-        if(Auth::guard('merchant')->user()->parent_id == null){
-            $products = Product::where('merchant_id',Auth::id())->get();
-        }else{
-            $products = Product::where('merchant_id',Auth::guard('merchant')->user()->parent_id)->get();
-        }
+        $products = Product::get();
 
         return view('dashboardV2.products.relatedProducts')->with(['productId'=>$request->input('product_id'),'products'=>$products]);
     }
@@ -485,7 +436,6 @@ class ProductController extends BaseController
     public function withCorrelationProducts(Request $request)
     {
         $input = $request->all();
-        $data['merchants'] = Merchant::pluck('name' ,'id')->toArray();
         $query = Product::with('stocks')->where('match_keys',1);
 
         if ($request->has('from')) {
@@ -494,16 +444,7 @@ class ProductController extends BaseController
         if ($request->has('to')) {
             $query = $query->where('created_at' ,'<=' ,$input['to']);
         }
-
-        if(Auth::user()->getTable() != 'merchants')
-        {
-            if ($request->has('merchant_id')) {
-                $query = $query->where('merchant_id' ,$input['merchant_id']);
-            }
-            $data['products'] = $query->paginate(20);
-        }else{
-            $data['products'] = $query->where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->paginate(20);
-        }
+        $data['products'] = $query->paginate(20);
 
         return view('dashboardV2.products.index' ,$data);
     }
@@ -511,7 +452,6 @@ class ProductController extends BaseController
     public function withoutCorrelationProducts(Request $request)
     {
         $input = $request->all();
-        $data['merchants'] = Merchant::pluck('name' ,'id')->toArray();
         $query = Product::with('stocks')->where('match_keys',0);
 
         if ($request->has('from')) {
@@ -520,16 +460,7 @@ class ProductController extends BaseController
         if ($request->has('to')) {
             $query = $query->where('created_at' ,'<=' ,$input['to']);
         }
-
-        if(Auth::user()->getTable() != 'merchants')
-        {
-            if ($request->has('merchant_id')) {
-                $query = $query->where('merchant_id' ,$input['merchant_id']);
-            }
-            $data['products'] = $query->paginate(20);
-        }else{
-            $data['products'] = $query->where('merchant_id',Auth::guard('merchant')->user()->merchant_id)->paginate(20);
-        }
+        $data['products'] = $query->paginate(20);
 
         return view('dashboardV2.products.index' ,$data);
     }

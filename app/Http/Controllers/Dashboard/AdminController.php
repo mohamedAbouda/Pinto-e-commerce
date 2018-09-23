@@ -116,39 +116,4 @@ class AdminController extends BaseController
         alert()->success('Admin deleted successfully.', 'Success');
         return redirect()->route('dashboard.admins.index');
     }
-
-    public function getMerchantProfile()
-    {
-        $user = Merchant::where('id',\Auth::user()->merchant->id)->with('address')->first();
-        $governorates = Governorate::all();
-        return view('dashboardV2.merchant_admins.merchant_form',compact('user','governorates'));
-    }
-    public function updateMerchantProfile(Request $request)
-    {
-        $data = $request->all();
-        $updateAddress = Address::where('id',$request->input('addressId'))->first();
-
-        if ($updateAddress) {
-            $updateAddress->update($data);
-        }else{
-            $address = Address::create($data);
-            $data['address_id'] = $address->id;
-        }
-
-
-        if($request->input('password')){
-            $data['password'] = bcrypt($request->input('password'));
-        }
-        $updateMerchant = Merchant::where('id',$request->input('updateId'))->first();
-        $updateMerchant->update($data);
-
-        alert()->success('Data Updated successfully.', 'Success');
-        return redirect()->back();
-    }
-
-    public function viewMerchantProfile()
-    {
-        $user = Merchant::where('id',\Auth::user()->merchant->id)->with('address.governorate')->first();
-        return view('dashboardV2.merchant_admins.merchant_view',compact('user'));
-    }
 }

@@ -24,7 +24,7 @@ body {
             </div>
         </div>
     </div>
-  
+
 </div>
 @stop
 
@@ -54,7 +54,6 @@ body {
                             {{ $order->id }}
                         </td>
                     </tr>
-                     @if(!Auth::guard('merchant')->check())
                     <tr>
                         <td class="">
                             <span style="margin-left:30px;">
@@ -65,12 +64,11 @@ body {
                             @if($order->total_price_after_discount)
                             {{ $order->total_price_after_discount }}
                             @else
-                             {{ $order->total_price }}
+                            {{ $order->total_price }}
                             @endif
                         </td>
                     </tr>
-                    @endif
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{trans('web.dashboard_orders_pages_show_user')}}
@@ -80,17 +78,17 @@ body {
                             {{ $order->user->name }}
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{trans('web.dashboard_orders_pages_show_status')}}
                             </span>
                         </td>
                         <td>
-                           @include('dashboardV2.orders.status')
+                            @include('dashboardV2.orders.status')
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{trans('web.dashboard_orders_pages_show_note')}}
@@ -100,18 +98,18 @@ body {
                             {{ $order->note }}
                         </td>
                     </tr>
-                  
-                      <tr>
+
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
-                               {{trans('web.dashboard_orders_pages_show_dispute_comment')}}
+                                {{trans('web.dashboard_orders_pages_show_dispute_comment')}}
                             </span>
                         </td>
                         <td>
                             {{ $order->dispute_comment }}
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{trans('web.dashboard_orders_pages_show_address')}}
@@ -119,7 +117,7 @@ body {
                         </td>
                         <td>
                             @if($order->address)
-                             Address : {{$order->address->address}}<br>
+                            Address : {{$order->address->address}}<br>
                             Country : {{$order->address->country}}<br>
                             City    : {{$order->address->city}}
                             @else
@@ -135,26 +133,15 @@ body {
                             </span>
                         </td>
                         <td>
-                            @if(!Auth::guard('merchant')->check())
-                             @foreach($order->items as $item)
+                            @foreach($order->items as $item)
                             Product : <a href="{{url('dashboard/products/'.$item->product->id.'/show')}}">{{$item->product->name}}</a><br>
                             Count : {{$item->amount}}<br>
                             Price    : {{$item->price_per_item}}<br>
                             <hr>
-                             @endforeach
-                             @else
-                              @foreach($order->items as $item)
-                              @if($item->product->merchant_id == Auth::guard('merchant')->user()->merchant_id)
-                            Product : <a href="{{url('dashboard/products/'.$item->product->id.'/show')}}">{{$item->product->name}}</a><br>
-                            Count : {{$item->amount}}<br>
-                            Price    : {{$item->price_per_item}}<br>
-                            <hr>
-                            @endif
-                             @endforeach
-                             @endif
+                            @endforeach
                         </td>
                     </tr>
-                
+
                 </tbody>
             </table>
         </div>

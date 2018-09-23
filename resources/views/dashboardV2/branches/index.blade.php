@@ -68,9 +68,6 @@ body {
                         <th>
                             {{ trans('web.dashboard_branches_pages_index_page_table_header_governorate') }}
                         </th>
-                        <th>
-                            {{ trans('web.dashboard_branches_pages_index_page_table_header_merchant') }}
-                        </th>
 
                         <th>
                         </th>
@@ -94,11 +91,6 @@ body {
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                                 {{ $resource->governorate ? $resource->governorate->name : '[DELETED]' }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->merchant->name }}
                             </h3>
                         </td>
 

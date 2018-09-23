@@ -25,11 +25,9 @@ body {
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-        @if(Auth::guard('merchant')->check())
         <a href="{{ route('dashboard.products.create') }}"class="btn btn-primary margin-left-10">
             <span>+ </span>{{ trans('web.dashboard_products_show_add') }}
         </a>
-        @endif
         <a href="{{ route('dashboard.products.edit',$product->id) }}"class="btn btn-warning margin-left-10">
             {{ trans('web.dashboard_products_show_edit') }}
         </a>
@@ -73,7 +71,7 @@ body {
                             {{ $product->name }}
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{ trans('web.dashboard_products_show_sku') }}
@@ -83,7 +81,7 @@ body {
                             {{ $product->sku }}
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{ trans('web.dashboard_products_show_price') }}
@@ -93,7 +91,7 @@ body {
                             {{ $product->price }}
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{ trans('web.dashboard_products_show_category') }}
@@ -107,74 +105,62 @@ body {
                     </tr>
                     <tr>
                         <td> <span style="margin-left:30px;">
-                                {{ trans('web.dashboard_products_show_cost') }}
-                            </span></td>
+                            {{ trans('web.dashboard_products_show_cost') }}
+                        </span></td>
                         <td>
                             @if($product->generalProduct)
-                        By Merchant : {{$product->generalProduct->shipping_cost}} EGP<br>
-                        @endif
-                           @if($product->generalProduct)
-                           @if(($product->generalProduct->shipping_category == 1))
-                        By site : Yes<br>
-                        @endif
-                        @endif
+                            By Merchant : {{$product->generalProduct->shipping_cost}} EGP<br>
+                            @endif
+                            @if($product->generalProduct)
+                            @if(($product->generalProduct->shipping_category == 1))
+                            By site : Yes<br>
+                            @endif
+                            @endif
                         </td>
                     </tr>
-                 
-                    @if($product->merchant)
-                      <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                                {{ trans('web.dashboard_products_show_merchant') }}
-                            </span>
-                        </td>
-                        <td>
-                            {{ $product->merchant->name }}
-                        </td>
-                    </tr>
-                    @endif
-                        <tr>
+
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{ trans('web.dashboard_products_show_discount_products') }}
                             </span>
                         </td>
                         <td>
-                           @if($product->discountCount)
+                            @if($product->discountCount)
                             @foreach($product->discountCount as $discountproduct)
-                                <strong>{{ trans('web.dashboard_products_show_count') }} : </strong>{{$discountproduct->count}}<br>
-                                <strong>{{ trans('web.dashboard_products_show_discount') }} : </strong>{{$discountproduct->discount}}<br><hr>
+                            <strong>{{ trans('web.dashboard_products_show_count') }} : </strong>{{$discountproduct->count}}<br>
+                            <strong>{{ trans('web.dashboard_products_show_discount') }} : </strong>{{$discountproduct->discount}}<br><hr>
                             @endforeach
-                           @else
-                           {{ trans('web.dashboard_products_show_no_discount') }}.
-                           @endif
+                            @else
+                            {{ trans('web.dashboard_products_show_no_discount') }}.
+                            @endif
                         </td>
                     </tr>
-              
-                    
-                         <tr>
+
+
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
                                 {{ trans('web.dashboard_products_show_cover') }}
                             </span>
                         </td>
                         <td>
-                          <img src="{{$product->cover_image_url}}" style="width: 200px;max-width: 200px;height: 150px;max-height: 150px;">
+                            <img src="{{$product->cover_image_url}}" style="width: 200px;max-width: 200px;height: 150px;max-height: 150px;">
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
-                                 {{ trans('web.dashboard_products_show_img') }}
+                                {{ trans('web.dashboard_products_show_img') }}
                             </span>
                         </td>
                         <td>
                             @foreach($product->images as $image)
-                          <img src="{{$image->image_url}}" style="width: 200px;max-width: 200px;height: 150px;max-height: 150px;">
-                          @endforeach
+                            <img src="{{$image->image_url}}" style="width: 200px;max-width: 200px;height: 150px;max-height: 150px;">
+                            @endforeach
                         </td>
                     </tr>
-                   
+
                     <tr>
                         <td class="">
                             <span style="margin-left:30px;">
@@ -195,33 +181,33 @@ body {
                         <td>
                             @if($product->stocks)
                             @foreach($product->stocks as $stock)
-                               <strong>{{ trans('web.dashboard_products_show_amount') }} : </strong> {{$stock->amount}}<br>
-                               <strong>{{ trans('web.dashboard_products_show_note') }} : </strong> {{$stock->note}}<br><strong><hr></strong>
-                                <strong>{{ trans('web.dashboard_products_show_sk') }} : </strong>{{$stock->sku}}<br>
-                                 <strong>Weight : </strong>{{$stock->weight ? $stock->weight: "Not Set"}} <br>
-                               <strong>{{ trans('web.dashboard_products_show_clr') }} : </strong> {{$stock->color}}<br>
-                               <strong>{{ trans('web.dashboard_products_show_brnd') }} : </strong> @if($stock->brand_id)
-                               {{$stock->brand->name}}
-                               @else
-                               {{ trans('web.dashboard_products_show_no_brnd') }}.
-                               @endif
-                               <br>
-                               <strong>Size : </strong> {{$stock->size}}<br>
+                            <strong>{{ trans('web.dashboard_products_show_amount') }} : </strong> {{$stock->amount}}<br>
+                            <strong>{{ trans('web.dashboard_products_show_note') }} : </strong> {{$stock->note}}<br><strong><hr></strong>
+                            <strong>{{ trans('web.dashboard_products_show_sk') }} : </strong>{{$stock->sku}}<br>
+                            <strong>Weight : </strong>{{$stock->weight ? $stock->weight: "Not Set"}} <br>
+                            <strong>{{ trans('web.dashboard_products_show_clr') }} : </strong> {{$stock->color}}<br>
+                            <strong>{{ trans('web.dashboard_products_show_brnd') }} : </strong> @if($stock->brand_id)
+                            {{$stock->brand->name}}
+                            @else
+                            {{ trans('web.dashboard_products_show_no_brnd') }}.
+                            @endif
+                            <br>
+                            <strong>Size : </strong> {{$stock->size}}<br>
                             @endforeach
                             @else
                             {{ trans('web.dashboard_products_show_no_data') }}.
                             @endif
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="">
                             <span style="margin-left:30px;">
-                               {{ trans('web.dashboard_products_show_total_ava') }} 
+                                {{ trans('web.dashboard_products_show_total_ava') }}
                             </span>
                         </td>
                         <td>
                             @if($product->stocks)
-                           <strong> {{$product->stocks->sum('amount')}}</strong>
+                            <strong> {{$product->stocks->sum('amount')}}</strong>
                             @endif
                         </td>
                     </tr>

@@ -47,7 +47,7 @@
                             <option selected disabled>{{ trans('web.dashboard_products_create_please_select_cateogry') }}</option>
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
-                            
+
 
                             @endforeach
                         </select>
@@ -62,10 +62,6 @@
                         </select>
                     </div>
                 </div>
-
-
-                <input type="hidden" name="merchant_id" value="{{Auth::guard('merchant')->user()->merchant_id}}">
-
 
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
@@ -159,8 +155,8 @@
             $('#AppendPrice').append('You will get <strong><span></span>'+Discount+' EGP</strong>');
                 console.log(Discount);
          }
-         
-     
+
+
          if(data['has_brand'] == 1){
             $('#brandDiv').css("display", "block");
         }else{
@@ -194,7 +190,7 @@
             }
             $('#selectValue').html('');
             $('#selectValue').append(options);
-           
+
        }
    });
 }

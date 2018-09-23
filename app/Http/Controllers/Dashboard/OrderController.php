@@ -44,22 +44,6 @@ class OrderController extends BaseController
             $filter_sql = $filter_sql->where('status',$status);
         }
 
-        if (isset($input['merchant_id']) || Auth::guard('merchant')->check()) {
-            if(Auth::guard('merchant')->check()){
-
-
-                $MerchantId = Auth::guard('merchant')->user()->merchant_id;
-
-            }
-            $merchant_id = isset($input['merchant_id']) ? $input['merchant_id'] : $MerchantId;
-
-            $ordersId = OrderProduct::whereHas('product', function ($query) use($merchant_id) {
-                $query->where('merchant_id',$merchant_id);
-            })->pluck('order_id')->toArray();
-            // dd($merchant_id,$ordersId);
-            $filter_sql = $filter_sql->whereIn('id',$ordersId);
-        }
-
         if (isset($input['orderBy'])) {
             if ($input['orderBy'] === 'ASC') {
                 $filter_sql = $filter_sql->orderBy('id','ASC');
@@ -72,18 +56,8 @@ class OrderController extends BaseController
         // dd($filter_sql->toSql());
         $data = [];
         if (!$request->wantsJson()) {
-            if(Auth::user()->getTable() != 'merchants'){
-                $data['merchants'] = Merchant::where('id','!=',null)->pluck('name','id')->toArray();
-                
-                $data['orders'] = $filter_sql->paginate(20);
-
-            }else{
-                $ordersId = OrderProduct::whereHas('product', function ($query) use($MerchantId) {
-                    $query->where('merchant_id',$MerchantId);
-                })->pluck('order_id')->toArray();
-                $data['orders'] = $filter_sql->whereIn('id',$ordersId)->paginate(20);
-            }
-
+            $ordersId = OrderProduct::pluck('order_id')->toArray();
+            $data['orders'] = $filter_sql->whereIn('id',$ordersId)->paginate(20);
             return view($this->views_path.'index',$data);
         }
 
@@ -216,16 +190,6 @@ class OrderController extends BaseController
             $filter_sql = $filter_sql->where('status',$status);
         }
 
-        if (isset($input['merchant_id'])) {
-            $merchant_id = $input['merchant_id'];
-            $ordersId = Item::whereHas('product', function ($query) use($merchant_id) {
-                $query->where('merchant_id',$merchant_id);
-            })->pluck('order_id')->toArray();
-            if ($ordersId) {
-                $filter_sql = $filter_sql->whereIn('id',$ordersId);
-            }
-        }
-
         if (isset($input['orderBy'])) {
             if ($input['orderBy'] === 'ASC') {
                 $filter_sql = $filter_sql->orderBy('id','ASC');
@@ -239,15 +203,8 @@ class OrderController extends BaseController
         $data = [];
 
         if (!$request->wantsJson()) {
-            if(Auth::user()->getTable() != 'merchants'){
-                $data['merchants'] = Merchant::pluck('name','id')->toArray();
-                $data['orders'] = $filter_sql->whereIn('status',[3,5,6,7,8,9,10,11])->paginate(20);
-            }else{
-                $ordersId = Item::whereHas('product', function ($query) {
-                    $query->where('merchant_id',Auth::id());
-                })->pluck('order_id')->toArray();
-                $data['orders'] = $filter_sql->whereIn('status',[3,5,6,7,8,9,10,11])->whereIn('id',$ordersId)->paginate(20);
-            }
+            $ordersId = Item::pluck('order_id')->toArray();
+            $data['orders'] = $filter_sql->whereIn('status',[3,5,6,7,8,9,10,11])->whereIn('id',$ordersId)->paginate(20);
             return view($this->views_path.'index',$data);
         }
 
@@ -277,16 +234,6 @@ class OrderController extends BaseController
             $filter_sql = $filter_sql->where('status',$status);
         }
 
-        if (isset($input['merchant_id'])) {
-            $merchant_id = $input['merchant_id'];
-            $ordersId = Item::whereHas('product', function ($query) use($merchant_id) {
-                $query->where('merchant_id',$merchant_id);
-            })->pluck('order_id')->toArray();
-            if ($ordersId) {
-                $filter_sql = $filter_sql->whereIn('id',$ordersId);
-            }
-        }
-
         if (isset($input['orderBy'])) {
             if ($input['orderBy'] === 'ASC') {
                 $filter_sql = $filter_sql->orderBy('id','ASC');
@@ -300,15 +247,8 @@ class OrderController extends BaseController
         $data = [];
 
         if (!$request->wantsJson()) {
-            if(Auth::user()->getTable() != 'merchants'){
-                $data['merchants'] = Merchant::pluck('name','id')->toArray();
-                $data['orders'] = $filter_sql->whereIn('status',[2,4])->paginate(20);
-            }else{
-                $ordersId = Item::whereHas('product', function ($query) {
-                    $query->where('merchant_id',Auth::guard('merchant')->user()->merchant_id);
-                })->pluck('order_id')->toArray();
-                $data['orders'] = $filter_sql->whereIn('status',[2,4])->whereIn('id',$ordersId)->paginate(20);
-            }
+            $ordersId = Item::pluck('order_id')->toArray();
+            $data['orders'] = $filter_sql->whereIn('status',[2,4])->whereIn('id',$ordersId)->paginate(20);
             return view($this->views_path.'index',$data);
         }
 
@@ -320,40 +260,12 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function merchantHistoryOrders()
-    {
-       
-        $ordersId = OrderProduct::whereHas('product', function ($query)  {
-            $query->where('merchant_id',Auth::guard('merchant')->user()->merchant_id);
-        })->pluck('order_id')->toArray();
-        $data['orders'] = Order::whereIn('id',$ordersId)->whereIn('status',[3,5,6,7,8,9,10,11])->paginate(20);
-        return view($this->views_path.'index',$data);
-    }
-
-    public function merchantActiveOrders($value='')
-    {
-       
-        $ordersId = OrderProduct::whereHas('product', function ($query)  {
-            $query->where('merchant_id',Auth::guard('merchant')->user()->merchant_id);
-        })->pluck('order_id')->toArray();
-        $data['orders'] = Order::whereIn('id',$ordersId)->whereIn('status',[2,4])->paginate(20);
-        return view($this->views_path.'index',$data);
-    }
-
-
     public function disputeComments(Order $order)
     {
-        $merchant = auth('merchant')->user();
-
-        $orders = OrderProduct::whereHas('product', function ($query) use($merchant) {
-            $query->where('id' ,'<>' ,NULL);
-            if ($merchant) {
-                $query->where('merchant_id',$merchant->id);
-            }
-        })->groupBy('order_id')->where('order_id' ,$order->id)->exists();
+        $orders = OrderProduct::groupBy('order_id')->where('order_id' ,$order->id)->exists();
 
         if (!$orders) {
-            alert()->error('No products for this order & merchant or no dispute comments.', 'Error');
+            alert()->error('No products for this order or no dispute comments.', 'Error');
             return redirect()->back();
         }
 
@@ -364,8 +276,6 @@ class OrderController extends BaseController
     public function disputeCommentReply(Request $request ,Order $order)
     {
         $input = $request->all();
-        $merchant = auth('merchant')->user();
-        $input['merchant_id'] = $merchant->id;
         $input['order_id'] = $order->id;
         OrderDisputeComment::create($input);
         alert()->success('Reply sent successfully.', 'Success');

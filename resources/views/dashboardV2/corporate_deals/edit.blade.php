@@ -75,26 +75,6 @@
 
                 </div>
 
-                    @if(Auth::guard('merchant')->check())
-                    <input type="hidden" name="merchant_id" value="{{Auth::guard('merchant')->user()->merchant_id}}">
-                @else
-                    <div class="col-md-12">
-                    <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">
-                           Merchant
-                        </label>
-                        <select class="form-control" name="merchant_id" required>
-                           
-                            @foreach($merchants as $merchant)
-                            <option value="{{$merchant->id}}" {{$merchant->id == $corporate_deal->merchant_id ? 'selected':''}}>{{$merchant->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                </div>
-                @endif
-
-
                 <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 padding-bottom-30">
                     <div class="text-left">
                         <button type="submit" class="btn btn-primary">

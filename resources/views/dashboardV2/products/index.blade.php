@@ -56,13 +56,10 @@ body {
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-        @if(Auth::guard('merchant')->check())
         <a class="btn btn-blue margin-left-10" href="{{route('dashboard.products.create')}}">
             <span>+ </span>{{ trans('web.dashboard_products_index_add') }}
         </a>
-        @endif
 
-        @if(!Auth::guard('merchant')->check())
         <div class="btn-group">
             <button type="button" class="btn btn-sm edit-btn text-center margin-left-10 dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-ellipsis-h"></i>
@@ -86,7 +83,6 @@ body {
                 </li>
             </ul>
         </div>
-        @endif
     </div>
 </div>
 @stop
@@ -109,7 +105,7 @@ body {
     </div>
 </div>
 <div class="row margin-top15">
-    <div class="col-md-{{ Auth::guard('merchant')->check() ? 12 : 9 }}">
+    <div class="col-md-9">
         <div class="row margin-bottom10">
             {{ $products->links() }}
         </div>
@@ -155,18 +151,11 @@ body {
                             <a href="{{url('dashboard/products/'.$product->id.'/reviews')}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Reviews">
                                 <i class="fa fa-eye"></i> {{ trans('web.dashboard_products_index_rev') }}
                             </a>
-                            @if(!Auth::guard('merchant')->check())
                             @if($product->approved == 1)
                             {{ Form::open(['route' => 'dashboard.admin.toggle.approve']) }}
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <button type="submit" class="btn btn-danger">{{ trans('web.dashboard_products_index_disapprove') }}</button>
                             {{ Form::close() }}
-                            @else
-                            {{ Form::open(['route' => 'dashboard.admin.toggle.approve']) }}
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                            <button type="submit" class="btn btn-primary">{{ trans('web.dashboard_products_index_approve') }}</button>
-                            {{ Form::close() }}
-                            @endif
                             @endif
                         </td>
                     </tr>
@@ -176,14 +165,10 @@ body {
         </div>
     </div>
 
-    @if(!Auth::guard('merchant')->check())
     <div class="col-md-3">
         <div class="row margin-bottom10">
         </div>
         {{ Form::open(['id' => 'filter-products-form' ,'method' => 'GET']) }}
-        <div class="form-group margin-bottom10">
-            {{ Form::select('merchant_id' ,$merchants ,request('merchant_id' ,NULL) ,['class' => 'form-control' ,'placeholder' => 'Filter by merchant']) }}
-        </div>
         <div class="form-group margin-bottom10">
             <input name="from" type="text" value="{{ request('from' ,NULL) }}" class="form-control" placeholder="From">
         </div>
@@ -197,7 +182,6 @@ body {
         </div>
         {{ Form::close() }}
     </div>
-    @endif
 </div>
 @stop
 

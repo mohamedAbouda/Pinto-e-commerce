@@ -28,21 +28,12 @@ body {
                 <i class="fa fa-ellipsis-h"></i>
             </button>
             <ul class="dropdown-menu contact-dropdown pull-right" role="menu">
-              @if(Auth::guard('merchant')->check())
-               <li>
-                    <a href="{{route('dashboard.merchant.active.orders')}}">{{trans('web.dashboard_orders_pages_index_active_orders')}}</a>
-                </li>
-                  <li>
-                    <a href="{{route('dashboard.merchant.history.orders')}}">{{trans('web.dashboard_orders_pages_index_history_orders')}}</a>
-                </li>
-              @else
                 <li>
                     <a href="{{route('dashboard.active.orders')}}">{{trans('web.dashboard_orders_pages_index_active_orders')}}</a>
                 </li>
-                  <li>
+                <li>
                     <a href="{{route('dashboard.history.orders')}}">{{trans('web.dashboard_orders_pages_index_history_orders')}}</a>
                 </li>
-                @endif
             </ul>
         </div>
     </div>
@@ -90,13 +81,6 @@ body {
                         <option value="11" {{ request()->get('status') == 11 ? 'selected' : '' }}>Dispute Other</option>
                     </select>
                 </div>
-                @if(!Auth::guard('merchant')->check())
-                <div class="col-xs-4 col-md-4">
-                    @if(isset($merchants))
-                    {{ Form::select('merchant_id',$merchants,old('merchant_id'),['class' => "form-control", 'style' => "margin-top:15px;margin-bottom:15px;",'placeholder'=>'select a merchant']) }}
-                    @endif
-                </div>
-                @endif
                 <div class="col-xs-2 col-md-2">
                     <button type="button" class="btn btn-sm edit-btn text-center" id="orderbtn">
                         <i class="fa fa-long-arrow-{{ request()->get('orderBy','ASC') === 'ASC' ? 'up' : 'down' }}"></i>
@@ -124,7 +108,7 @@ body {
                     <tr>
 
                         <th>
-                          {{trans('web.dashboard_orders_pages_index_client_name')}}
+                            {{trans('web.dashboard_orders_pages_index_client_name')}}
                         </th>
                         <th>
                             {{trans('web.dashboard_orders_pages_index_stauts')}}
@@ -133,9 +117,9 @@ body {
 
                             {{trans('web.dashboard_orders_pages_index_dispute_request')}}
                         </th>
-                         <th>
+                        <th>
 
-                           {{trans('web.dashboard_orders_pages_index_change_status')}}
+                            {{trans('web.dashboard_orders_pages_index_change_status')}}
                         </th>
 
                         <th>

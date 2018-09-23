@@ -47,31 +47,6 @@ body {
         </div>
     </div>
 </div>
-<div class="row">
-    <form method="get" action="{{route('dashboard.search.merchant.gift')}}">
-
-        <div class="col-md-5 contact-edit-col col-xs-4">
-            <div class="col-xs-4 col-md-8">
-                <select class="form-control" name="merchant_id" style="margin-top:15px;margin-bottom:15px;">
-                    <option selected disabled>
-                        {{ trans('web.dashboard_gift_cards_pages_list_page_please_select_merchant') }}
-                    </option>
-                    @foreach($merchants as $merchant)
-                    <option value="{{$merchant->id}}">{{$merchant->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-
-
-            <div class="col-xs-2 col-md-2">
-                <button type="submit" class="btn btn-white-blue">
-                    <i class="fa fa-filter"></i>
-                    {{ trans('web.dashboard_gift_cards_pages_list_page_get_gift_cards') }}
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
 <div class="row margin-top15">
     <div class="col-md-12">
         <div class="row margin-bottom10">
@@ -95,16 +70,12 @@ body {
                         <td>
                             {{$gift_card->name}}
                         </td>
-
-
                         <td>
-                            @if(Auth::guard('merchant')->check())
                             {{ Form::open(['route' => ['dashboard.gift_cards.destroy',$gift_card->id ],'method'=>'delete']) }}
                             <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="{{ trans('web.dashboard_branches_pages_index_page_delete_button') }}">
                                 <i class="fa fa-trash-o"></i>
                             </button>
                             {{ Form::close() }}
-                            @endif
                             @if($gift_card->is_active == 1)
                             {{ Form::open(['route' => ['dashboard.giftCard.change.status'],'method'=>'post']) }}
                             <input type="hidden" name="gift_id" value="{{$gift_card->id}}">

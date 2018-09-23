@@ -16,23 +16,17 @@ class DiscountController extends BaseController
 {
     protected $views_path ='dashboardV2.discounts.';
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         $index = request()->get('page' , 1);
         $data['counter_offset'] = ($index * 20) - 20;
 
-        if(Auth::guard('merchant')->check()){
-            $id = Auth::guard('merchant')->user()->merchant_id;
-            $products = Product::where('merchant_id',$id)->pluck('id')->toArray();
-        }else{
-            $products = Product::pluck('id')->toArray();
-        }
+        $products = Product::pluck('id')->toArray();
 
-        $data['merchants'] = Merchant::all();
         $data['total_resources_count'] = Discount::whereIn('product_id' ,$products)->count();
         $data['resources'] = Discount::whereIn('product_id' ,$products)->orderBy('id','DESC')->paginate(20);
 
@@ -40,25 +34,24 @@ class DiscountController extends BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
         $discount_ids = Discount::where('active',1)->pluck('product_id')->toArray();
-        $id = Auth::guard('merchant')->user()->merchant_id;
-        $data['products'] = Product::where('merchant_id',$id)->whereNotIn('id',$discount_ids)->pluck('name','id')->toArray();
+        $data['products'] = Product::whereNotIn('id',$discount_ids)->pluck('name','id')->toArray();
 
         return view($this->views_path.'create',$data);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function store(DiscountStoreRequest $request)
     {
         $input = $request->all();
@@ -83,11 +76,11 @@ class DiscountController extends BaseController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function show(Discount $discount)
     {
         // $data['products'] = $discount->products()->orderBy('id' , 'DESC')->paginate(10);
@@ -96,26 +89,25 @@ class DiscountController extends BaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function edit(Discount $offer) // named "deal" for resource route reasons ... don't judge
     {
-        $id = Auth::guard('merchant')->user()->merchant_id;
-        $data['products'] = Product::where('merchant_id',$id)->pluck('name','id')->toArray();
+        $data['products'] = Product::pluck('name','id')->toArray();
         $data['resource'] = $offer;
         return view($this->views_path.'edit',$data);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function update(DiscountUpdateRequest $request, Discount $offer)
     {
         $input = $request->all();
@@ -139,11 +131,11 @@ class DiscountController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Discount $offer)
     {
         $offer->delete();
@@ -152,30 +144,16 @@ class DiscountController extends BaseController
     }
 
     /**
-     * Toggle the boolean 'active' field in an offer
-     *
-     * @param  Discount $offer
-     * @return \Illuminate\Http\Response
-     */
+    * Toggle the boolean 'active' field in an offer
+    *
+    * @param  Discount $offer
+    * @return \Illuminate\Http\Response
+    */
     public function toggleActivation(Discount $offer)
     {
         $offer->active = ($offer->active === 1) ? 0 : 1;
         $offer->save();
         alert()->success('Product offer activation status changed.', 'Success');
         return redirect()->route('dashboard.offers.index');
-    }
-
-    public function merchantOffers(Request $request)
-    {
-        $index = request()->get('page' , 1);
-        $data['counter_offset'] = ($index * 20) - 20;
-        $data['merchants'] = Merchant::all();
-        $data['total_resources_count'] = Discount::whereHas('product', function ($query) use($request) {
-                $query->where('merchant_id',$request->input('merchant_id'));
-            })->count();
-        $data['resources'] = Discount::whereHas('product', function ($query) use($request) {
-                $query->where('merchant_id',$request->input('merchant_id'));
-            })->orderBy('id','DESC')->paginate(20);
-        return view($this->views_path.'index',$data);
     }
 }

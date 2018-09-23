@@ -23,21 +23,21 @@ body {
             </div>
         </div>
     </div>
-     <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
+    <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
 
         <div class="btn-group">
             <button type="button" class="btn btn-sm edit-btn text-center margin-left-10 dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-ellipsis-h"></i>
             </button>
             <ul class="dropdown-menu contact-dropdown pull-right" role="menu">
-             
+
                 <li>
                     <a href="{{route('dashboard.active.corporate_deals')}}">Active Deals</a>
                 </li>
-                  <li>
+                <li>
                     <a href="{{route('dashboard.notActive.corporate_deals')}}">Not Active Deals</a>
                 </li>
-               
+
             </ul>
         </div>
     </div>
@@ -116,20 +116,18 @@ body {
                                 <i class="fa fa-trash-o"></i>
                             </button>
                             {{ Form::close() }}
-                            @if(!Auth::guard('merchant')->check())
-                                @if($corporate_deal->approved == 0)
-                                    <form action="{{route('dashboard.toggle.status.corporate_deals')}}" method="post">
-                                       {{csrf_field()}}
-                                       <input type="hidden" name="id" value="{{$corporate_deal->id}}">
-                                       <input type="submit" value="Approve" class="btn btn-primary">
-                                    </form>
-                                @else
-                                 <form action="{{route('dashboard.toggle.status.corporate_deals')}}" method="post">
-                                       {{csrf_field()}}
-                                       <input type="hidden" name="id" value="{{$corporate_deal->id}}">
-                                       <input type="submit" value="Disapprove" class="btn btn-danger">
-                                    </form>
-                                @endif
+                            @if($corporate_deal->approved == 0)
+                            <form action="{{route('dashboard.toggle.status.corporate_deals')}}" method="post">
+                                {{csrf_field()}}
+                                <input type="hidden" name="id" value="{{$corporate_deal->id}}">
+                                <input type="submit" value="Approve" class="btn btn-primary">
+                            </form>
+                            @else
+                            <form action="{{route('dashboard.toggle.status.corporate_deals')}}" method="post">
+                                {{csrf_field()}}
+                                <input type="hidden" name="id" value="{{$corporate_deal->id}}">
+                                <input type="submit" value="Disapprove" class="btn btn-danger">
+                            </form>
                             @endif
                         </td>
                     </tr>
