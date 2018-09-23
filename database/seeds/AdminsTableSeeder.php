@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Roll;
+use App\Models\Role;
 
 class AdminsTableSeeder extends Seeder
 {
@@ -13,12 +13,15 @@ class AdminsTableSeeder extends Seeder
      */
     public function run()
     {
-        // $user = User::create([
-        //     'name' => 'All might',
-        //     'email' => 'admin@site.com',
-        //     'password' => 123456
-        // ]);
-        //
-        // $user->
+        $user = User::create([
+            'name' => 'All might',
+            'email' => 'admin@site.com',
+            'password' => bcrypt('123456')
+        ]);
+
+        $role = Role::where('name', 'superadmin')->first();
+        if ($role) {
+            $user->attachRole($role);
+        }
     }
 }

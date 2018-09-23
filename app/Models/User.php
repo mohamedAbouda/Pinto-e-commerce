@@ -19,17 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'address',
-        'national_id',
-        'start_date',
-        'phone',
-        'social_id',
-        'social_type',
-        'profile_pic',
-        'valid',
+        'name', 'email', 'password', 'address', 'national_id', 'start_date', 'phone', 'social_id', 'social_type', 'profile_pic', 'valid',
     ];
 
     protected $appends = ['profile_pic_url','national_id_url'];
@@ -50,9 +40,6 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Role');
     }
 
-    
-
- 
     public function orders()
     {
         return $this->hasMany(Order::class);

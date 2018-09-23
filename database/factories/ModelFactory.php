@@ -27,7 +27,7 @@
 $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
     $sub_categories_id = App\Models\SubCategory::pluck('id')->toArray();
     $brands_id = App\Models\Brand::pluck('id')->toArray();
-    $merchants_id = App\Models\Merchant::pluck('id')->toArray();
+    // $merchants_id = App\Models\Merchant::pluck('id')->toArray();
     // $key_word_id = App\Models\KeyWord::pluck('id')->toArray();
     return [
         'name' => $faker->name,
@@ -38,7 +38,7 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
         'price' => $faker->randomNumber(2),
         'sub_category_id' => $faker->randomElement($sub_categories_id),
         'brand_id' => $brands_id ? $faker->randomElement($brands_id) : NULL,
-        'merchant_id' => $faker->randomElement($merchants_id),
+        // 'merchant_id' => $faker->randomElement($merchants_id),
         'featured' => 0,
         'sku' => $faker->unique()->word(),
         'views' => 0,

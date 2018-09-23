@@ -28,12 +28,12 @@ class CreateProductsTable extends Migration
 
             $table->integer('key_word_id')->unsigned()->nullable();
             $table->foreign('key_word_id')->references('id')->on('key_words')->onUpdate('cascade')->onDelete('cascade');
-           
+
             $table->integer('brand_id')->unsigned()->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('merchant_id')->unsigned()->nullable();
-            $table->foreign('merchant_id')->references('id')->on('merchants')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('views')->unsigned()->default(0);
             $table->integer('featured')->default(0);
             $table->string('sku')->unique()->nullable();

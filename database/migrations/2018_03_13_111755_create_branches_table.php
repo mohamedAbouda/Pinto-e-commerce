@@ -17,11 +17,7 @@ class CreateBranchesTable extends Migration
             $table->increments('id');
 
             $table->string('name')->default('');
-            $table->integer('merchant_id')->unsigned()->nullable();
             $table->integer('governorate_id')->unsigned()->nullable();
-            
-            $table->foreign('merchant_id')->references('id')->on('merchants')
-            ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('governorate_id')->references('id')->on('governorates')
             ->onUpdate('cascade')->onDelete('cascade');
 

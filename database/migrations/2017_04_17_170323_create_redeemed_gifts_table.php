@@ -15,8 +15,8 @@ class CreateRedeemedGiftsTable extends Migration
     {
         Schema::create('redeemed_gifts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            // $table->integer('user_id')->unsigned()->nullable();
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('type',['gift_card','coupon','discount']);
             $table->integer('object_id')->unsigned();
             $table->timestamps();

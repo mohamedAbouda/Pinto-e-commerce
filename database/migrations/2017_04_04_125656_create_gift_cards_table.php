@@ -19,10 +19,6 @@ class CreateGiftCardsTable extends Migration
             $table->float('discount');
             $table->string('code');
             $table->integer('is_active');
-            $table->integer('merchant_id')->unsigned();
-
-            $table->foreign('merchant_id')->references('id')->on('merchants')
-                ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

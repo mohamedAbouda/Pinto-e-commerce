@@ -22,9 +22,6 @@ class CreateCorporateDealsTable extends Migration
             $table->integer('second_product_id')->unsigned()->nullable();
             $table->foreign('second_product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('merchant_id')->unsigned()->nullable();
-            $table->foreign('merchant_id')->references('id')->on('merchants')->onUpdate('cascade')->onDelete('cascade');
-
             $table->float('discount')->defualt(0);
             $table->integer('approved')->defualt(0);
             $table->timestamps();

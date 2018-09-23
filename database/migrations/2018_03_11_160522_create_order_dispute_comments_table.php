@@ -21,9 +21,9 @@ class CreateOrderDisputeCommentsTable extends Migration
 
             $table->integer('client_id')->unsigned()->nullable();
             $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('cascade');
-
-            $table->integer('merchant_id')->unsigned()->nullable();
-            $table->foreign('merchant_id')->references('id')->on('merchants')->onUpdate('cascade')->onDelete('cascade');
+            
+            // $table->integer('user_id')->unsigned()->nullable();
+            // $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->text('dispute_comment')->nullable();
 
