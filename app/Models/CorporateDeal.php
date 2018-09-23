@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CorporateDeal extends Model
 {
     protected $table = 'corporate_deals';
-    protected $fillable = ['first_product_id','second_product_id','discount','merchant_id','approved'];
+    protected $fillable = ['first_product_id','second_product_id','discount','approved'];
 
     public function firstProduct()
     {
@@ -17,10 +17,5 @@ class CorporateDeal extends Model
     public function secondProduct()
     {
         return $this->belongsTo('App\Models\Product','second_product_id');
-    }
-
-    public function merchant()
-    {
-        return $this->belongsTo('App\Models\Merchant');
     }
 }

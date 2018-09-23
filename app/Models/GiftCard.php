@@ -7,7 +7,7 @@ class GiftCard extends Model
 {
     protected $table = 'gift_cards';
     /*
-    is active 
+    is active
     1 :yes
     0:no
     */
@@ -16,12 +16,5 @@ class GiftCard extends Model
         'name',
         'discount',
         'is_active',
-        'merchant_id'
     ];
-
-
-    public function merchant()
-    {
-        return $this->belongsTo('App\Models\Merchant');
-    }
 }

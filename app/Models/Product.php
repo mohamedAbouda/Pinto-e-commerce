@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = 'products';
     protected $fillable = [
         'name','description','short_description','technical_specs','cover_image',
-        'price','sub_category_id','brand_id','merchant_id','featured','sku' ,
+        'price','sub_category_id','brand_id','user_id','featured','sku' ,
         'views','key_word_id','approved','match_keys'
     ];
     protected $appends = ['cover_image_url' , 'rate'];
@@ -64,11 +64,6 @@ class Product extends Model
     public function subcategory()
     {
         return $this->belongsTo('App\Models\SubCategory','sub_category_id');
-    }
-
-    public function merchant()
-    {
-        return $this->belongsTo('App\Models\Merchant');
     }
 
     public function brand()
