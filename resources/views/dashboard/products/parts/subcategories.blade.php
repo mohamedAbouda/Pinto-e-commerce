@@ -1,0 +1,1 @@
+{{ Form::select('sub_category_id' , $subcategories , isset($resource) && $resource ? $resource->sub_category_id:NULL , ['class' => 'form-control' , 'placeholder' => 'Choose sub-category' , 'autocomplete' => 'off']) }}
