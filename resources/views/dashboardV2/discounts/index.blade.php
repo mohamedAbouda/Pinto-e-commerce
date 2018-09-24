@@ -115,7 +115,6 @@ body {
                             @endif
                             {{ Form::close() }}
                         </td>
-                        @else
                         <td>
                             @if($resource->active === 1)
                             {{ trans('web.dashboard_offers_pages_index_page_table_active') }}

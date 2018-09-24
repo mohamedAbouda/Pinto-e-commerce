@@ -12,9 +12,10 @@ use DB;
 class UserController extends Controller
 {
     protected $mainRedirect = 'dashboardV2.users.';
+    
     public function index()
     {
-        $users =Client::paginate(10);
+        $users = Client::paginate(10);
 
         return view($this->mainRedirect . 'index')->with('users', $users);
     }

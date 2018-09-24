@@ -30,12 +30,12 @@ body {
                 <i class="fa fa-ellipsis-h"></i>
             </button>
             <ul class="dropdown-menu contact-dropdown pull-right" role="menu">
-             
+
                  <li>
-                    <a href="{{route('dashboard.admin.approved.users.filter', ['status' => 'approved'])}}">{{ trans('web.dashboard_users_index_approved_users') }}</a>
+                    <a href="{{route('dashboard.users.filter', ['status' => 'approved'])}}">{{ trans('web.dashboard_users_index_approved_users') }}</a>
                 </li>
                  <li>
-                    <a href="{{route('dashboard.admin.approved.users.filter', ['status' => 'disapproved'])}}">{{ trans('web.dashboard_users_index_disapproved_users') }}</a>
+                    <a href="{{route('dashboard.users.filter', ['status' => 'disapproved'])}}">{{ trans('web.dashboard_users_index_disapproved_users') }}</a>
                 </li>
             </ul>
         </div>
@@ -70,11 +70,11 @@ body {
             <table class="table table-borderless table-responsive">
                 <tbody>
                     <tr>
-                       
+
                         <th>
                             {{ trans('web.dashboard_users_index_name') }}
                         </th>
-                      
+
                         <th>
                             {{ trans('web.dashboard_users_index_action') }}
                         </th>
@@ -84,7 +84,7 @@ body {
                         <td>
                            {{$user->name}}
                         </td>
-                 
+
                         <td>
                            <a href="{{url('dashboard/users/'.$user->id.'/edit')}}"
                      class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top"
@@ -112,13 +112,13 @@ body {
                                 <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> </button>
                             </form>
                         </td>
-                       
+
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-     
+
     </div>
 </div>
 @stop

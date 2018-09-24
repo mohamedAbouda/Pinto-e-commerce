@@ -147,6 +147,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     Route::get('disapproved/products', 'ProductController@disapprovedProducts')->name('show.disapproved.products');
 
     // USERS
+    Route::get('clients/{status}', 'UserController@approvedUsers')->name('users.filter');
     Route::resource('users', 'UserController');
     Route::post('product/add/discount', 'ProductController@DiscountProductAdd')->name('product.add.discount');
     Route::post('product/delete/discount', 'ProductController@DiscountProductDelete')->name('product.delete.discount');
