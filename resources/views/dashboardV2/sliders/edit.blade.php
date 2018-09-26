@@ -57,14 +57,6 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="head2">
-                            {{ trans('web.dashboard_sliders_create_page_form_head2') }}
-                        </label>
-                        <input type="text" name="head2" id="head2" class="form-control" value="{{ $slider->head2 }}">
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group margin-bottom20">
                         <label class="control-label" for="desc">
                             {{ trans('web.dashboard_sliders_create_page_form_desc') }}
                         </label>

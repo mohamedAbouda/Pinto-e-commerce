@@ -53,9 +53,6 @@ body {
                             {{ trans('web.dashboard_sliders_index_table_header_head1') }}
                         </th>
                         <th>
-                            {{ trans('web.dashboard_sliders_index_table_header_head2') }}
-                        </th>
-                        <th>
                             {{ trans('web.dashboard_sliders_index_table_header_desc') }}
                         </th>
                         <th>
@@ -88,11 +85,6 @@ body {
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                                 {{ $slider->head1 }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $slider->head2 }}
                             </h3>
                         </td>
                         <td>

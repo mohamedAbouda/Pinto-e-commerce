@@ -18,7 +18,7 @@ class Controller extends BaseController
         if(strpos($route_name, 'web.') !== false || $route_name === 'login' || $route_name === 'index' || $route_name === 'home' || $route_name === 'register' || $route_name === 'reset.password' || $route_name === 'client.reset.password' || $route_name === 'client.change.password' || $route_name === 'merchant.register.get') {
             view()->share([
                 'categories' => \App\Models\Category::with('subCategories')->get(),
-                'contact' => \App\Models\Contact::first()
+                'contact_details' => \App\Models\Contact::first()
             ]);
         }
 

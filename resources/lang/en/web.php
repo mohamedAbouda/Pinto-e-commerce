@@ -355,7 +355,7 @@ return [
     'dashboard_sliders_index_total' => 'Total Sliders',
     'dashboard_sliders_index_image' => 'Image',
     'dashboard_sliders_index_table_header_tag' => 'Tag',
-    'dashboard_sliders_index_table_header_head1' => 'Header 1',
+    'dashboard_sliders_index_table_header_head1' => 'Header',
     'dashboard_sliders_index_table_header_head2' => 'Header 2',
     'dashboard_sliders_index_table_header_desc' => 'Description',
     'dashboard_sliders_index_table_header_url' => 'Link',

@@ -1,40 +1,37 @@
 <template>
-    <div class="col-xs-12 col-sm-6 col-md-4" v-if="product">
-        <!-- .pro-text -->
-        <div class="pro-text text-center">
-            <!-- .pro-img -->
-            <div class="pro-img">
-                <img :src="product.cover_image_url" :alt="product.name">
-                <sup class="sale-tag" v-if="product.discount">sale!</sup>
-                <sup class="sale-tag" style="right: 5px;left:inherit;" v-if="product.featured == 1">
-                    Hot!
-                </sup>
-                <!-- .hover-icon -->
-                <div class="hover-icon">
-                    <a @click.prevent="wishlist(product.id)">
-                        <span class="icon icon-Heart"></span>
-                    </a>
-                    <a :href="url">
-                        <span class="icon icon-Search"></span>
-                    </a>
-                    <a @click.prevent="addCompare(product.id)">
-                        <span class="icon icon-Restart"></span>
-                    </a>
+    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item" v-if="product">
+        <div class="product-images">
+            <a :href="url" class="hover-images effect">
+                <img :src="product.cover_image_url" :alt="product.name" class="img-reponsive">
+            </a>
+            <!-- <div class="ribbon-new ver2"><span>new</span></div> -->
+            <div class="ribbon-sale ver2" v-if="product.discount"><span>sale</span></div>
+            <a class="btn-add-wishlist ver2" @click.prevent="wishlist(product.id)"><i class="icon-heart"></i></a>
+            <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+        </div>
+        <div class="product-info-ver2">
+            <h3 class="product-title"><a href="single-product.html">{{ product.name }}</a></h3>
+            <div class="product-after-switch">
+                <div class="product-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</div>
+                <div class="product-after-button">
+                    <a href="#" class="addcart">ADD TO CART</a>
                 </div>
-                <!-- /.hover-icon -->
             </div>
-            <!-- /.pro-img -->
-            <div class="pro-text-outer">
-                <span>
-                    {{ product.sub_category.name }}
-                </span>
-                <a :href="url">
-                    <h4> {{ product.name }} </h4>
-                </a>
-                <p class="wk-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</p>
+            <div class="rating-star">
+                <span class="star star-5"></span>
+                <span class="star star-4"></span>
+                <span class="star star-3"></span>
+                <span class="star star-2"></span>
+                <span class="star star-1"></span>
+            </div>
+            <p class="product-desc">{{ product.short_description }}</p>
+            <div class="product-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</div>
+            <div class="button-group">
+                <a href="#" class="button add-to-cart">Add to cart</a>
+                <a href="#" class="button add-to-wishlist" @click.prevent="wishlist(product.id)">Add to wishlist</a>
+                <a href="#" class="button add-view">Quick view</a>
             </div>
         </div>
-        <!-- /.pro-text -->
     </div>
 </template>
 

@@ -1,81 +1,75 @@
 <template>
     <div>
-        <div class="weight">
-            <div class="title">
-                <h2>Sections</h2>
-            </div>
-            <div class="product-categories">
-                <ul>
-                    <li v-for="(section ,index) in sections">
-                        <a href="#" :class="{ active: selected_section_index == index }" @click.prevent="change({section : section.id});selected_section_index=index;">
-                            {{ section.name }}
-                        </a>
-                    </li>
-                </ul>
+        <div class="filter filter-price">
+            <h3 class="filtertitle">
+                By price.
+            </h3>
+            <div class="filter-content">
+                <div class="price-range-holder">
+                    <input type="text" id="parameters-price-slider" value="">
+                </div>
+                <span class="min-max">
+                    Price: <!--$30 — $3450-->
+                </span>
+                <span class="filter-title">
+                </span>
             </div>
         </div>
-        <div class="weight">
-            <div class="title">
-                <h2>filter by price</h2>
-            </div>
-            <div class="filter-outer">
-                <h3>Price</h3>
-                <!-- Bootstrap Pricing Slider by ZsharE -->
-                <div class="button-slider">
-                    <div class="btn-group">
-                        <div class="btn btn-default">
-                            <p>
-                                Range:
-                                <strong>
-                                    $<span id="sliderValue">100.0</span>
-                                </strong> -
-                                <strong>
-                                    $<span id="sliderValue2">1.700.00</span>
-                                </strong>
-                            </p>
-                            <input id="bootstrap-slider" type="text">
-                            <input type="hidden" name="price_from" style="" :value="price_from">
-                            <input type="hidden" name="price_to" style="" :value="price_to">
-                            <button class="valueLabelblck" @click.prevent="change({});">Filter</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Bootstrap Pricing Slider by ZsharE -->
-                <div class="brands">
-                    <h3>Brands</h3>
-                    <ul>
-                        <li>
-                            <a href="#" :class="{ active: selected_brand_index == undefined }" @click.prevent="change({brand : undefined});selected_brand_index=undefined;">
-                                All
-                            </a>
-                        </li>
-                        <li v-for="(brand ,index) in brands">
-                            <a href="#" :class="{ active: selected_brand_index == index }" @click.prevent="change({brand : brand.id});selected_brand_index=index;">
-                                {{ brand.name }}  <span>({{ brand.products_count }})</span>
+        <div class="filter filter-category">
+            <h3 class="filtertitle">
+                Categories.
+            </h3>
+            <ul class="filter-content js-filter-menu">
+                <li v-for="(section ,index) in sections">
+                    <a :style="[selected_section_index == index ? {'color': '#00abe7'} : {}]" @click.prevent="change({section : section.id});selected_section_index=index;">
+                        {{ section.name }}
+                    </a>
+                    <span class="plus js-plus-icon" v-if="section.sub_categories" @click="expandSubCategories($event)"></span>
+                    <ul class="filter-menu" v-if="section.sub_categories">
+                        <li class="" v-for="(sub_category ,iteration) in section.sub_categories">
+                            <a :style="[selected_section_index == index && selected_sub_category_index == iteration ? {'color': '#00abe7'} : {}]" @click.prevent="change({sub_category_id : sub_category.id});selected_section_index=index;selected_sub_category_index=iteration;">
+                                {{ sub_category.name }}
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div class="color">
-                    <h3>Color</h3>
-                    <ul>
-                        <li v-for="(color ,index) in colors">
-                            <a href="#"  :class="['color-1' ,{ active: selected_color_index == index }]" @click.prevent="selectColor(color ,index)">
-                                <span :style="{ 'background-color':color.code }"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="size">
-                    <h3>Size</h3>
-                    <ul>
+                </li>
+            </ul>
+        </div>
+        <div class="filter filter-color">
+            <h3 class="filtertitle">
+                By color.
+            </h3>
+            <ul class="filter-content">
+                <li>
+                    <a :style="[selected_color_index == undefined ? {'color': '#00abe7'} : {}]" @click.prevent="selectColor()">
+                        ALL
+                    </a>
+                </li>
+                <li v-for="(color ,index) in colors">
+                    <a :style="[selected_color_index == index ? {'color': '#00abe7'} : {}]" @click.prevent="selectColor(color ,index)">
+                        {{ color.name }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="filter filter-size">
+            <h3 class="filtertitle">
+                By size
+            </h3>
+            <div class="filter-content">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                        {{ selected_size_name }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
                         <li>
-                            <a href="#" :class="{ active: selected_size_index == undefined }" @click.prevent="change({size : undefined});selected_size_index=undefined;">
+                            <a @click.prevent="change({size : undefined});selected_size_name='ALL'">
                                 ALL
                             </a>
                         </li>
                         <li v-for="(size ,index) in sizes">
-                            <a href="#" :class="{ active: selected_size_index == index }" @click.prevent="change({size : size.id});selected_size_index=index;">
+                            <a @click.prevent="change({size : size.id});selected_size_index=index;selected_size_name=size.name">
                                 {{ size.name }}
                             </a>
                         </li>
@@ -89,24 +83,38 @@
 <script>
 export default {
     props: {
-		url: {
-			default: ''
-		}
-	},
+        url: {
+            default: ''
+        }
+    },
     data(){
         return {
             sections : [],
             selected_section_index : undefined,
+            selected_sub_category_index : undefined,
             brands : [],
             selected_brand_index : undefined,
             colors : [],
             selected_color_index : undefined,
             sizes : [],
             selected_size_index : undefined,
-            price_from : 0,
-            price_to : 10000,
+            selected_size_name : "Choose any size...",
+            price_slider : undefined,
             search_params : {}
         };
+    },
+    mounted() {
+        var slider_options = {
+            min: 0,
+            max: 1000,
+            step: 5,
+            value: [10, 1000],
+        };
+        new slider(".price-slider", slider_options);
+        var vm = this;
+        this.price_slider = new slider("#parameters-price-slider", slider_options).on('slideStop' ,function(){
+            vm.change({});
+        });
     },
     created() {
         /**
@@ -154,21 +162,27 @@ export default {
                     delete this.search_params.size_id;
                 }
             }
-            this.search_params.price_from = document.querySelector('input[name=price_from]').value;
-            this.search_params.price_to = document.querySelector('input[name=price_to]').value;
+            if (this.price_slider) {
+                var price_range = this.price_slider.getValue();
+                this.search_params.price_from = price_range[0];
+                this.search_params.price_to = price_range[1];
+            }
             /**
-             * Go and search
-             */
+            * Go and search
+            */
             Event.$emit('search-parameters-change' ,this.search_params);
         },
         selectColor(color ,index) {
-            if(this.selected_color_index != undefined){
+            if(color == undefined || this.selected_color_index == index){
                 this.selected_color_index = undefined;
                 this.change({color : undefined});
             }else{
                 this.selected_color_index = index;
                 this.change({color : color.id});
             }
+        },
+        expandSubCategories(event){
+            window.toggleExpansion(event.target);
         }
     }
 }

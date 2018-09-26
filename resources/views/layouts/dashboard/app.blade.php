@@ -2,12 +2,12 @@
 <html lang="en" style="height:100%;">
 <head content="A">
     <meta charset="utf-8">
-    <title>Alashank Panel</title>
+    <title>{{ Config('app.name') }} Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content=" bootstrap,graphic,hex" />
     <meta name="description" content="CRM" />
     <meta name="author" content="Abdulrahman Khaled">
-    <link rel="shortcut icon" href="ico/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('assets/site/img/favicon.ico') }}" />
     <!-- Core CSS -->
     <link href="{{ asset('assets/panel-assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 

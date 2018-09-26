@@ -1,29 +1,22 @@
 <template>
-	<div>
-		<!-- .pagetions -->
-		<div class="col-xs-12 col-sm-6 col-md-6 text-left">
+	<div class="pagination-container pagination-blog button-v v2">
+		<nav>
 			<ul class="pagination" v-if="data.total > data.per_page">
 				<li v-if="data.prev_page_url">
-					<a href="#" aria-label="Previous" @click.prevent="selectPage(--data.current_page)">
-						&laquo;
+					<a href="#" aria-label="Next" @click.prevent="selectPage(--data.current_page)">
+						<i class="fa fa-angle-left" aria-hidden="true"></i>
 					</a>
 				</li>
 				<li v-for="page in getPages()" :class="{ active: page == data.current_page }">
-					<a href="#" @click.prevent="selectPage(page)">{{ page }}</a>
+					<a @click.prevent="selectPage(page)">{{ page }}</a>
 				</li>
 				<li v-if="data.next_page_url">
 					<a href="#" aria-label="Next" @click.prevent="selectPage(++data.current_page)">
-						&raquo;
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</a>
 				</li>
 			</ul>
-		</div>
-		<!-- /.pagetions -->
-		<!-- .Showing -->
-		<div class="col-xs-12 col-sm-6 col-md-6 text-right">
-			<strong>Showing {{ data.from }}-{{ data.to }} <span>of {{ data.total }} relults</span></strong>
-		</div>
-		<!-- /.Showing -->
+		</nav>
 	</div>
 </template>
 

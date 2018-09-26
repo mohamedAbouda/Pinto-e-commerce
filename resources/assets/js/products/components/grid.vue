@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="row">
         <product-grid v-for="(product ,index) in products" :product="product" :product_url="product_url"></product-grid>
     </div>
 </template>

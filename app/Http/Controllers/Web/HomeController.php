@@ -36,37 +36,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['slider_sheets'] = Slider::get();
-        $banners = Banner::where('active' ,1)->inRandomOrder()->get();
-        $data['banners_under_slider'] = $banners->filter(function ($item) {
-            return strpos($item->position ,'Home page under main slider') !== FALSE;
-        });
-        $data['banners_middle'] = $banners->filter(function ($item) {
-            return strpos($item->position ,'Home page in the middle') !== FALSE;
-        });
-        $data['featured'] = Product::with(['discount' ,'subCategory'])->where('featured' ,3)->orderBy('id' ,'DESC')->get();
-        $data['sections'] = Category::with('subCategories')->inRandomOrder()->take(3)->get()->values();
-        foreach ($data['sections'] as $section) {
-            $sub_category_ids = $section->subCategories->pluck('id')->toArray();
-            $section->objects['best_selling'] = Product::with(['discount' ,'subCategory'])->whereIn('sub_category_id' ,$sub_category_ids)
-            ->select('products.*' ,DB::raw('COUNT(order_product.id) as selling_count'))
-            ->join('order_product' ,'order_product.product_id' ,'=' ,'products.id')
-            ->groupBy('products.id')->orderBy('selling_count' ,'DESC')
-            ->orderBy('id' ,'DESC')->take(16)->get();
-            $section->objects['new_products'] = Product::with(['discount' ,'subCategory'])->whereIn('sub_category_id' ,$sub_category_ids)->orderBy('id' ,'DESC')->take(16)->get();
-            $section->objects['most_seen'] = Product::with(['discount' ,'subCategory'])->whereIn('sub_category_id' ,$sub_category_ids)->orderBy('views' ,'DESC')->take(16)->get();
-            $section->objects['discounts'] = Product::with(['discount' ,'subCategory'])->whereIn('sub_category_id' ,$sub_category_ids)->take(16)->get()->filter(function ($item) {
-                return $item->discount != NULL;
-            });
-            $section->objects['top_rated'] = Product::with(['discount' ,'subCategory'])->whereIn('sub_category_id' ,$sub_category_ids)
-            ->select('products.*' ,'product_review.rate')
-            ->join('product_review' ,'product_id' ,'=' ,'products.id')->orderBy('product_review.rate' ,'DESC')
-            ->take(16)->get();
-            // $section->objects['best_selling'] = [];
-            // dd($section->objects);
-        }
-        // dd($data['sections']);
-
-        return view('site.index.index' ,$data);
+        return view('site.landing' ,$data);
     }
 
     public function offers()

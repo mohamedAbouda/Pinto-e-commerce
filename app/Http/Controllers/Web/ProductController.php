@@ -130,14 +130,14 @@ class ProductController extends Controller
 
     public function getSearchPage(Request $request)
     {
-        $banners = Banner::where('active' ,1)->where('position' ,'LIKE' ,'%Search page%')->inRandomOrder()->get();
-        $data['banner_top'] = $banners->filter(function ($item) {
-            return strpos($item->position ,'Search page top') !== FALSE;
-        })->first();
-        $data['banners_side'] = $banners->filter(function ($item) {
-            return strpos($item->position ,'Search page sidebar') !== FALSE;
-        });
-        return view('site.products.search' ,$data);
+        // $banners = Banner::where('active' ,1)->where('position' ,'LIKE' ,'%Search page%')->inRandomOrder()->get();
+        // $data['banner_top'] = $banners->filter(function ($item) {
+        //     return strpos($item->position ,'Search page top') !== FALSE;
+        // })->first();
+        // $data['banners_side'] = $banners->filter(function ($item) {
+        //     return strpos($item->position ,'Search page sidebar') !== FALSE;
+        // });
+        return view('site.search');
     }
 
 
@@ -149,7 +149,7 @@ class ProductController extends Controller
         foreach ($data['brands'] as $brand) {
             $brand->products_count  = Stock::where('brand_id' ,$brand->id)->groupBy('product_id')->count();
         }
-        $data['sections'] = Category::get();
+        $data['sections'] = Category::with('subCategories')->get();
         foreach ($data['sections'] as $section) {
             $sub_categories = $section->subCategories()->pluck('id')->toArray();
             $section->products_count  = Product::whereIn('sub_category_id' ,$sub_categories)->count();

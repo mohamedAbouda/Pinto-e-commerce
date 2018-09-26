@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Pinto | The World's Most Comfortable Underwears</title>
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="shortcut icon" href="img/favicon.ico" >
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.4.1/collection/icon/icon.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!--push menu cart -->
+    <div class="pushmenu pushmenu-left cart-box-container">
+        <div class="cart-list">
+            <span class="close-left js-close">x</span>
+            <h3 class="cart-title">Your Cart</h3>
+            <div class="nocart-list">
+                <div class="empty-cart">
+                    <h4 class="nocart-title">No products in the cart.</h4>
+                    <a href="" class="btn-shop btn-arrow">Start shopping</a>
+                </div>
+            </div>
+            <div class="cart-bottom">
+                <a href="#" class="text">Our Shipping & Return Policy</a>
+            </div>
+            <!-- End cart bottom -->
+        </div>
+    </div>
+    <!-- End cart -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">SEARCH HERE</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <form method="get" class="searchform" action="/search" role="search">
+                            <input type="hidden" name="type" value="product">
+                            <input type="text" name="q" class="form-control control-search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default button_search" type="button"><i data-toggle="dropdown" class="fa fa-search"></i></button>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END  Modal content-->
+    <header id="header" class="header-v1">
+        <div class="sticky-header text-center hidden-xs hidden-sm">
+            <div class="text">
+                <span class="u-line">Free shipping and returns</span> on all orders above $200
+            </div>
+        </div>
+        <div class="topbar">
+            <div class="container container-40">
+                <div class="topbar-left">
+                    <div class="topbar-option">
+                        <div class="topbar-account">
+                            <a href="login.html"><i class="icon-user f-15"></i></a>
+                        </div>
+                        <div class="topbar-wishlist">
+                            <a href="wishlist.html">
+                                <i class="icon-heart f-15"></i>
+                                <span class="count wishlist-count">0</span>
+                            </a>
+                        </div>
+                        <div class="topbar-language dropdown">
+                            <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                <span>EN</span>
+                                <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label1">
+                                <li><a href="#">English</a></li>
+                                <li><a href="#">Arabic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-left-->
+                <div class="logo hidden-xs hidden-sm">
+                    <a href="" title="home-logo"><img src="img/logo.png" alt="logo" class="img-reponsive"></a>
+                </div>
+                <!--end logo-->
+                <div class="topbar-right">
+                    <div class="topbar-option">
+                        <div class="topbar-currency dropdown">
+                            <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                <span>USD</span>
+                                <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label2">
+                                <li><a href="#">USD</a></li>
+                                <li><a href="#">EGP</a></li>
+                            </ul>
+                        </div>
+                        <div class="topbar-search">
+                            <div class="search-popup dropdown" data-toggle="modal" data-target="#myModal">
+                                <a href="#"><i class="icon-magnifier f-15"></i></a>
+                            </div>
+                        </div>
+                        <div class="topbar-cart">
+                            <a href="#" class="icon-cart">
+                                <i class="icon-basket f-15"></i>
+                                <span class="count cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-right-->
+            </div>
+        </div>
+        <div class="header-top">
+            <div class="container container-40">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="logo-mobile hidden-lg hidden-md">
+                            <a href="" title="home-logo"><img src="img/cosre.png" alt="logo" class="img-reponsive"></a>
+                        </div>
+                        <!--end logo-->
+                        <button type="button" class="navbar-toggle icon-mobile" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-menu"></span>
+                        </button>
+                        <nav class="navbar main-menu">
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav js-menubar">
+                                    <li class="level1 active dropdown"><a href="index.html">Home</a>
+
+                                    </li>
+                                    <li class="level1 dropdown hassub">
+                                        <a href="products.html">Shop</a>
+                                        <span class="plus js-plus-icon"></span>
+                                        <div class="menu-level-1 dropdown-menu">
+                                            <ul class="level1">
+                                                <li class="level2 col-3">
+                                                    <a href="products.html">Category Name</a>
+                                                    <ul class="menu-level-2">
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level2 col-3">
+                                                    <a href="products.html">Category Name</a>
+                                                    <ul class="menu-level-2">
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level2 col-3">
+                                                    <a href="products.html">Category Name</a>
+                                                    <ul class="menu-level-2">
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </li>
+                                    <li class="level1 dropdown hassub">
+                                        <a href="#">Top Deals</a>
+                                        <span class="plus js-plus-icon"></span>
+                                        <div class="menu-level-1 dropdown-menu">
+                                            <ul class="level1">
+                                                <li class="level2 col-3">
+                                                    <a href="products.html">Category Name</a>
+                                                    <ul class="menu-level-2">
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level2 col-3">
+                                                    <a href="products.html">Category Name</a>
+                                                    <ul class="menu-level-2">
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level2 col-3">
+                                                    <a href="products.html">Category Name</a>
+                                                    <ul class="menu-level-2">
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                        <li class="level3"><a href="products.html" >Product Title</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </li>
+
+                                    <li class="level1 dropdown hassub"><a href="about.html">About</a>
+                                    </li>
+                                    <li class="level1 dropdown hassub"><a href="blog.html">Blog</a>
+                                    </li>
+                                    <li class="level1 dropdown hassub"><a href="contact-us.html">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+    <footer>
+        <div class="container container-42">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="menu-footer">
+                        <ul>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="terms.html">Terms & Conditions</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="newletter-form">
+                        <h3 class="footer-title text-center">Newsletter</h3>
+                        <form action="#">
+                            <input type="text" name="s" placeholder="Email Adress..." class="form-control">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                    <div class="social">
+                        <a href="#" title="twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" title="facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" title="google plus">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="#" title="Pinterest">
+                            <i class="fa fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" title="rss">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

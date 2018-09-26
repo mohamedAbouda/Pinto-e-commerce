@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Pinto | The World's Most Comfortable Underwears</title>
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="shortcut icon" href="img/favicon.ico" >
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.4.1/collection/icon/icon.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!--push menu cart -->
+    <div class="pushmenu pushmenu-left cart-box-container">
+        <div class="cart-list">
+            <span class="close-left js-close">x</span>
+            <h3 class="cart-title">Your Cart</h3>
+            <div class="nocart-list">
+                <div class="empty-cart">
+                    <h4 class="nocart-title">No products in the cart.</h4>
+                    <a href="" class="btn-shop btn-arrow">Start shopping</a>
+                </div>
+            </div>
+            <div class="cart-bottom">
+                <a href="#" class="text">Our Shipping & Return Policy</a>
+            </div>
+            <!-- End cart bottom -->
+        </div>
+    </div>
+    <!-- End cart -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">SEARCH HERE</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <form method="get" class="searchform" action="/search" role="search">
+                            <input type="hidden" name="type" value="product">
+                            <input type="text" name="q" class="form-control control-search">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default button_search" type="button"><i data-toggle="dropdown" class="fa fa-search"></i></button>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END  Modal content-->
+    <header id="header" class="header-v1">
+        <div class="sticky-header text-center hidden-xs hidden-sm">
+            <div class="text">
+                <span class="u-line">Free shipping and returns</span> on all orders above $200
+            </div>
+        </div>
+        <div class="topbar">
+            <div class="container container-40">
+                <div class="topbar-left">
+                    <div class="topbar-option">
+                        <div class="topbar-account">
+                            <a href="login.html"><i class="icon-user f-15"></i></a>
+                        </div>
+                        <div class="topbar-wishlist">
+                            <a href="wishlist.html">
+                                <i class="icon-heart f-15"></i>
+                                <span class="count wishlist-count">0</span>
+                            </a>
+                        </div>
+                        <div class="topbar-language dropdown">
+                            <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            
+                              <span>EN</span>
+                              <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label1">
+                                <li><a href="#">English</a></li>
+                                <li><a href="#">Arabic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-left-->
+                <div class="logo hidden-xs hidden-sm">
+                    <a href="" title="home-logo"><img src="img/logo.png" alt="logo" class="img-reponsive"></a>
+                </div>
+                <!--end logo-->
+                <div class="topbar-right">
+                    <div class="topbar-option">
+                        <div class="topbar-currency dropdown">
+                            <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            
+                              <span>USD</span>
+                              <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label2">
+                                <li><a href="#">USD</a></li>
+                                <li><a href="#">EGP</a></li>
+                            </ul>
+                        </div>
+                        <div class="topbar-search">
+                            <div class="search-popup dropdown" data-toggle="modal" data-target="#myModal">
+                                <a href="#"><i class="icon-magnifier f-15"></i></a>
+                            </div>
+                        </div>
+                        <div class="topbar-cart">
+                            <a href="#" class="icon-cart">
+                                <i class="icon-basket f-15"></i>
+                                <span class="count cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-right-->
+            </div>
+        </div>
+       	<div class="header-top">
+			<div class="container container-40">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<div class="logo-mobile hidden-lg hidden-md">
+							<a href="" title="home-logo"><img src="img/cosre.png" alt="logo" class="img-reponsive"></a>
+						</div>
+						<!--end logo-->
+						<button type="button" class="navbar-toggle icon-mobile" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-menu"></span>
+                        </button>
+						<nav class="navbar main-menu">
+							<div class="collapse navbar-collapse" id="myNavbar">
+								<ul class="nav navbar-nav js-menubar">
+									<li class="level1 active dropdown"><a href="index.html">Home</a>
+										
+									</li>
+									<li class="level1 dropdown hassub">
+										<a href="products.html">Shop</a>
+										<span class="plus js-plus-icon"></span>
+										<div class="menu-level-1 dropdown-menu">
+											<ul class="level1">
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+									</li>
+									<li class="level1 dropdown hassub">
+										<a href="#">Top Deals</a>
+										<span class="plus js-plus-icon"></span>
+										<div class="menu-level-1 dropdown-menu">
+											<ul class="level1">
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+									</li>
+									
+									<li class="level1 dropdown hassub"><a href="about.html">About</a>
+									</li>
+									<li class="level1 dropdown hassub"><a href="blog.html">Blog</a>
+									</li>
+									<li class="level1 dropdown hassub"><a href="contact-us.html">Contact Us</a>
+									</li>
+								</ul>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	 </header>
+    
+	
+	<div class="main-container right-slidebar">
+            <div class="container">
+                <div class="row">
+                    <div class="main-content col-xs-12 col-md-8">
+                        <div class="blog-post-container blog-page">
+                            <div class="blog-post-item">
+                                <div class="blog-post-img">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/1.jpg" class="img-reponsive" alt="blog-img"></a>
+                                </div>
+                                <div class="blog-post-info">
+                                    <div class="post-date">September 22, 2018</div>
+                                    <h3 class="post-name"><a href="blog-post.html">21 Pastel Picks Your Closet Is Craving</a></h3>
+                                    <p class="post-desc">
+                                        Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose ethical scenarios through leveraged niches....
+                                    </p>
+                                    <a href="blog-post.html" class="readmore">Read more</a>
+                                </div>
+                                <div class="post-metas">
+                                    <div class="categories">
+                                        <a href="#" rel="category tag">BEAUTY</a>,
+                                        <a href="#" rel="category tag">FASHION</a>
+                                    </div>
+                                    <span class="post-comments-number">3</span>
+                                </div>
+                            </div>
+                            <div class="blog-item-list">
+                                <div class="blog-post-item post-item">
+                                    <div class="blog-post-img">
+                                        <a class="hover-images" href="blog-post.html"><img src="img/blog/1_sm.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="blog-post-info">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3 class="post-name"><a href="blog-post.html">The Must Have Neutral Layers for Spring</a></h3>
+                                        <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
+                                        <div class="post-metas">
+                                            <div class="categories">
+                                                <a href="#" rel="category tag">BEAUTY</a>,
+                                                <a href="#" rel="category tag">FASHION</a>
+                                            </div>
+                                            <span class="post-comments-number">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-post-item post-item">
+                                    <div class="blog-post-img">
+                                        <a class="hover-images" href="blog-post.html"><img src="img/blog/2_sm.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="blog-post-info">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3 class="post-name"><a href="blog-post.html">Giving the design and production</a></h3>
+                                        <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
+                                        <div class="post-metas">
+                                            <div class="categories">
+                                                <a href="#" rel="category tag">BEAUTY</a>,
+                                                <a href="#" rel="category tag">FASHION</a>
+                                            </div>
+                                            <span class="post-comments-number">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-post-item post-item">
+                                    <div class="blog-post-img">
+                                        <a class="hover-images" href="blog-post.html"><img src="img/blog/3_sm.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="blog-post-info">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3 class="post-name"><a href="blog-post.html">A planner tool to help coordinate</a></h3>
+                                        <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
+                                        <div class="post-metas">
+                                            <div class="categories">
+                                                <a href="#" rel="category tag">BEAUTY</a>,
+                                                <a href="#" rel="category tag">FASHION</a>
+                                            </div>
+                                            <span class="post-comments-number">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog-post-item">
+                                <div class="blog-post-img">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/2.jpg" class="img-reponsive" alt="blog-img"></a>
+                                </div>
+                                <div class="blog-post-info">
+                                    <div class="post-date">September 22, 2018</div>
+                                    <h3 class="post-name"><a href="blog-post.html">What a beautiful design!</a></h3>
+                                    <p class="post-desc">
+                                        Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose ethical scenarios through leveraged niches....
+                                    </p>
+                                    <a href="blog-post.html" class="readmore">Read more</a>
+                                </div>
+                                <div class="post-metas">
+                                    <div class="categories">
+                                        <a href="#" rel="category tag">BEAUTY</a>,
+                                        <a href="#" rel="category tag">FASHION</a>
+                                    </div>
+                                    <span class="post-comments-number">3</span>
+                                </div>
+                            </div>
+                            <div class="blog-item-list">
+                                <div class="blog-post-item post-item">
+                                    <div class="blog-post-img">
+                                        <a class="hover-images" href="blog-post.html"><img src="img/blog/4_sm.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="blog-post-info">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3 class="post-name"><a href="blog-post.html">How to Shop with Us</a></h3>
+                                        <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
+                                        <div class="post-metas">
+                                            <div class="categories">
+                                                <a href="#" rel="category tag">BEAUTY</a>,
+                                                <a href="#" rel="category tag">FASHION</a>
+                                            </div>
+                                            <span class="post-comments-number">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-post-item post-item">
+                                    <div class="blog-post-img">
+                                        <a class="hover-images" href="blog-post.html"><img src="img/blog/5_sm.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="blog-post-info">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3 class="post-name"><a href="blog-post.html">The Style of Modern</a></h3>
+                                        <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
+                                        <div class="post-metas">
+                                            <div class="categories">
+                                                <a href="#" rel="category tag">BEAUTY</a>,
+                                                <a href="#" rel="category tag">FASHION</a>
+                                            </div>
+                                            <span class="post-comments-number">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-post-item post-item">
+                                    <div class="blog-post-img">
+                                        <a class="hover-images" href="blog-post.html"><img src="img/blog/6_sm.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="blog-post-info">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3 class="post-name"><a href="blog-post.html">Dezi Blog & Magazine</a></h3>
+                                        <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
+                                        <div class="post-metas">
+                                            <div class="categories">
+                                                <a href="#" rel="category tag">BEAUTY</a>,
+                                                <a href="#" rel="category tag">FASHION</a>
+                                            </div>
+                                            <span class="post-comments-number">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination-container pagination-blog">
+                            <nav>
+                                <ul class="pagination">
+                                    <li><a class="active" href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li>
+                                        <a href="#" aria-label="Previous">
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="sidebar col-xs-12 col-md-4">
+                        <aside class="widget widget_search">
+                            <form action="#" method="get" class="search-form">
+                                <input type="text" name="s" placeholder="Search...">
+                                <button type="submit" class="btn btn-search">
+                                    <i class="icon-magnifier"></i>
+                                </button>
+                            </form>
+                        </aside>
+                        <aside class="widget widget_social">
+                            <h3 class="widget-title">Social</h3>
+                            <div class="social">
+                                <a href="#" title="twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                                <a href="#" title="facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                                <a href="#" title="google plus">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                                <a href="#" title="Pinterest">
+                                <i class="fa fa-pinterest-p"></i>
+                            </a>
+                            </div>
+                        </aside>
+                        <aside class="widget widget_category">
+                            <h3 class="widget-title">Categories</h3>
+                            <ul>
+                                <li><a href="#">fashion</a>3</li>
+                                <li><a href="#">family</a>6</li>
+                                <li><a href="#">beauty</a>9</li>
+                                <li><a href="#">essential six</a>12</li>
+                                <li><a href="#">videos</a>16</li>
+                            </ul>
+                        </aside>
+                        <aside class="widget widget_popular_posts">
+                            <h3 class="widget-title">Popular Posts</h3>
+                            <div class="post-item-list">
+                                <div class="post-item">
+                                    <div class="post-item-img">
+                                        <a href="#"><img src="img/blog/popular_1.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="post-item-text">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3><a href="#">The Must Have Neutral Layers for Spring</a></h3>
+                                    </div>
+                                </div>
+                                <div class="post-item">
+                                    <div class="post-item-img">
+                                        <a href="#"><img src="img/blog/popular_2.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="post-item-text">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3><a href="#">A planner tool to help coordinate</a></h3>
+                                    </div>
+                                </div>
+                                <div class="post-item">
+                                    <div class="post-item-img">
+                                        <a href="#"><img src="img/blog/popular_3.jpg" alt="blog-img" class="img-reponsive"></a>
+                                    </div>
+                                    <div class="post-item-text">
+                                        <div class="post-date">September 22, 2018</div>
+                                        <h3><a href="#">What a beautiful design!</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                        <aside class="widget widget_newletters">
+                            <h3 class="widget-title">Newletters</h3>
+                            <div class="newletter-form">
+                                <form action="#">
+                                    <input type="text" name="s" placeholder="Your email address..." class="form-control">
+                                    <button type="submit" class="btn btn-submit">Submit</button>
+                                </form>
+                            </div>
+                        </aside>
+                        <aside class="widget widget_instagram">
+                            <h3 class="widget-title">Instagrams</h3>
+                            <div class="cosre-instagram">
+                                <div class="item">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/insta_1.jpg" alt="" class="img-reponsive"></a>
+                                </div>
+                                <div class="item">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/insta_2.jpg" alt="" class="img-reponsive"></a>
+                                </div>
+                                <div class="item">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/insta_3.jpg" alt="" class="img-reponsive"></a>
+                                </div>
+                                <div class="item">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/insta_4.jpg" alt="" class="img-reponsive"></a>
+                                </div>
+                                <div class="item">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/insta_5.jpg" alt="" class="img-reponsive"></a>
+                                </div>
+                                <div class="item">
+                                    <a class="hover-images" href="blog-post.html"><img src="img/blog/insta_6.jpg" alt="" class="img-reponsive"></a>
+                                </div>
+                            </div>
+                        </aside>
+                        <aside class="widget widget_tags">
+                            <h3 class="widget-title">Tags</h3>
+                            <div class="content">
+                                <a href="#" title="design" class="active">Design</a>
+                                <a href="#" title="news">news</a>
+                                <a href="#" title="lifestyle">life style</a>
+                                <a href="#" title="fashion">Fashion</a>
+                                <a href="#" title="blog">blog</a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+	
+    <footer>
+        <div class="container container-42">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="menu-footer">
+                        <ul>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="terms.html">Terms & Conditions</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="newletter-form">
+                        <h3 class="footer-title text-center">Newsletter</h3>
+                        <form action="#">
+                            <input type="text" name="s" placeholder="Email Adress..." class="form-control">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                    <div class="social">
+                        <a href="#" title="twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" title="facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" title="google plus">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="#" title="Pinterest">
+                            <i class="fa fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" title="rss">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

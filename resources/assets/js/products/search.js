@@ -1,16 +1,15 @@
 window.Vue = require('vue');
 window.Event = new Vue();
 window.axios = require('axios');
+window.slider = require('bootstrap-slider');
 window.axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': window.csrfToken,
+    'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
 
 Vue.component('search-parameters', require('./components/parameters.vue'));
 Vue.component('product-grid', require('./components/product-grid.vue'));
-Vue.component('product-list', require('./components/product-list.vue'));
 Vue.component('grid', require('./components/grid.vue'));
-Vue.component('list', require('./components/list.vue'));
 Vue.component('pagination', require('../components/pagination.vue'));
 
 const app = new Vue({
@@ -24,7 +23,8 @@ const app = new Vue({
             page_offset : 0,
             search_params : {},
             resources_url : "",
-            grid_style : true
+            grid_style : true,
+            sort_by_placeholder_text : "newest"
         }
     },
     created() {

@@ -1,0 +1,1245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Pinto | The World's Most Comfortable Underwears</title>
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="shortcut icon" href="img/favicon.ico" >
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.4.1/collection/icon/icon.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!--push menu cart -->
+    <div class="pushmenu pushmenu-left cart-box-container">
+        <div class="cart-list">
+            <span class="close-left js-close">x</span>
+            <h3 class="cart-title">Your Cart</h3>
+            <ul class="list">
+                <li>
+                    <a href="#" title="" class="cart-product-image"><img src="img/cart_1.jpg" alt="Product"></a>
+                    <div class="text">
+                        <p class="product-name">Rose Gold Natural Band Watch</p>
+                        <p class="product-price">$295.00</p>
+                        <div class="quantity input-group">
+                            <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
+                                <span class="minus-icon">-</span>
+                            </button>
+                            <input type="text" name="number" value="1" class="product_quantity_number js-number">
+                            <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
+                                <span class="plus-icon">+</span>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" title="" class="cart-product-image"><img src="img/cart_1.jpg" alt="Product"></a>
+                    <div class="text">
+                        <p class="product-name">Dot Drop Earrings</p>
+                        <p class="product-price">$295.00</p>
+                        <div class="quantity input-group">
+                            <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
+                                <span class="minus-icon">-</span>
+                            </button>
+                            <input type="text" name="number" value="1" class="product_quantity_number js-number">
+                            <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
+                                <span class="plus-icon">+</span>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+                
+            </ul>
+            <div class="cart-bottom">
+                <p class="total"><span>Subtotal</span> $560.00</p>
+                <div class="cart-button">
+                    <a class="checkout" href="checkout.html" title="">Check Out</a>
+                    <a class="edit-cart" href="cart.html" title="edit cart">View Cart</a>
+                </div>
+                <a href="#" class="text">Our Shipping & Return Policy</a>
+            </div>
+            <!-- End cart bottom -->
+            <!-- End cart bottom -->
+        </div>
+    </div>
+    <!-- End cart -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">SEARCH HERE</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <form method="get" class="searchform" action="/search" role="search">
+                            <input type="hidden" name="type" value="product">
+                            <input type="text" name="q" class="form-control control-search">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default button_search" type="button"><i data-toggle="dropdown" class="fa fa-search"></i></button>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END  Modal content-->
+    <header id="header" class="header-v1">
+        <div class="sticky-header text-center hidden-xs hidden-sm">
+            <div class="text">
+                <span class="u-line">Free shipping and returns</span> on all orders above $200
+            </div>
+        </div>
+        <div class="topbar">
+            <div class="container container-40">
+                <div class="topbar-left">
+                    <div class="topbar-option">
+                        <div class="topbar-account">
+                            <a href="login.html"><i class="icon-user f-15"></i></a>
+                        </div>
+                        <div class="topbar-wishlist">
+                            <a href="wishlist.html">
+                                <i class="icon-heart f-15"></i>
+                                <span class="count wishlist-count">0</span>
+                            </a>
+                        </div>
+                        <div class="topbar-language dropdown">
+                            <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            
+                              <span>EN</span>
+                              <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label1">
+                                <li><a href="#">English</a></li>
+                                <li><a href="#">Arabic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-left-->
+                <div class="logo hidden-xs hidden-sm">
+                    <a href="" title="home-logo"><img src="img/logo.png" alt="logo" class="img-reponsive"></a>
+                </div>
+                <!--end logo-->
+                <div class="topbar-right">
+                    <div class="topbar-option">
+                        <div class="topbar-currency dropdown">
+                            <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            
+                              <span>USD</span>
+                              <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label2">
+                                <li><a href="#">USD</a></li>
+                                <li><a href="#">EGP</a></li>
+                            </ul>
+                        </div>
+                        <div class="topbar-search">
+                            <div class="search-popup dropdown" data-toggle="modal" data-target="#myModal">
+                                <a href="#"><i class="icon-magnifier f-15"></i></a>
+                            </div>
+                        </div>
+                        <div class="topbar-cart">
+                            <a href="#" class="icon-cart">
+                                <i class="icon-basket f-15"></i>
+                                <span class="count cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-right-->
+            </div>
+        </div>
+        	<div class="header-top">
+			<div class="container container-40">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<div class="logo-mobile hidden-lg hidden-md">
+							<a href="" title="home-logo"><img src="img/cosre.png" alt="logo" class="img-reponsive"></a>
+						</div>
+						<!--end logo-->
+						<button type="button" class="navbar-toggle icon-mobile" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-menu"></span>
+                        </button>
+						<nav class="navbar main-menu">
+							<div class="collapse navbar-collapse" id="myNavbar">
+								<ul class="nav navbar-nav js-menubar">
+									<li class="level1 active dropdown"><a href="index.html">Home</a>
+										
+									</li>
+									<li class="level1 dropdown hassub">
+										<a href="products.html">Shop</a>
+										<span class="plus js-plus-icon"></span>
+										<div class="menu-level-1 dropdown-menu">
+											<ul class="level1">
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+									</li>
+									<li class="level1 dropdown hassub">
+										<a href="#">Top Deals</a>
+										<span class="plus js-plus-icon"></span>
+										<div class="menu-level-1 dropdown-menu">
+											<ul class="level1">
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+												<li class="level2 col-3">
+													<a href="products.html">Category Name</a>
+													<ul class="menu-level-2">
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+														<li class="level3"><a href="products.html" >Product Title</a></li>
+													</ul>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+									</li>
+									
+									<li class="level1 dropdown hassub"><a href="about.html">About</a>
+									</li>
+									<li class="level1 dropdown hassub"><a href="blog.html">Blog</a>
+									</li>
+									<li class="level1 dropdown hassub"><a href="contact-us.html">Contact Us</a>
+									</li>
+								</ul>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	 </header>
+    <!-- /header -->
+    <div class="page-heading">
+        <div class="banner-heading">
+            <img src="img/headerbg_2.jpg" alt="" class="img-reponsive">
+            <div class="heading-content text-center">
+                <div class="container container-42">
+                    <h1 class="page-title white">Shop</h1>
+                    <ul class="breadcrumb white">
+                        <li><a href="">home</a></li>
+                        <li><a href="">Shop All Products</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="nav nav-tabs nav-justified nav-filter white">
+            <ul class="owl-carousel owl-theme js-owl-category">
+                <li class="active"><a data-toggle="pill" href="#all">All</a></li>
+                <li><a data-toggle="pill" href="#women">Boxer</a></li>
+                <li><a data-toggle="pill" href="#access">Trunk</a></li>
+                <li><a data-toggle="pill" href="#gagets">Boxer Brief</a></li>
+                <li><a data-toggle="pill" href="#edit">Brief</a></li>
+                <li><a data-toggle="pill" href="#edit">Packs</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="wrap-filter">
+        <div class="wrap-filter-box wrap-filter-number">
+           
+            <span class="total-count">Showing 1-12 of 30 products</span>
+        </div>
+        <div class="wrap-filter-box text-center view-mode">
+            <a class="col" href="#" onClick="return false;"><span class="icon-grid-img"></span></a>
+        </div>
+        <div class="wrap-filter-box text-center js-filter"><a href="#" class="filter-title"><i class="icon-equalizer"></i></a>
+            <form action="#" method="get" class="form-filter-product js-filter-open">
+                <span class="close-left js-close"><i class="icon-close f-20"></i></span>
+                <div class="product-filter-wrapper">
+                    <div class="product-filter-inner text-left">
+                        <div class="product-filter">
+                            <div class="form-group">
+                                <span class="title-filter">Category</span>
+                                <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Select a category
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>Select a category</li>
+                                    <li>Backpacks</li>
+                                    <li>Decoration</li>
+                                    <li>Essentials</li>
+                                    <li>Interior</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-filter">
+                            <div class="form-group">
+                                <span class="title-filter">Color</span>
+                                <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Choose color
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>Choose color</li>
+                                    <li>Red</li>
+                                    <li>Blue</li>
+                                    <li>Gray</li>
+                                    <li>White</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-filter">
+                            <div class="form-group">
+                                <span class="title-filter">Size</span>
+                                <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Choose size
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>Choose size</li>
+                                    <li>S</li>
+                                    <li>M</li>
+                                    <li>L</li>
+                                    <li>XL</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-filter">
+                            <div class="form-group">
+                                <span class="title-filter">Price</span>
+                                <div class="filter-content">
+                                    <div class="price-range-holder">
+                                        <input type="text" class="price-slider" value="">
+                                    </div>
+                                    <span class="min-max">
+                                    Price: $30 — $3450
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="product-filter-button-group clearfix">
+                        <div class="product-filter-button">
+                            <a href="" class="btn-submit">Fillter </a>
+                        </div>
+                        <div class="product-filter-button">
+                            <a href="" class="btn-submit">Clear </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="wrap-filter-box text-center view-mode">
+            <a class="list" href="#" onClick="return false;"><span class="icon-list-img"></span></a>
+        </div>
+        <div class="wrap-filter-box wrap-filter-sorting">
+            <button class="dropdown-toggle" type="button" data-toggle="dropdown" id="menu2">Sort by newness
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+                <li><a href="#" title="">Sort by newness</a></li>
+                <li><a href="#" title="">Best Selling</a></li>
+                <li><a href="#" title="">Best Selling</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="container container-42 shop-sidebar">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 collection-sidebar">
+                <div class="product-standard filter-product">
+                    <div class="filter filter-price">
+                        <h3 class="filtertitle">
+                            By price.
+                        </h3>
+                        <div class="filter-content">
+                            <div class="price-range-holder">
+                                <input type="text" class="price-slider" value="">
+                            </div>
+                            <span class="min-max">
+                                Price: $30 — $3450
+                            </span>
+                            <span class="filter-title">
+                                
+                            </span>
+                        </div>
+                    </div>
+                    <div class="filter filter-category">
+                        <h3 class="filtertitle">
+                            Categories.
+                        </h3>
+                        <ul class="filter-content js-filter-menu">
+                            <li><a href="">Outerwear</a></li>
+                            <li><a href="">Dresses</a>
+                                <span class="plus js-plus-icon"></span>
+                                <ul class="filter-menu">
+                                    <li class=""><a href="#">Drop menu 1</a></li>
+                                    <li class=""><a href="#">Drop menu 2</a></li>
+                                    <li class=""><a href="#">Drop menu 3</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">Gadgets</a></li>
+                            <li><a href="">Hoodies</a>
+                                <span class="plus js-plus-icon"></span>
+                                <ul class="filter-menu">
+                                    <li class=""><a href="#">Drop menu 1</a></li>
+                                    <li class=""><a href="#">Drop menu 2</a></li>
+                                    <li class=""><a href="#">Drop menu 3</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">Men</a></li>
+                            <li><a href="">Shirts & Blouses</a>
+                                <span class="plus js-plus-icon"></span>
+                                <ul class="filter-menu">
+                                    <li class=""><a href="#">Drop menu 1</a></li>
+                                    <li class=""><a href="#">Drop menu 2</a></li>
+                                    <li class=""><a href="#">Drop menu 3</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">Shoes</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter filter-color">
+                        <h3 class="filtertitle">
+                           By color. 
+                        </h3>
+                        <ul class="filter-content">
+                            <li><a href="">Grey</a></li>
+                            <li><a href="">Metallic</a></li>
+                            <li><a href="">Multicolour Nude</a></li>
+                            <li><a href="">Pink</a></li>
+                            <li><a href="">Purple</a></li>
+                            <li><a href="">Red White</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter filter-size">
+                        <h3 class="filtertitle">
+                            By size
+                        </h3>
+                        <div class="filter-content">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Choose any size...
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">XXL</a></li>
+                                    <li><a href="#">XL</a></li>
+                                    <li><a href="#">L</a></li>
+                                    <li><a href="#">M</a></li>
+                                    <li><a href="#">S</a></li>
+                                    <li><a href="#">xS</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-banner">
+                        <a href=""><img src="img/sidebar-banner.jpg" alt="" class="img-reponsive"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 collection-list">
+                <div class="product-standard product-grid">
+                    <div class="tab-content">
+                        <div id="all" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_02.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_01.png" alt="photo" class="img-reponsive">
+                            
+                                                </a>
+                                        <div class="ribbon-sale ver2"><span>sale</span></div>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_06.png" alt="photo" class="img-reponsive">
+                                                
+                                                </a>
+                                        <div class="ribbon-new ver2"><span>new</span></div>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_05.png" alt="photo" class="img-reponsive">
+                                                
+                                                </a>
+                                        <div class="ribbon-sale ver2"><span>sale</span></div>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_04.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_03.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_02.png" alt="photo" class="img-reponsive">
+                                                
+                                                </a>
+                                        <div class="ribbon-sale ver2"><span>sale</span></div>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_01.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_02.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_03.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_04.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_05.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_06.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_01.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_02.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_03.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_04.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_05.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_06.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 product-item">
+                                    <div class="product-images">
+                                        <a href="single-product.html" class="hover-images effect"><img src="img/products/product_01.png" alt="photo" class="img-reponsive"></a>
+                                        <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                                        <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+                                    </div>
+                                    <div class="product-info-ver2">
+                                        <h3 class="product-title"><a href="single-product.html">The Turtleneck</a></h3>
+                                        <div class="product-after-switch">
+                                            <div class="product-price">$295.00</div>
+                                            <div class="product-after-button">
+                                                <a href="#" class="addcart">ADD TO CART</a>
+                                            </div>
+                                        </div>
+                                        <div class="rating-star">
+                                            <span class="star star-5"></span>
+                                            <span class="star star-4"></span>
+                                            <span class="star star-3"></span>
+                                            <span class="star star-2"></span>
+                                            <span class="star star-1"></span>
+                                        </div>
+                                        <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
+                                        <div class="product-price">$292.00</div>
+                                        <div class="button-group">
+                                            <a href="#" class="button add-to-cart">Add to cart</a>
+                                            <a href="#" class="button add-to-wishlist">Add to wishlist</a>
+                                            <a href="#" class="button add-view">Quick view</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pagination-container pagination-blog button-v v2">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li><a class="active" href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Previous">
+                                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container container-42">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="menu-footer">
+                        <ul>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="terms.html">Terms & Conditions</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="newletter-form">
+                        <h3 class="footer-title text-center">Newsletter</h3>
+                        <form action="#">
+                            <input type="text" name="s" placeholder="Email Adress..." class="form-control">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                    <div class="social">
+                        <a href="#" title="twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" title="facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" title="google plus">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="#" title="Pinterest">
+                            <i class="fa fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" title="rss">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+	<div id="quickview" class="modal fade quickview-wrapper" role="dialog" >
+            <div class="quick-modal show">
+                <div id="quickview-content">
+                    <div class="single-product-detail">
+                        <div class="product-images">
+                            <img src="img/products/product_01.png" alt="photo" class="img-reponsive">
+                        </div>
+                        <div class="single-product-info">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="rating-star">
+                                <div class="icon-rating"><span class="star star-5"></span>
+                                    <span class="star star-4"></span>
+                                    <span class="star star-3"></span>
+                                    <span class="star star-2"></span>
+                                    <span class="star star-1"></span>
+                                </div>
+                                <span class="review">(1 customer review)</span>
+                            </div>
+                            <h3 class="product-title"><a href="#">Simple Product</a></h3>
+                            <div class="product-price">
+                                <span>$220.00</span>
+                            </div>
+                            <p class="product-desc">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+                            <div class="action">
+                                <div class="quantity">
+                                    <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
+                                        <span class="minus-icon">-</span>
+                                    </button>
+                                    <input type="text" name="number" value="1" class="product_quantity_number js-number">
+                                    <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
+                                        <span class="plus-icon">+</span>
+                                    </button>
+                                </div>
+                                <a href="#" class="link-ver1 add-cart">Add To Cart</a>
+                                <a href="#" class="link-ver1 wish"><i class="icon-heart f-15"></i></a>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="share-social">
+                                <span>Share :</span>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

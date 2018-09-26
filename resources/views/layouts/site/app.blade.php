@@ -1,281 +1,311 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Pinto | The World's Most Comfortable Underwears</title>
+    <link rel="stylesheet" href="{{ asset('assets/site/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/site/css/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/site/css/owl.carousel.min.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/site/img/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/site/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/site/css/bootstrap-slider.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/site/css/custom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.4.1/collection/icon/icon.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+    window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+    ]) !!};
+    </script>
+    {{ Html::style('assets/panel-assets/css/sweetalert.css') }}
+    @yield('stylesheets')
+    <style>
+    .spinner-container {
+        position: fixed;
+        background-color: #0009;
+        width: 100%;
+        height: 110%;
+        z-index: 10000;
+    }
 
-    <link rel="shortcut icon" href="{{ asset('assets/site/images/ficon.png') }}">
-    <!-- Standard -->
-    <!-- Latest Bootstrap min CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/site/css/bootstrap.min.css') }}" type="text/css">
-    <!-- Dropdownhover CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/site/css/bootstrap-dropdownhover.min.css') }}" type="text/css">
-    <!-- simple line fonts awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/site/simple-line-icon/css/simple-line-icons.css') }}" type="text/css">
-    <!-- stroke-gap-icons -->
-    <link rel="stylesheet" href="{{ asset('assets/site/stroke-gap-icons/stroke-gap-icons.css') }}" type="text/css">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/site/css/animate.min.css') }}" type="text/css">
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/site/css/style.css') }}" type="text/css">
-    <!--  baguetteBox -->
-    <link rel="stylesheet" href="{{ asset('assets/site/css/baguetteBox.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/site/css/starrr.css')}}">
-    <!--  jCarousel -->
-    <link rel="stylesheet" href="{{ asset('assets/site/css/jcarousel.connected-carousels.css')}}">
-
-    <!-- Owl Carousel Assets -->
-    <link href="{{ asset('assets/site/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/site/owl-carousel/owl.theme.css') }}" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css" />
-{{ Html::style('assets/panel-assets/css/sweetalert.css') }}
-@yield('stylesheets')
-<style>
-.spinner-container {
-    position: fixed;
-    background-color: #0009;
-    width: 100%;
-    height: 110%;
-    z-index: 10000;
-}
-
-@keyframes spinner {
-    to {transform: rotate(360deg);}
-}
-.spinner {
-    content: '';
-    box-sizing: border-box;
-    position: relative;
-    top: 37%;
-    left: 46%;
-    height: 150px;
-    width: 150px;
-    margin-top: -15px;
-    margin-left: -15px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    border-top-color: #07d;
-    animation: spinner .6s linear infinite;
-}
-.fas {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-        font-size: 14px;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-</style>
+    @keyframes spinner {
+        to {transform: rotate(360deg);}
+    }
+    .spinner {
+        content: '';
+        box-sizing: border-box;
+        position: relative;
+        top: 37%;
+        left: 46%;
+        height: 150px;
+        width: 150px;
+        margin-top: -15px;
+        margin-left: -15px;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+        border-top-color: #07d;
+        animation: spinner .6s linear infinite;
+    }
+    </style>
 </head>
+
 <body>
-    @include('layouts.site.parts.header')
+    <!--push menu cart -->
+    <div class="pushmenu pushmenu-left cart-box-container">
+        <div class="cart-list">
+            <span class="close-left js-close">x</span>
+            <h3 class="cart-title">Your Cart</h3>
+            <div class="nocart-list">
+                <div class="empty-cart">
+                    <h4 class="nocart-title">No products in the cart.</h4>
+                    <a href="" class="btn-shop btn-arrow">Start shopping</a>
+                </div>
+            </div>
+            <div class="cart-bottom">
+                <a href="#" class="text">Our Shipping & Return Policy</a>
+            </div>
+            <!-- End cart bottom -->
+        </div>
+    </div>
+    <!-- End cart -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">SEARCH HERE</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <form method="get" class="searchform" action="/search" role="search">
+                            <input type="hidden" name="type" value="product">
+                            <input type="text" name="q" class="form-control control-search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default button_search" type="button"><i data-toggle="dropdown" class="fa fa-search"></i></button>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END  Modal content-->
+    <header id="header" class="header-v1">
+        <div class="sticky-header text-center hidden-xs hidden-sm">
+            <div class="text">
+                <span class="u-line">Free shipping and returns</span> on all orders above $200
+            </div>
+        </div>
+        <div class="topbar">
+            <div class="container container-40">
+                <div class="topbar-left">
+                    <div class="topbar-option">
+                        <div class="topbar-account">
+                            <a href="login.html"><i class="icon-user f-15"></i></a>
+                        </div>
+                        <div class="topbar-wishlist">
+                            <a href="wishlist.html">
+                                <i class="icon-heart f-15"></i>
+                                <span class="count wishlist-count">0</span>
+                            </a>
+                        </div>
+                        <div class="topbar-language dropdown">
+                            <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                <span>EN</span>
+                                <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label1">
+                                <li><a href="#">English</a></li>
+                                <li><a href="#">Arabic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-left-->
+                <div class="logo hidden-xs hidden-sm">
+                    <a href="{{ url('/') }}" class="logo" title="home-logo"><img src="{{ asset('assets/site/img/logo1.png') }}" alt="logo" class="img-reponsive"/></a>
+                </div>
+                <!--end logo-->
+                <div class="topbar-right">
+                    <div class="topbar-option">
+                        <div class="topbar-currency dropdown">
+                            <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                <span>USD</span>
+                                <span class="fa fa-caret-down f-10"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="label2">
+                                <li><a href="#">USD</a></li>
+                                <li><a href="#">EGP</a></li>
+                            </ul>
+                        </div>
+                        <div class="topbar-search">
+                            <div class="search-popup dropdown" data-toggle="modal" data-target="#myModal">
+                                <a href="#"><i class="icon-magnifier f-15"></i></a>
+                            </div>
+                        </div>
+                        <div class="topbar-cart">
+                            <a href="#" class="icon-cart">
+                                <i class="icon-basket f-15"></i>
+                                <span class="count cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end topbar-option-->
+                </div>
+                <!--end topbar-right-->
+            </div>
+        </div>
+        <div class="header-top">
+            <div class="container container-40">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="logo-mobile hidden-lg hidden-md">
+                            <a href="" title="home-logo"><img src="{{ asset('assets/site/img/cosre.png') }}" alt="logo" class="img-reponsive"></a>
+                        </div>
+                        <!--end logo-->
+                        <button type="button" class="navbar-toggle icon-mobile" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-menu"></span>
+                        </button>
+                        <nav class="navbar main-menu">
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav js-menubar">
+                                    <li class="level1 active dropdown">
+                                        <a href="{{ url('/') }}">Home</a>
+                                    </li>
+                                    <li class="level1 dropdown hassub">
+                                        <a href="{{ route('web.products.shop') }}">Shop</a>
+                                        <?php if (!$categories->isEmpty()): ?>
+                                            <span class="plus js-plus-icon"></span>
+                                            <div class="menu-level-1 dropdown-menu">
+                                                <ul class="level1">
+                                                    @foreach($categories as $category)
+                                                    <li class="level2 col-3">
+                                                        <a href="products.html">{{ $category->name }}</a>
+                                                        <ul class="menu-level-2">
+                                                            @foreach($category->subCategories as $sub_category)
+                                                            <li class="level3">
+                                                                <a href="products.html">
+                                                                    {{ $sub_category->name }}
+                                                                </a>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        <?php endif; ?>
+                                    </li>
+                                    <li class="level1 dropdown">
+                                        <a href="#">Top Deals</a>
+                                    </li>
+                                    <li class="level1 dropdown"><a href="about.html">About</a>
+                                    </li>
+                                    <li class="level1 dropdown"><a href="blog.html">Blog</a>
+                                    </li>
+                                    <li class="level1 dropdown"><a href="contact-us.html">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div id="app">
         <div class="spinner-container" v-show="loading_screen" style="display:none;"><div class="spinner"></div></div>
         @yield('content')
     </div>
-    <!-- /deal-outer -->
-    <!-- newsletter -->
-    <section class="newsletter">
-        <div class="container">
+
+    <footer>
+        <div class="container container-42">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <h6 class="sing-up-text">sign up to<strong>newsletter</strong> &<strong>free shipping</strong> for first shopping</h6>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="menu-footer">
+                        <ul>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="terms.html">Terms & Conditions</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="sing-up-input">
-                        <input name="singup" type="text" placeholder="Your email address...">
-                        <input name="submit" type="button" value="Submit" />
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="newletter-form">
+                        <h3 class="footer-title text-center">Newsletter</h3>
+                        <form action="#">
+                            <input type="text" name="s" placeholder="Email Adress..." class="form-control">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                    <div class="social">
+                        <a href="{{ $contact_details && $contact_details->twitter ? $contact_details->twitter : '#' }}" title="twitter" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="{{ $contact_details && $contact_details->facebook ? $contact_details->facebook : '#' }}" title="facebook" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="{{ $contact_details && $contact_details->google ? $contact_details->google : '#' }}" title="google plus" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="{{ $contact_details && $contact_details->instagram ? $contact_details->instagram : '#' }}" title="instagram" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-instagram"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- /newsletter -->
-    @include('layouts.site.parts.footer')
-    <!-- Login Modal -->
-    <div class="modal fade" id="login" data-open-onload="true" data-open-delay="1500" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-times"></i>
-                </button>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            {{ Form::open(['route' => 'web.login' ,'id' => "form-login"]) }}
-                            <div class="pt-20 text-center col-sm-6 col-sm-offset-3">
-                                <h2 class="heading font34 inverse text-uppercase">
-                                    LOGIN TO YOUR ACCOUNT
-                                </h2>
-                                <p class="font22 text-center">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.</p>
-                                <div class="form-group">
-                                    <input type="text" required name="email" class="form-control" placeholder="Enter your Email">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" required class="form-control" placeholder="Enter your Password">
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox"  id="remember" checked name="remember">
-                                    <label for="remember">Remember me</label>
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-black" type="submit">Login</button>
-                                </div>
-                            </div>
-                            {{ Form::close() }}
+    </footer>
+    <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
 
-                        </div>
-                        <div style="margin-left: 450px;">
-                       <strong> or login with</strong>
-
-                          <a class="btn btn-social-icon btn-facebook" href="{{route('facebook.redirect')}}">
-                              <span class="fa fa-facebook"></span>
-                          </a>
-                          <a class="btn btn-social-icon btn-google" href="{{route('google.redirect')}}">
-                              <span class="fa fa-google"></span>
-                          </a>
-                      </div>
-                      <br>
-                      <div class="row">
-                        <div class="form-group" style="margin-left: 470px;">
-                            <a href="{{route('register')}}">New ? Register</a>
-                        </div>
-
-                        <div class="form-group" style="margin-left: 470px;">
-                            <a href="{{route('reset.password')}}">Forget your password ? click here</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Get Our Email Letter popup -->
-<div class="modal fade modal-popup" id="modal1" data-open-onload="true" data-open-delay="1500" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="fa fa-times"></i>
-            </button>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6 pt-20">
-                        </div>
-                        <div class="col-sm-6 pt-20 text-center">
-                            <h2 class="heading font34 inverse text-uppercase">
-                                Subscribe to our newsletter
-                            </h2>
-                            <p class="font22 text-center">Subscribe to the Platin mailing list to receive updates on new arrivals, special offers and other discount information.</p>
-                            <form name="main">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Enter your Email id">
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-black" type="button">Subscribe!</button>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="check" /> Do not show this popup again
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /Get Our Email Letter popup -->
-<p id="back-top"> <a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a> </p>
-<script type="text/javascript">
-    window.csrfToken = "{{ csrf_token() }}";
-</script>
-<script src="{{ asset('assets/site/js/jquery.js') }}"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="{{ asset('assets/site/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/site/js/bootstrap-dropdownhover.min.js') }}"></script>
-<!-- Plugin JavaScript -->
-<script src="{{ asset('assets/site/js/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('assets/site/js/jquery.countdown.js') }}"></script>
-<script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
-<!-- owl carousel -->
-<script src="{{ asset('assets/site/owl-carousel/owl.carousel.js') }}"></script>
-<!--  Custom Theme JavaScript  -->
-<script src="{{ asset('assets/site/js/custom.js') }}"></script>
-
-@yield('scripts')
-
-{{ Html::script('assets/panel-assets/js/sweetalert.min.js') }}
-@include('sweet::alert')
-<script type="text/javascript">
+    @yield('pre-scripts')
+    <script src="{{ asset('assets/site/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/site/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/site/js/owl.carousel.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/site/js/bootstrap-slider.min.js') }}"></script> -->
+    <script src="{{ asset('assets/site/js/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/site/js/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ asset('assets/site/js/main.js') }}"></script>
+    {{ Html::script('assets/panel-assets/js/sweetalert.min.js') }}
+    @include('sweet::alert')
+    @yield('scripts')
+    <script type="text/javascript">
     function wishlist(id) {
         var id = id;
         $.ajax({
             type: "POST",
-
-            url: "{{route('web.wishlist.add')}}",
+            url: "{{ route('web.wishlist.add') }}",
             data: {
                 _token: "{{ csrf_token() }}",
                 id: id
             },
+            dataType: 'json',
             success: function(data) {
-                swal("Done", data[0], "success");
+                if (data.error != undefined) {
+                    return swal("Error", data.error, "error");
+                }
+                if (data.message != undefined) {
+                    return swal("Done", data.message, "success");
+                }
                 $('#wishListCount').text(data[1]);
             }
         });
     }
-
-      function removeCartItem(rowId) {
-
-        $.ajax({
-            type: "POST",
-
-            url: "{{route('web.cart.remove.item')}}",
-            data: {
-                _token: "{{ csrf_token() }}",
-                rowId: rowId
-            },
-            success: function(data) {
-                $('.cartContent'+data[0]).remove();
-                $('#cartCountTotalAjax').text('');
-                $('#cartCountTotalAjax').text(data[2]);
-                $('#cartSubTotalAjax').text('');
-                $('#cartSubTotalAjax').text(data[1]);
-            }
-        });
-    }
-
-    function addCompare(id) {
-        var id = id;
-        $.ajax({
-            type: "POST",
-
-            url: "{{route('web.add.compare.product')}}",
-            data: {
-                _token: "{{ csrf_token() }}",
-                id: id
-            },
-            success: function(data) {
-                console.log(data);
-                $('#compareCount').text(data[1]);
-                swal("Done", "Add to Compare List!", "success");
-
-            }
-        });
-    }
-</script>
+    </script>
 </body>
 </html>
