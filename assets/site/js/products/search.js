@@ -15085,7 +15085,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "product-after-switch"
   }, [_c('div', {
     staticClass: "product-price"
-  }, [_vm._v("$" + _vm._s(_vm.product.discount ? _vm.product.price - (_vm.product.discount.percentage * _vm.product.price / 100) : _vm.product.price))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('p', {
+  }, [_vm._v("$" + _vm._s(_vm.product.discount ? _vm.product.price - (_vm.product.discount.percentage * _vm.product.price / 100) : _vm.product.price))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c('div', {
+    staticClass: "rating-star"
+  }, [(_vm.product.rate >= 1) ? _c('span', {
+    staticClass: "star star-5"
+  }) : _vm._e(), _vm._v(" "), (_vm.product.rate >= 2) ? _c('span', {
+    staticClass: "star star-4"
+  }) : _vm._e(), _vm._v(" "), (_vm.product.rate >= 3) ? _c('span', {
+    staticClass: "star star-3"
+  }) : _vm._e(), _vm._v(" "), (_vm.product.rate >= 4) ? _c('span', {
+    staticClass: "star star-2"
+  }) : _vm._e(), _vm._v(" "), (_vm.product.rate >= 5) ? _c('span', {
+    staticClass: "star star-1"
+  }) : _vm._e()]), _vm._v(" "), _c('p', {
     staticClass: "product-desc"
   }, [_vm._v(_vm._s(_vm.product.short_description))]), _vm._v(" "), _c('div', {
     staticClass: "product-price"
@@ -15122,20 +15134,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "#"
     }
   }, [_vm._v("ADD TO CART")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "rating-star"
-  }, [_c('span', {
-    staticClass: "star star-5"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "star star-4"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "star star-3"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "star star-2"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "star star-1"
-  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {

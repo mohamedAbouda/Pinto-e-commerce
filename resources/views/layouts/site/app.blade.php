@@ -209,7 +209,7 @@
                                     <li class="level1 dropdown">
                                         <a href="#">Top Deals</a>
                                     </li>
-                                    <li class="level1 dropdown"><a href="about.html">About</a>
+                                    <li class="level1 dropdown"><a href="{{ route('web.about') }}">About</a>
                                     </li>
                                     <li class="level1 dropdown"><a href="blog.html">Blog</a>
                                     </li>

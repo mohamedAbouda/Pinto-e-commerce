@@ -88,7 +88,7 @@ class ProductController extends Controller
         //     $q->where('activation_end' ,'>=' ,Carbon::now()->toDateTimeString())->where('activation_start' ,'<=' ,Carbon::now()->toDateTimeString());
         // })->take(8)->get();
 
-        return view('site.products.singleProduct' , $data);
+        return view('site.product' , $data);
     }
 
     public function review(ProductReviewRequest $request , Product $product)

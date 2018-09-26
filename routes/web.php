@@ -52,6 +52,7 @@ Route::group(['as' => 'web.','middleware' => ['updateSessionItemsLogin'] ,'names
         Route::post('wishlist/delete' , 'WishlistController@delete')->name('delete');
         Route::get('wishlist/delete/all' , 'WishlistController@deleteAll')->name('delete.all');
     });
+    Route::get('/about', 'ContactController@about')->name('about');
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');
     // Route::post('/products/review/{product?}', 'ProductController@review')->name('products.review');
@@ -69,7 +70,6 @@ Route::group(['as' => 'web.','middleware' => ['updateSessionItemsLogin'] ,'names
     // Route::post('user/reorder', 'OrderController@userReorder')->name('user.reorder');
     // Route::get('order/{order}/submit/dispute', 'OrderController@submitDispute')->name('order.submit.dispute');
     // Route::post('order/dispute/save', 'OrderController@orderDisputeSubmit')->name('order.dispute.store');
-    // Route::get('/about', 'ContactController@about')->name('about');
     // Route::get('/terms/conditions', 'ContactController@terms')->name('terms');
     // Route::get('/policy', 'ContactController@policy')->name('policy');
     // Route::post('/contact/submit', 'ContactController@submit')->name('submit.contact');
@@ -330,7 +330,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     // Terms
     Route::resource('terms', 'TermController');
     // About
-    Route::resource('about', 'AboutController');
+    Route::resource('about', 'AboutController' ,['only' => ['index' ,'create' ,'store']]);
 
     Route::post('delete/image/product', 'ProductController@deleteImage')->name('delete.image.product');
     // Store Locations

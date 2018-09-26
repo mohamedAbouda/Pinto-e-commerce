@@ -34,7 +34,7 @@ class ContactController extends Controller
     public function about()
     {
         $about = About::first();
-        return view('site.about.index',compact('about'));
+        return view('site.about',compact('about'));
     }
 
     public function terms()

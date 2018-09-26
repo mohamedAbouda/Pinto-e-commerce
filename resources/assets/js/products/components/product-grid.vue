@@ -18,11 +18,11 @@
                 </div>
             </div>
             <div class="rating-star">
-                <span class="star star-5"></span>
-                <span class="star star-4"></span>
-                <span class="star star-3"></span>
-                <span class="star star-2"></span>
-                <span class="star star-1"></span>
+                <span class="star star-5" v-if="product.rate >= 1"></span>
+                <span class="star star-4" v-if="product.rate >= 2"></span>
+                <span class="star star-3" v-if="product.rate >= 3"></span>
+                <span class="star star-2" v-if="product.rate >= 4"></span>
+                <span class="star star-1" v-if="product.rate >= 5"></span>
             </div>
             <p class="product-desc">{{ product.short_description }}</p>
             <div class="product-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</div>

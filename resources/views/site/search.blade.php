@@ -8,7 +8,7 @@
             <div class="container container-42">
                 <h1 class="page-title white">Shop</h1>
                 <ul class="breadcrumb white">
-                    <li><a href="">home</a></li>
+                    <li><a href="{{ url('/') }}">home</a></li>
                     <li><a href="">Shop All Products</a></li>
                 </ul>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\AboutRequest;
 use App\Models\About;
 
 class AboutController extends Controller
@@ -26,7 +27,8 @@ class AboutController extends Controller
      */
     public function create()
     {
-        return view('dashboardV2.about.create');
+        $data['about'] = About::first();
+        return view('dashboardV2.about.create' ,$data);
     }
 
     /**
@@ -35,62 +37,18 @@ class AboutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AboutRequest $request)
     {
-        $delete = About::where('id','!=',null)->delete();
-        $about = About::create([
-            'description'=>$request->input('body')
-        ]);
+        $input = $request->all();
 
+        $about = About::first();
+        alert()->success('Updated successfully.', 'Success');
+
+        if ($about) {
+            $about = $about->update($input);
+            return redirect()->route('dashboard.about.index');
+        }
+        $about = About::create($input);
         return redirect()->route('dashboard.about.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $about = About::where('id',$id)->first();
-        return view('dashboardV2.about.edit')->with('about',$about);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $updateAbout = About::where('id',$id)->update([
-            'description'=>$request->input('body')
-        ]);
-         return redirect()->route('dashboard.about.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
