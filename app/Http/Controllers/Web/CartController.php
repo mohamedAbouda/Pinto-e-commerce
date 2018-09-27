@@ -32,19 +32,17 @@ class CartController extends Controller
 {
     public function index()
     {
-    
         $count = Cart::content()->count();
         if($count > 0){
-            $data['cart'] = Cart::content();
-            $data['total'] = Cart::subtotal();
-            return view('site.cart.index' , $data);
-        }else{
-            Alert::error('No items in your cart', 'Oops!')->persistent('Close');
-            return redirect()->back();
-
+            /**
+             * Cart data is shared in Controller.php
+             */
+            return view('site.cart.index');
         }
-
+        Alert::error('No items in your cart', 'Oops!')->persistent('Close');
+        return redirect()->back();
     }
+
     /**
     * \
     * @param Request $request
@@ -57,7 +55,7 @@ class CartController extends Controller
         $stockSum = Stock::where('product_id',$request->input('id'))->sum('amount');
         $productOrdersSum = OrderProduct::where('product_id',$request->input('id'))->sum('amount');
         $availableItems = $stockSum - $productOrdersSum;
-        if($data['qty'] > $availableItems){
+        if($request->get('qty' ,1) > $availableItems){
             return ['message'=>'Not Available Amount.','cartSubTotal'=>0,'cartItem'=>0,'CartCount'=>0];
         }
         $product = Product::where('id',$request->input('id'))->with('discount')->first();
@@ -69,7 +67,7 @@ class CartController extends Controller
         $item = Cart::add([
             'id' => $product->id,
             'name' => $product->name,
-            'qty' => $request->input('qty'),
+            'qty' => $request->get('qty' ,1),
             'price' =>$price,
             'options' => [
                 'obj' => $product,
@@ -110,9 +108,9 @@ class CartController extends Controller
                 }else{
                     $message = 'You will get discount by '.$checkGiftCard->discount.' EGP on the products by code\'s merchant ';
                 }
-                
+
                     Session::forget('giftCardId');
-                    Session::put(['giftCardId'=>$checkGiftCard->id]);                
+                    Session::put(['giftCardId'=>$checkGiftCard->id]);
             }else{
                 $message = 'This Gift card is not active';
             }
@@ -218,10 +216,10 @@ class CartController extends Controller
             $createOrderProduct->product_id = $cartItem->id;
             $createOrderProduct->amount = $cartItem->qty;
             $createOrderProduct->price_per_item = $cartItem->options->obj->price;
-            $createOrderProduct->color = $cartItem->options->color ? $cartItem->options->color : null; 
-            $createOrderProduct->size = $cartItem->options->size ? $cartItem->options->size : null; 
+            $createOrderProduct->color = $cartItem->options->color ? $cartItem->options->color : null;
+            $createOrderProduct->size = $cartItem->options->size ? $cartItem->options->size : null;
             $createOrderProduct->order_id = $createOrder->id;
-            $createOrderProduct->save(); 
+            $createOrderProduct->save();
         }
 
         if($request->input('address')){

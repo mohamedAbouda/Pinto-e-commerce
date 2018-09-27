@@ -103,12 +103,12 @@
 							<button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
 								<span class="minus-icon">-</span>
 							</button>
-							<input type="text" name="number" value="1" class="product_quantity_number js-number">
+							<input type="text" name="number" value="1" id="qty" class="qty product_quantity_number js-number">
 							<button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
 								<span class="plus-icon">+</span>
 							</button>
 						</div>
-						<a class="link-ver1 add-cart">Add To Cart</a>
+						<a class="link-ver1 add-cart" onclick="addCart({{ $product->id }})">Add To Cart</a>
 						<a class="link-ver1 wish" onclick="wishlist({{ $product->id }});"><i class="icon-heart f-15"></i></a>
 						<div class="clearfix"></div>
 					</div>
@@ -278,4 +278,50 @@
 		</div>
 	</div>
 </div>
+@stop
+
+@section('scripts')
+<script type="text/javascript">
+function checkQty(id) {
+	var id = id;
+	var qty = $('.qty').val();
+	$('.spinner-container').show();
+
+	$.ajax({
+		type: "POST",
+		url: "{{ route('web.check.product.quantity') }}",
+		data: {
+			_token: "{{ csrf_token() }}",
+			id: id,
+			qty:qty,
+		},
+		success: function(data) {
+			if(data == 'stockSumNotAvailable'){
+				swal("Sorry", "Product not available", "error");
+			}
+		}
+	}).done(function(data) {
+		$('.spinner-container').hide();
+	});
+}
+
+$(document).ready(function(){
+	var quantitiy = 0;
+	$('.js-plus').on("click", function(e) {
+		e.preventDefault();
+		var quantity = parseInt($('.js-number').val(), 10);
+		$('.js-number').val(quantity + 1);
+		checkQty({{ $product->id }});
+	});
+	$('.js-minus').on("click", function(e) {
+		e.preventDefault();
+		var quantity = parseInt($('.js-number').val(), 10);
+		if (quantity > 0) {
+			$('.js-number').val(quantity - 1);
+			checkQty({{ $product->id }});
+		}
+	});
+});
+
+</script>
 @stop

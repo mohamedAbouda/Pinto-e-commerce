@@ -73,6 +73,6 @@ class Kernel extends HttpKernel
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
         'dashboard' => \App\Http\Middleware\DashboardIntialization::class,
-        'updateSessionItemsLogin' => \App\Http\Middleware\UpdateSessionItemsOnLogin::class,
+        'shareSessionItems' => \App\Http\Middleware\ShareSessionItems::class,
     ];
 }

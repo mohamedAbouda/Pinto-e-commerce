@@ -31,6 +31,7 @@
         width: 100%;
         height: 110%;
         z-index: 10000;
+        top: 0;
     }
 
     @keyframes spinner {
@@ -56,23 +57,9 @@
 
 <body>
     <!--push menu cart -->
-    <div class="pushmenu pushmenu-left cart-box-container">
-        <div class="cart-list">
-            <span class="close-left js-close">x</span>
-            <h3 class="cart-title">Your Cart</h3>
-            <div class="nocart-list">
-                <div class="empty-cart">
-                    <h4 class="nocart-title">No products in the cart.</h4>
-                    <a href="" class="btn-shop btn-arrow">Start shopping</a>
-                </div>
-            </div>
-            <div class="cart-bottom">
-                <a href="#" class="text">Our Shipping & Return Policy</a>
-            </div>
-            <!-- End cart bottom -->
-        </div>
-    </div>
+    @include('layouts.site.parts.cart')
     <!-- End cart -->
+
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -117,7 +104,6 @@
                         </div>
                         <div class="topbar-language dropdown">
                             <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
                                 <span>EN</span>
                                 <span class="fa fa-caret-down f-10"></span>
                             </a>
@@ -155,7 +141,9 @@
                         <div class="topbar-cart">
                             <a href="#" class="icon-cart">
                                 <i class="icon-basket f-15"></i>
-                                <span class="count cart-count">0</span>
+                                <?php if ($cart->count()): ?>
+                                    <span class="count cart-count">{{ $cart->count() }}</span>
+                                <?php endif; ?>
                             </a>
                         </div>
                     </div>
@@ -306,6 +294,53 @@
             }
         });
     }
+    function addCart(id) {
+    	var id = id;
+    	var qty = $('#qty').val();
+    	var color = $('#color').val();
+    	var size = $('#size').val();
+    	if(qty < 1){
+    		qty = 1;
+    	}
+    	$('.spinner-container').show();
+
+    	$.ajax({
+    		type: "POST",
+    		url: "{{ route('web.cart.addToCart') }}",
+    		data: {
+    			_token: "{{ csrf_token() }}",
+    			id : id,
+    			qty : qty,
+    			color : color,
+    			size : size,
+    		},
+    		success: function(data) {
+    			if(data['message'] == 'Not Available Amount.'){
+    				swal("Sorry", "Product not available", "error");
+    			}else{
+    				swal("Success", "Product added to your cart", "success");
+    			}
+    		}
+    	}).done(function(data) {
+    		$('.spinner-container').hide();
+    	});
+    }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.cart-js-plus').on("click", function(e) {
+                var input = $(this).siblings('.cart-js-number');
+                var quantity = parseInt(input.val(), 10);
+        		input.val(quantity + 1);
+        	});
+        	$('.cart-js-minus').on("click", function(e) {
+                var input = $(this).siblings('.cart-js-number');
+                var quantity = parseInt(input.val(), 10);
+        		if (quantity > 0) {
+        			input.val(quantity - 1);
+        		}
+        	});
+        });
     </script>
 </body>
 </html>

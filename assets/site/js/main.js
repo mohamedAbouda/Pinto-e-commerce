@@ -64,35 +64,35 @@ jQuery(document).ready(function($) {
     });
     // SHOPPING CART Quantity increment buttons
 
-    var quantitiy = 0;
-    $('.js-plus').on("click", function(e) {
+    // var quantitiy = 0;
+    // $('.js-plus').on("click", function(e) {
+    //
+    //     // Stop acting like a button
+    //     e.preventDefault();
+    //     // Get the field name
+    //     var quantity = parseInt($('.js-number').val(), 10);
+    //
+    //     // If is not undefined
+    //
+    //     $('.js-number').val(quantity + 1);
+    //
+    //
+    //     // Increment
+    // });
 
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('.js-number').val(), 10);
-
-        // If is not undefined
-
-        $('.js-number').val(quantity + 1);
-
-
-        // Increment
-    });
-
-    $('.js-minus').on("click", function(e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('.js-number').val(), 10);
-
-        // If is not undefined
-
-        // Increment
-        if (quantity > 0) {
-            $('.js-number').val(quantity - 1);
-        }
-    });
+    // $('.js-minus').on("click", function(e) {
+    //     // Stop acting like a button
+    //     e.preventDefault();
+    //     // Get the field name
+    //     var quantity = parseInt($('.js-number').val(), 10);
+    //
+    //     // If is not undefined
+    //
+    //     // Increment
+    //     if (quantity > 0) {
+    //         $('.js-number').val(quantity - 1);
+    //     }
+    // });
 
     //SHOP LISTING FILTER
     // Price Slider

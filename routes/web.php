@@ -33,7 +33,7 @@ Route::get('facebook/callback','Auth\SocialiteController@facebookCallBack')->nam
 Route::get('google/redirect','Auth\SocialiteController@googleRedirect')->name('google.redirect');
 Route::get('google/callback','Auth\SocialiteController@googleCallBack')->name('google.callback');
 
-Route::group(['as' => 'web.','middleware' => ['updateSessionItemsLogin'] ,'namespace' => 'Web'] , function(){
+Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' => 'Web'] , function(){
     Route::get('/', 'HomeController@index')->name('index');
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('shop' ,'ProductController@getSearchPage')->name('products.shop');
@@ -53,10 +53,22 @@ Route::group(['as' => 'web.','middleware' => ['updateSessionItemsLogin'] ,'names
         Route::get('wishlist/delete/all' , 'WishlistController@deleteAll')->name('delete.all');
     });
     Route::get('/about', 'ContactController@about')->name('about');
+    // Route::post('/contact', 'HomeController@contact')->name('contactUsPost');
+    Route::group(['prefix' => 'cart' , 'as' => 'cart.'] , function(){
+        Route::get('/','CartController@index')->name('index');
+        Route::get('destroy','CartController@destroy')->name('destroy');
+        Route::post('add/','CartController@addToCart')->name('addToCart');
+        Route::post('update/qty/item/cart','CartController@updateQtyItem')->name('update.item.qty');
+        Route::post('remove/item/cart','CartController@removeItem')->name('remove.item');
+        Route::post('remove/item/cart/row','CartController@removeItemRow')->name('remove.item.row');
+        Route::post('add/coupon','CartController@AddCouponAndSave')->name('add.coupon.save');
+        Route::get('checkout','CartController@checkout')->name('checkout')->middleware('auth:client');
+        Route::post('checkout/submit','CartController@checkoutSubmit')->name('checkout.submit');
+    });
+    Route::post('check/product/quantity', 'CartController@checkQuantity')->name('check.product.quantity');
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');
     // Route::post('/products/review/{product?}', 'ProductController@review')->name('products.review');
-    // Route::post('check/product/quantity', 'CartController@checkQuantity')->name('check.product.quantity');
     // Route::post('delete/compare/product', 'CompareController@delete')->name('delete.compare.product');
     // Route::get('compare/products', 'CompareController@index')->name('compare.index');
     // Route::get('map/locations', 'HomeController@locations')->name('store.locations');
@@ -79,18 +91,6 @@ Route::group(['as' => 'web.','middleware' => ['updateSessionItemsLogin'] ,'names
     //     Route::post('/forget' , 'Auth\WebController@postForgetPassword')->name('postForgetPassword'); // notify
     //     Route::get('/reset/{token}' , 'Auth\WebController@getResetPassword')->name('getResetPassword');
     //     Route::post('/reset/{token}' , 'Auth\WebController@postResetPassword')->name('postResetPassword'); // notify
-    // });
-    // Route::post('/contact', 'HomeController@contact')->name('contactUsPost');
-    // Route::group(['prefix' => 'cart' , 'as' => 'cart.'] , function(){
-    //     Route::get('/','CartController@index')->name('index');
-    //     Route::get('destroy','CartController@destroy')->name('destroy');
-    //     Route::post('add/','CartController@addToCart')->name('addToCart');
-    //     Route::post('update/qty/item/cart','CartController@updateQtyItem')->name('update.item.qty');
-    //     Route::post('remove/item/cart','CartController@removeItem')->name('remove.item');
-    //     Route::post('remove/item/cart/row','CartController@removeItemRow')->name('remove.item.row');
-    //     Route::post('add/coupon','CartController@AddCouponAndSave')->name('add.coupon.save');
-    //     Route::get('checkout','CartController@checkout')->name('checkout')->middleware('auth:client');
-    //     Route::post('checkout/submit','CartController@checkoutSubmit')->name('checkout.submit');
     // });
     // Route::post('/register' , 'Auth\WebController@postRegister')->name('postRegister');
     // Route::get('/login', 'Auth\WebController@getLoginForm')->name('login');

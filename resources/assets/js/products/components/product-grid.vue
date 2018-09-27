@@ -7,14 +7,14 @@
             <!-- <div class="ribbon-new ver2"><span>new</span></div> -->
             <div class="ribbon-sale ver2" v-if="product.discount"><span>sale</span></div>
             <a class="btn-add-wishlist ver2" @click.prevent="wishlist(product.id)"><i class="icon-heart"></i></a>
-            <a href="#" class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
+            <a class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
         </div>
         <div class="product-info-ver2">
             <h3 class="product-title"><a href="single-product.html">{{ product.name }}</a></h3>
             <div class="product-after-switch">
                 <div class="product-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</div>
                 <div class="product-after-button">
-                    <a href="#" class="addcart">ADD TO CART</a>
+                    <a class="addcart" @click.prevent="addCart(product.id)">ADD TO CART</a>
                 </div>
             </div>
             <div class="rating-star">
@@ -27,9 +27,9 @@
             <p class="product-desc">{{ product.short_description }}</p>
             <div class="product-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</div>
             <div class="button-group">
-                <a href="#" class="button add-to-cart">Add to cart</a>
-                <a href="#" class="button add-to-wishlist" @click.prevent="wishlist(product.id)">Add to wishlist</a>
-                <a href="#" class="button add-view">Quick view</a>
+                <a class="button add-to-cart" @click.prevent="addCart(product.id)">Add to cart</a>
+                <a class="button add-to-wishlist" @click.prevent="wishlist(product.id)">Add to wishlist</a>
+                <a class="button add-view">Quick view</a>
             </div>
         </div>
     </div>
@@ -47,9 +47,9 @@ export default {
         wishlist: function(id){
             window.wishlist(id);
         },
-        addCompare: function(id){
-            window.addCompare(id);
-        }
+        addCart: function(id){
+            window.addCart(id);
+        },
     }
 }
 </script>

@@ -76,8 +76,8 @@ class ProductController extends Controller
         }
         //return $data;
 
-        //     $product->views = $product->views + 1;
-        //     $product->save();
+        $product->views = $product->views + 1;
+        $product->save();
         //
         //     $data['resource'] = $product;
         //

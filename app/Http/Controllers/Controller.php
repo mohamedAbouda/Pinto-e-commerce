@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Cart;
 use App;
 
 class Controller extends BaseController
@@ -18,11 +19,10 @@ class Controller extends BaseController
         if(strpos($route_name, 'web.') !== false || $route_name === 'login' || $route_name === 'index' || $route_name === 'home' || $route_name === 'register' || $route_name === 'reset.password' || $route_name === 'client.reset.password' || $route_name === 'client.change.password' || $route_name === 'merchant.register.get') {
             view()->share([
                 'categories' => \App\Models\Category::with('subCategories')->get(),
-                'contact_details' => \App\Models\Contact::first()
+                'contact_details' => \App\Models\Contact::first(),
             ]);
         }
-
-         App::setLocale('en');
+        App::setLocale('en');
     }
 
     public function uploadImage($image)
