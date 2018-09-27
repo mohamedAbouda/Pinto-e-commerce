@@ -71,7 +71,7 @@
 						</a>
 					</h3>
 					<div class="product-price">
-						<span>${{ $product->price }}</span>
+						<span>${{ $product->discount ? $product->price - ($product->discount->discount * $product->price / 100) : $product->price }}</span>
 					</div>
 					<p class="product-desc">
 						{{ $product->short_description }}
@@ -225,56 +225,30 @@
 	<div class="container container-42">
 		<h3 class="title text-center">Related Products</h3>
 		<div class="owl-carousel owl-theme js-owl-product">
+			@foreach($related_products as $product)
 			<div class="product-item">
 				<div class="product-images">
-					<a href="#" class="hover-images effect"><img src="{{ asset('assets/site/img/products/product_01.png') }}" alt="products" class="img-reponsive"></a>
-					<a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-					<a href="#" class="btn-quickview">QUICK VIEW</a>
+					<a href="{{ route('web.products.show' ,$product->id) }}" class="hover-images effect"><img src="{{ $product->cover_image_url }}" alt="products" class="img-reponsive"></a>
+					<a class="btn-add-wishlist ver2" onclick="wishlist({{ $product->id }})"><i class="icon-heart"></i></a>
+					<a class="btn-quickview">QUICK VIEW</a>
 				</div>
 				<div class="product-info-ver2">
-					<h3 class="product-title space-pm"><a href="#">Tia Slides in Brandy</a></h3>
+					<h3 class="product-title space-pm"><a href="{{ route('web.products.show' ,$product->id) }}">{{ $product->name }}</a></h3>
 					<div class="product-after-switch">
-						<div class="product-price">$295.00</div>
+						<div class="product-price">${{ $product->discount ? $product->price - ($product->discount->discount * $product->price / 100) : $product->price }}</div>
 						<div class="product-after-button">
-							<a href="#" class="addcart">ADD TO CART</a>
+							<a class="addcart" onclick="addCart({{ $product->id }})">ADD TO CART</a>
 						</div>
 					</div>
 					<div class="rating-star">
-						<span class="star star-5"></span>
-						<span class="star star-4"></span>
-						<span class="star star-3"></span>
-						<span class="star star-2"></span>
-						<span class="star star-1"></span>
+						<?php for($i = 1 ; $i <= $product->rate ; $i++): ?>
+							<span class="star star-5"></span>
+						<?php endfor; ?>
 					</div>
-					<div class="product-price">$292.00</div>
+					<div class="product-price">${{ $product->discount ? $product->price - ($product->discount->discount * $product->price / 100) : $product->price }}</div>
 				</div>
 			</div>
-			<div class="product-item">
-				<div class="product-images">
-					<a href="#" class="hover-images effect"><img src="{{ asset('assets/site/img/products/product_02.png') }}" alt="photo" class="img-reponsive">
-						<div class="ribbon-sale ver2"><span>sale</span></div>
-					</a>
-					<a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-					<a href="#" class="btn-quickview">QUICK VIEW</a>
-				</div>
-				<div class="product-info-ver2">
-					<h3 class="product-title space-pm"><a href="#">Alabama Tee</a></h3>
-					<div class="product-after-switch">
-						<div class="product-price">$295.00</div>
-						<div class="product-after-button">
-							<a href="#" class="addcart">ADD TO CART</a>
-						</div>
-					</div>
-					<div class="rating-star">
-						<span class="star star-5"></span>
-						<span class="star star-4"></span>
-						<span class="star star-3"></span>
-						<span class="star star-2"></span>
-						<span class="star star-1"></span>
-					</div>
-					<div class="product-price">$292.00</div>
-				</div>
-			</div>
+			@endforeach
 		</div>
 	</div>
 </div>

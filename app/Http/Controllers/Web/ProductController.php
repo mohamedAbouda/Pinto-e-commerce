@@ -63,7 +63,7 @@ class ProductController extends Controller
         $data['reviews_avg'] = count($product->reviews) >=1 ? $product->reviews->avg('rate') : 0;
         $data['related_products'] = Product::where('id' ,'<>',$product->id)
         ->where('sub_category_id' , $product->sub_category_id)->orderBy('id' , 'DESC')
-        ->take(8)->get();
+        ->take(12)->get();
         $data['sizes'] = Stock::where('product_id',$id)->pluck('size');
         $data['colors'] = Stock::where('product_id',$id)->pluck('color');
         $stockCount = $product->stocks->sum('amount');
