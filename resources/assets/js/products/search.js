@@ -74,6 +74,10 @@ const app = new Vue({
                 vm.search_params.sort = search_params.sort;
             }
 
+            if (vm.resources_url.includes('top_deals')) {
+                vm.sort_by_placeholder_text = "top deals";
+            }
+
             axios({
                 method: 'post',
                 url: vm.resources_url,

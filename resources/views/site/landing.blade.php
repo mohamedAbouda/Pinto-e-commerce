@@ -73,44 +73,17 @@
 											<?php endif; ?>
 										</li>
 										<li>
-											<a href="products.html">Top Deals</a>
-											<span class="toggle-icon"></span>
-											<ul>
-												<li>
-													<a href="products.html">Top Deals Today</a>
-													<span class="toggle-icon"></span>
-													<ul>
-														<li><a href="products.html">Today's Deals #1</a></li>
-														<li><a href="products.html">Today's Deals #2</a></li>
-														<li><a href="products.html">Today's Deals #1</a></li>
-														<li><a href="products.html">Today's Deals #2</a></li>
-														<li><a href="products.html">Today's Deals </a></li>
-														<li><a href="products.html">Today's Deals</a></li>
-														<li><a href="products.html">Today's Deals</a></li>
-													</ul>
-												</li>
-												<li>
-													<a href="products.html">Top Deals Today</a>
-													<span class="toggle-icon"></span>
-													<ul>
-														<li><a href="products.html">Project 1</a></li>
-														<li><a href="products.html">Project 2</a></li>
-														<li><a href="products.html">Project 3</a></li>
-														<li><a href="products.html">Project 4</a></li>
-														<li><a href="products.html">Project 5</a></li>
-													</ul>
-												</li>
-											</ul>
+											<a href="{{ route('web.products.shop' ,['sort' => 'top_deals']) }}">Top Deals</a>
 										</li>
 										<li>
-											<a href="#">About</a>
+											<a href="{{ route('web.about') }}">About</a>
 										</li>
 
 										<li>
 											<a href="blog.html">Blog</a>
 										</li>
 										<li>
-											<a href="contact-us.html">Contact Us</a>
+											<a href="{{ route('web.contact') }}">Contact Us</a>
 										</li>
 									</ul>
 								</nav>

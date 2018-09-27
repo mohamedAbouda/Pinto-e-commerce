@@ -10,9 +10,9 @@
             <a class="btn-quickview" data-toggle="modal" data-target="#quickview">QUICK VIEW</a>
         </div>
         <div class="product-info-ver2">
-            <h3 class="product-title"><a href="single-product.html">{{ product.name }}</a></h3>
+            <h3 class="product-title"><a :href="url">{{ product.name }}</a></h3>
             <div class="product-after-switch">
-                <div class="product-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</div>
+                <div class="product-price">${{ product.discount ? product.price - (product.discount.discount * product.price / 100) : product.price }}</div>
                 <div class="product-after-button">
                     <a class="addcart" @click.prevent="addCart(product.id)">ADD TO CART</a>
                 </div>
@@ -25,7 +25,7 @@
                 <span class="star star-1" v-if="product.rate >= 5"></span>
             </div>
             <p class="product-desc">{{ product.short_description }}</p>
-            <div class="product-price">${{ product.discount ? product.price - (product.discount.percentage * product.price / 100) : product.price }}</div>
+            <div class="product-price">${{ product.discount ? product.price - (product.discount.discount * product.price / 100) : product.price }}</div>
             <div class="button-group">
                 <a class="button add-to-cart" @click.prevent="addCart(product.id)">Add to cart</a>
                 <a class="button add-to-wishlist" @click.prevent="wishlist(product.id)">Add to wishlist</a>
@@ -42,6 +42,9 @@ export default {
         url: function () {
             return this.product_url.replace('zzz', this.product.id);
         }
+    },
+    created(){
+        // console.log(this.product.discount);
     },
     methods: {
         wishlist: function(id){

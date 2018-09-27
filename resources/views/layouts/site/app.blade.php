@@ -195,13 +195,16 @@
                                         <?php endif; ?>
                                     </li>
                                     <li class="level1 dropdown">
-                                        <a href="#">Top Deals</a>
+                                        <a href="{{ route('web.products.shop' ,['sort' => 'top_deals']) }}">Top Deals</a>
                                     </li>
-                                    <li class="level1 dropdown"><a href="{{ route('web.about') }}">About</a>
+                                    <li class="level1 dropdown">
+                                        <a href="{{ route('web.about') }}">About</a>
                                     </li>
-                                    <li class="level1 dropdown"><a href="blog.html">Blog</a>
+                                    <li class="level1 dropdown">
+                                        <a href="#">Blog</a>
                                     </li>
-                                    <li class="level1 dropdown"><a href="contact-us.html">Contact Us</a>
+                                    <li class="level1 dropdown">
+                                        <a href="{{ route('web.contact') }}">Contact Us</a>
                                     </li>
                                 </ul>
                             </div>

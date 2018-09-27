@@ -60,17 +60,6 @@ class HomeController extends Controller
         return view('site.offers' ,$data);
     }
 
-
-
-    public function contact(SupportMessageRequest $request)
-    {
-        $message = SupportMessage::create($request->all());
-        if ($message) {
-            return redirect()->back()->with('success' , "Message sent successfully.");
-        }
-        return redirect()->back()->withErrors(["Something went wrong ! please try again."]);
-    }
-
     public function subscribe(SubscribeRequest $request)
     {
         if (Subscriber::where('email' , $request->get('subemail'))->first()) {

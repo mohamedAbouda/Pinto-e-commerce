@@ -15,6 +15,7 @@ class CreateContactTable extends Migration
     {
         Schema::create('contact', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('facebook')->nullable();
@@ -22,6 +23,16 @@ class CreateContactTable extends Migration
             $table->string('google')->nullable();
             $table->string('instagram')->nullable();
             $table->text('phones')->nullable();
+            $table->string('store_location_title_1')->nullable();
+            $table->string('store_location_address_1')->nullable();
+            $table->string('store_location_hours_1')->nullable();
+            $table->string('store_location_title_2')->nullable();
+            $table->string('store_location_address_2')->nullable();
+            $table->string('store_location_hours_2')->nullable();
+            $table->string('store_location_title_3')->nullable();
+            $table->string('store_location_address_3')->nullable();
+            $table->string('store_location_hours_3')->nullable();
+
             $table->timestamps();
         });
     }

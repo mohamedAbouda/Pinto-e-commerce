@@ -150,6 +150,99 @@ body {
                             </ul>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location title (1)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_title_1 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location address (1)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_address_1 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location hours (1)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_hours_1 }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location title (2)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_title_2 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location address (2)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_address_2 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location hours (2)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_hours_2 }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location title (3)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_title_3 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location address (3)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_address_3 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                                Store location hours (3)
+                            </span>
+                        </td>
+                        <td>
+                            {{ $contact->store_location_hours_3 }}
+                        </td>
+                    </tr>
                 </tbody>
                 @endif
             </table>

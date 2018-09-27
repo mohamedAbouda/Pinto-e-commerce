@@ -103,7 +103,7 @@ class Product extends Model
 
     public function discount()
     {
-        return $this->hasOne(Discount::class ,'product_id')->where('activation_end' ,'>=' ,Carbon::now()->toDateTimeString())->where('activation_start' ,'<=' ,Carbon::now()->toDateTimeString());
+        return $this->hasOne(DiscountProduct::class ,'product_id');
     }
 
     public function generalProduct()

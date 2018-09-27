@@ -53,7 +53,8 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
         Route::get('wishlist/delete/all' , 'WishlistController@deleteAll')->name('delete.all');
     });
     Route::get('/about', 'ContactController@about')->name('about');
-    // Route::post('/contact', 'HomeController@contact')->name('contactUsPost');
+    Route::get('/contact', 'ContactController@index')->name('contact');
+    Route::post('/contact', 'ContactController@submit')->name('submit.contact');
     Route::group(['prefix' => 'cart' , 'as' => 'cart.'] , function(){
         Route::get('/','CartController@index')->name('index');
         Route::get('destroy','CartController@destroy')->name('destroy');
@@ -72,7 +73,6 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     // Route::post('delete/compare/product', 'CompareController@delete')->name('delete.compare.product');
     // Route::get('compare/products', 'CompareController@index')->name('compare.index');
     // Route::get('map/locations', 'HomeController@locations')->name('store.locations');
-    // Route::get('/contact', 'ContactController@index')->name('contact');
     // Route::get('my/account', 'HomeController@myAccount')->name('user.account');
     // Route::post('my/account/edit', 'HomeController@submitAccountEdit')->name('submit.account.edit');
     // Route::get('active/orders', 'OrderController@activeOrders')->name('active.orders');
@@ -84,7 +84,6 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     // Route::post('order/dispute/save', 'OrderController@orderDisputeSubmit')->name('order.dispute.store');
     // Route::get('/terms/conditions', 'ContactController@terms')->name('terms');
     // Route::get('/policy', 'ContactController@policy')->name('policy');
-    // Route::post('/contact/submit', 'ContactController@submit')->name('submit.contact');
     // Route::get('/offers', 'HomeController@offers')->name('offers');
     // Route::group(['prefix' => '/auth/password' , 'as' => 'auth.'], function(){
     //     Route::get('/forget' , 'Auth\WebController@getForgetPassword')->name('getForgetPassword');

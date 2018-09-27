@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\ContactRequest;
 use App\Models\Contact;
 use App\Models\ContactMessage;
 use App\Models\About;
@@ -20,10 +21,10 @@ class ContactController extends Controller
     public function index()
     {
         $contact = Contact::first();
-        return view('site.contact.index')->with(['contact' => $contact]);
+        return view('site.contact-us')->with(['contact' => $contact]);
     }
 
-    public function submit(Request $request)
+    public function submit(ContactRequest $request)
     {
         $data = $request->all();
         $save = ContactMessage::create($data);

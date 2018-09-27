@@ -13164,6 +13164,10 @@ var app = new Vue({
                 vm.search_params.sort = search_params.sort;
             }
 
+            if (vm.resources_url.includes('top_deals')) {
+                vm.sort_by_placeholder_text = "top deals";
+            }
+
             axios({
                 method: 'post',
                 url: vm.resources_url,
@@ -13573,6 +13577,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.product_url.replace('zzz', this.product.id);
         }
     },
+    created: function created() {
+        // console.log(this.product.discount);
+    },
+
     methods: {
         wishlist: function wishlist(id) {
             window.wishlist(id);
@@ -26049,13 +26057,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "product-title"
   }, [_c('a', {
     attrs: {
-      "href": "single-product.html"
+      "href": _vm.url
     }
   }, [_vm._v(_vm._s(_vm.product.name))])]), _vm._v(" "), _c('div', {
     staticClass: "product-after-switch"
   }, [_c('div', {
     staticClass: "product-price"
-  }, [_vm._v("$" + _vm._s(_vm.product.discount ? _vm.product.price - (_vm.product.discount.percentage * _vm.product.price / 100) : _vm.product.price))]), _vm._v(" "), _c('div', {
+  }, [_vm._v("$" + _vm._s(_vm.product.discount ? _vm.product.price - (_vm.product.discount.discount * _vm.product.price / 100) : _vm.product.price))]), _vm._v(" "), _c('div', {
     staticClass: "product-after-button"
   }, [_c('a', {
     staticClass: "addcart",
@@ -26081,7 +26089,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "product-desc"
   }, [_vm._v(_vm._s(_vm.product.short_description))]), _vm._v(" "), _c('div', {
     staticClass: "product-price"
-  }, [_vm._v("$" + _vm._s(_vm.product.discount ? _vm.product.price - (_vm.product.discount.percentage * _vm.product.price / 100) : _vm.product.price))]), _vm._v(" "), _c('div', {
+  }, [_vm._v("$" + _vm._s(_vm.product.discount ? _vm.product.price - (_vm.product.discount.discount * _vm.product.price / 100) : _vm.product.price))]), _vm._v(" "), _c('div', {
     staticClass: "button-group"
   }, [_c('a', {
     staticClass: "button add-to-cart",
