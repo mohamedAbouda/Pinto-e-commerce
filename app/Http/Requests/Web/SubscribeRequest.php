@@ -24,14 +24,14 @@ class SubscribeRequest extends FormRequest
     public function rules()
     {
         return [
-            'subemail' => 'required|email'
+            'email' => 'required|email'
         ];
     }
 
     public function attributes()
     {
         return [
-            'subemail' => 'subscriber\'s email',
+            'email' => 'subscriber\'s email',
         ];
     }
 
@@ -40,5 +40,22 @@ class SubscribeRequest extends FormRequest
         return [
             'subemail.required' => 'The :attribute must be a valid email address.',
         ];
+    }
+
+    /**
+    * Get the proper failed validation response for the request.
+    *
+    * @param  array  $errors
+    * @return \Symfony\Component\HttpFoundation\Response
+    */
+    public function response(array $errors)
+    {
+        if ($this->expectsJson()) {
+            return new JsonResponse($errors, 422);
+        }
+        alert()->error('Validation errors !' , 'Error');
+        return $this->redirector->to($this->getRedirectUrl())
+        ->withInput($this->except($this->dontFlash))
+        ->withErrors($errors, $this->errorBag);
     }
 }

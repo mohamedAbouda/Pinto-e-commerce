@@ -28,8 +28,8 @@
                             <!-- <a href="" class="lost-password">Lost your password?</a> -->
                         </div>
                     </form>
-                    <!-- <span class="divider"></span> -->
-                    <!-- <a href="register.html" class="btn link-button create-account hover-black">Create an account</a> -->
+                    <span class="divider"></span>
+                    <a href="{{ route('web.register') }}" class="btn link-button create-account hover-black">Create an account</a>
                 </div>
             </div>
         </div>

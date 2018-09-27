@@ -248,8 +248,9 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="newletter-form">
                         <h3 class="footer-title text-center">Newsletter</h3>
-                        <form action="#">
-                            <input type="text" name="s" placeholder="Email Adress..." class="form-control">
+                        <form action="{{ route('web.subscribe') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="text" name="email" placeholder="Email Adress..." class="form-control" required>
                             <button type="submit" class="btn btn-submit">
                                 <i class="fa fa-angle-right"></i>
                             </button>

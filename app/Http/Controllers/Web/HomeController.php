@@ -62,10 +62,12 @@ class HomeController extends Controller
 
     public function subscribe(SubscribeRequest $request)
     {
-        if (Subscriber::where('email' , $request->get('subemail'))->first()) {
+        if (Subscriber::where('email' , $request->get('email'))->first()) {
+            alert()->error('Email already exists !' , 'Error');
             return redirect()->back()->withErrors(['error' => 'Email already exists !']);
         }
-        Subscriber::create(['email' => $request->get('subemail')]);
+        Subscriber::create(['email' => $request->get('email')]);
+        alert()->success('You\'ve subscribe successfully', 'Success');
         return redirect()->back()->with('success' , "Subscribed successfully.");
     }
 

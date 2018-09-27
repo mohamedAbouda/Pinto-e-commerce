@@ -24,7 +24,6 @@ Route::get('locale/{locale}', function ($locale) {
 Route::get('index', 'Web\HomeController@index')->name('index');
 Route::get('/', 'Web\HomeController@index')->name('home');
 Route::get('/logout', 'Auth\WebController@logout')->name('web.logout');
-Route::get('/register' , 'Auth\WebController@getRegisterForm')->name('register');
 Route::get('/reset/password' , 'Auth\WebController@resetPassword')->name('reset.password');
 Route::get('client/reset/{token}' , 'Auth\WebController@clientResetPasswordGet')->name('client.reset.password');
 Route::post('client/change/password' , 'Auth\WebController@clientChangePassword')->name('client.change.password');
@@ -38,6 +37,8 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems']] , function()
     Route::get('/u/login', 'Auth\WebController@getLoginForm')->name('login');
     Route::get('/u/logout', 'Auth\WebController@logout')->name('logout');
     Route::post('/u/login', 'Auth\WebController@login');
+    Route::get('/u/register' , 'Auth\WebController@getRegisterForm')->name('register');
+    Route::post('/u/register' , 'Auth\WebController@postRegister');
 });
 
 Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' => 'Web'] , function(){
@@ -74,6 +75,7 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
         Route::post('checkout/submit','CartController@checkoutSubmit')->name('checkout.submit');
     });
     Route::post('check/product/quantity', 'CartController@checkQuantity')->name('check.product.quantity');
+    Route::post('/subscribe' , 'HomeController@subscribe')->name('subscribe');
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');
     // Route::post('/products/review/{product?}', 'ProductController@review')->name('products.review');
@@ -105,7 +107,6 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     //     'only' => ['index','show']
     // ]);
     // Route::post('/blog/comment/{post}','BlogController@comment')->name('blog.comment');
-    // Route::post('/subscribe' , 'HomeController@subscribe')->name('subscribe');
     // Route::get('/mail' , 'HomeController@mailTest');
     // Route::group(['prefix' => 'checkout' , 'as' => 'checkout.'], function(){
     //     Route::get('visa' , 'CheckoutController@visaIndex');

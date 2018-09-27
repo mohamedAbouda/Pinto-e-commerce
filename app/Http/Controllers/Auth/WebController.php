@@ -29,7 +29,7 @@ class WebController extends Controller
 {
     public function getRegisterForm()
     {
-        return view('site.auth.register');
+        return view('site.register');
     }
 
     public function postRegister(UserRegisterRequest $request)
