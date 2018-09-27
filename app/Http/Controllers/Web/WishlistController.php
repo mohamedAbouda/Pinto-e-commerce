@@ -14,20 +14,18 @@ class WishlistController extends Controller
     public function index()
     {
         $products = WishList::with('product.images','client')->where('client_id',Auth::guard('client')->id())->get();
-        return view('site.wishlist.index')->with(['products'=>$products]);
+        return view('site.wishlist')->with(['products'=>$products]);
     }
-
 
     public function delete(Request $request)
     {
-
         $delete = WishList::where('id',$request->input('id'))->delete();
-        return $request->input('id');
+        alert()->success('Removed successfully', 'Success');
+        return redirect()->back();
     }
 
     public function deleteAll(Request $request)
     {
-
         $delete = WishList::where('client_id',Auth::guard('client')->id())->delete();
         return redirect()->back();
     }

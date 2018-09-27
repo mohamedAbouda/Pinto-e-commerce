@@ -94,12 +94,25 @@
                 <div class="topbar-left">
                     <div class="topbar-option">
                         <div class="topbar-account">
-                            <a href="login.html"><i class="icon-user f-15"></i></a>
+                            <?php if (!Auth::guard('client')->check()): ?>
+                                <a href="{{ route('web.login') }}"><i class="icon-user f-15"></i></a>
+                            <?php else: ?>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-user f-15"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('web.logout') }}">Log out</a>
+                                    </li>
+                                </ul>
+                            <?php endif; ?>
                         </div>
                         <div class="topbar-wishlist">
-                            <a href="wishlist.html">
+                            <a href="{{ route('web.wishlist.index') }}">
                                 <i class="icon-heart f-15"></i>
-                                <span class="count wishlist-count">0</span>
+                                <?php if (isset($wishlist) && !$wishlist->isEmpty()): ?>
+                                    <span class="count wishlist-count">{{ $wishlist->count() }}</span>
+                                <?php endif; ?>
                             </a>
                         </div>
                         <div class="topbar-language dropdown">
@@ -298,52 +311,52 @@
         });
     }
     function addCart(id) {
-    	var id = id;
-    	var qty = $('#qty').val();
-    	var color = $('#color').val();
-    	var size = $('#size').val();
-    	if(qty < 1){
-    		qty = 1;
-    	}
-    	$('.spinner-container').show();
+        var id = id;
+        var qty = $('#qty').val();
+        var color = $('#color').val();
+        var size = $('#size').val();
+        if(qty < 1){
+            qty = 1;
+        }
+        $('.spinner-container').show();
 
-    	$.ajax({
-    		type: "POST",
-    		url: "{{ route('web.cart.addToCart') }}",
-    		data: {
-    			_token: "{{ csrf_token() }}",
-    			id : id,
-    			qty : qty,
-    			color : color,
-    			size : size,
-    		},
-    		success: function(data) {
-    			if(data['message'] == 'Not Available Amount.'){
-    				swal("Sorry", "Product not available", "error");
-    			}else{
-    				swal("Success", "Product added to your cart", "success");
-    			}
-    		}
-    	}).done(function(data) {
-    		$('.spinner-container').hide();
-    	});
+        $.ajax({
+            type: "POST",
+            url: "{{ route('web.cart.addToCart') }}",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id : id,
+                qty : qty,
+                color : color,
+                size : size,
+            },
+            success: function(data) {
+                if(data['message'] == 'Not Available Amount.'){
+                    swal("Sorry", "Product not available", "error");
+                }else{
+                    swal("Success", "Product added to your cart", "success");
+                }
+            }
+        }).done(function(data) {
+            $('.spinner-container').hide();
+        });
     }
     </script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('.cart-js-plus').on("click", function(e) {
-                var input = $(this).siblings('.cart-js-number');
-                var quantity = parseInt(input.val(), 10);
-        		input.val(quantity + 1);
-        	});
-        	$('.cart-js-minus').on("click", function(e) {
-                var input = $(this).siblings('.cart-js-number');
-                var quantity = parseInt(input.val(), 10);
-        		if (quantity > 0) {
-        			input.val(quantity - 1);
-        		}
-        	});
+    $(document).ready(function(){
+        $('.cart-js-plus').on("click", function(e) {
+            var input = $(this).siblings('.cart-js-number');
+            var quantity = parseInt(input.val(), 10);
+            input.val(quantity + 1);
         });
+        $('.cart-js-minus').on("click", function(e) {
+            var input = $(this).siblings('.cart-js-number');
+            var quantity = parseInt(input.val(), 10);
+            if (quantity > 0) {
+                input.val(quantity - 1);
+            }
+        });
+    });
     </script>
 </body>
 </html>

@@ -35,8 +35,8 @@ class CartController extends Controller
         $count = Cart::content()->count();
         if($count > 0){
             /**
-             * Cart data is shared in Controller.php
-             */
+            * Cart data is shared in Controller.php
+            */
             return view('site.cart.index');
         }
         Alert::error('No items in your cart', 'Oops!')->persistent('Close');
@@ -109,8 +109,8 @@ class CartController extends Controller
                     $message = 'You will get discount by '.$checkGiftCard->discount.' EGP on the products by code\'s merchant ';
                 }
 
-                    Session::forget('giftCardId');
-                    Session::put(['giftCardId'=>$checkGiftCard->id]);
+                Session::forget('giftCardId');
+                Session::put(['giftCardId'=>$checkGiftCard->id]);
             }else{
                 $message = 'This Gift card is not active';
             }
@@ -137,11 +137,11 @@ class CartController extends Controller
             $CorporateDeals = CorporateDeal::whereIn('first_product_id',$productIds)->whereIn('second_product_id',$productIds)->where('approved',1)->with('firstProduct','secondProduct')->get();
             foreach($CorporateDeals as $CorporateDeal){
                 if(!in_array($CorporateDeal->first_product_id, $CorporateDealsProducts) && !in_array($CorporateDeal->second_product_id, $CorporateDealsProducts)){
-                   $itemQtyFirstProduct = Cart::search(function ($cart, $key) use($CorporateDeal) {
-                    return $cart->id == $CorporateDeal->firstProduct->id;
+                    $itemQtyFirstProduct = Cart::search(function ($cart, $key) use($CorporateDeal) {
+                        return $cart->id == $CorporateDeal->firstProduct->id;
                     })->pluck('qty')->first();
-                   $itemQtySecondProduct = Cart::search(function ($cart, $key) use($CorporateDeal) {
-                    return $cart->id == $CorporateDeal->secondProduct->id;
+                    $itemQtySecondProduct = Cart::search(function ($cart, $key) use($CorporateDeal) {
+                        return $cart->id == $CorporateDeal->secondProduct->id;
                     })->pluck('qty')->first();
                     $discountFirstProduct = ($CorporateDeal->firstProduct->price * $itemQtyFirstProduct) - ($CorporateDeal->discount*$itemQtyFirstProduct);
                     $discountSecondProduct = ($CorporateDeal->secondProduct->price * $itemQtySecondProduct) - ($CorporateDeal->discount*$itemQtySecondProduct);
@@ -157,9 +157,9 @@ class CartController extends Controller
             foreach($productsDiscounts as $productDiscount){
                 if($productDiscount->discount){
                     $itemQtyProduct = Cart::search(function ($cart, $key) use($productDiscount) {
-                    return $cart->id == $productDiscount->id;
+                        return $cart->id == $productDiscount->id;
                     })->pluck('qty')->first();
-                     $productAfterPriceDiscount = ($productDiscount->price * $itemQtyProduct) - (($productDiscount->discount->percentage * $productDiscount->price) /100);
+                    $productAfterPriceDiscount = ($productDiscount->price * $itemQtyProduct) - (($productDiscount->discount->percentage * $productDiscount->price) /100);
                     $string .= 'you have offer discount '.$productDiscount->discount->percentage.' % on the product '.$productDiscount->name.' its total price after the offer is '.$productAfterPriceDiscount.'EGP<br>';
                     $total +=$productAfterPriceDiscount;
                     array_push($CorporateDealsProducts, $productDiscount->id);
@@ -169,7 +169,7 @@ class CartController extends Controller
                 if(Session::get('giftCardId') != null){
                     $giftCard = GiftCard::where('id',Session::get('giftCardId'))->first();
                     $productsGiftCards = Product::whereIn('id',$productIds)->whereNotIn('id',$CorporateDealsProducts)->with('discount')->get();
-                   foreach($productsGiftCards as $productGiftCards){
+                    foreach($productsGiftCards as $productGiftCards){
                         if($giftCard->merchant_id == $productGiftCards->merchant_id){
                             $giftCardQtyProduct = Cart::search(function ($cart, $key) use($productGiftCards) {
                                 return $cart->id == $productGiftCards->id;
@@ -229,8 +229,8 @@ class CartController extends Controller
         }
         Session::forget('giftCardId');
         Cart::destroy();
-         Alert::success('Your order has been placed', 'Done')->persistent('Close');
-            return redirect()->route('index');
+        Alert::success('Your order has been placed', 'Done')->persistent('Close');
+        return redirect()->route('index');
     }
 
     public function removeItemRow(Request $request)

@@ -29,17 +29,7 @@ class WebController extends Controller
 {
     public function getRegisterForm()
     {
-        $data['breadcrumbs'] = [
-            [
-                'title' => 'Home',
-                'link' => route('index')
-            ],
-            [
-                'title' => 'Register',
-                'link' => '#'
-            ],
-        ];
-        return view('site.auth.register' ,$data);
+        return view('site.auth.register');
     }
 
     public function postRegister(UserRegisterRequest $request)
@@ -47,7 +37,7 @@ class WebController extends Controller
         $user_data = $request->except(['address' , 'city']);
         $address_data = $request->only(['address' , 'city']);
         $address = Address::create($address_data);
-        $user_data['valid'] = 1; 
+        $user_data['valid'] = 1;
         if ($address) {
             $user_data['address_id'] = $address->id;
         }
@@ -63,19 +53,9 @@ class WebController extends Controller
     public function getLoginForm()
     {
         if (Auth::guard('client')->check()) {
-            return redirect()->route('index');
+            return redirect('/');
         }
-        $data['breadcrumbs'] = [
-            [
-                'title' => 'Home',
-                'link' => route('index')
-            ],
-            [
-                'title' => 'Login',
-                'link' => '#'
-            ],
-        ];
-        return view('site.auth.login' , $data);
+        return view('site.login');
     }
 
     public function login(Request $request)
@@ -88,7 +68,6 @@ class WebController extends Controller
         $password = $request['password'];
         $remember = $request['remember'];
         if (Auth::guard('client')->attempt(['email' => $email, 'password' => $password , 'valid' => 1], $remember)) {
-        
             alert()->success('Logged in successfully.', 'Success');
             return redirect()->route('index');
         }
@@ -124,7 +103,7 @@ class WebController extends Controller
         try {
             Mail::to($email)->send(new ClientResetPasswordMail($token));
         } catch (\Exception $e) {
-          
+
             alert()->error('Something went wrong ! please try again.' , 'Error');
             return redirect()->back();
         }
@@ -196,7 +175,7 @@ class WebController extends Controller
 
     public function clientResetPasswordGet($token)
     {
-       
+
          $reset = PasswordReset::where('token' , $token)->first();
         if (!$reset) {
             alert()->error('Invalid reset code !' , 'Error');
@@ -207,7 +186,7 @@ class WebController extends Controller
             alert()->error('Reset code expired !' , 'Error');
             return redirect()->route('index');
         }
-        return view('site.auth.clientResetPassword' , compact('token','reset')); 
+        return view('site.auth.clientResetPassword' , compact('token','reset'));
     }
 
     public function clientChangePassword(ClientResetPassword $request)

@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-use App\Models\Order;
-use App\Models\OrderProduct;
 use Cart;
+use App\Models\WishList;
 
 class ShareSessionItems
 {
@@ -20,11 +19,16 @@ class ShareSessionItems
     public function handle($request, Closure $next)
     {
         $route_name = \Request::route()->getName();
-        if(strpos($route_name, 'web.') !== false || $route_name === 'login' || $route_name === 'index' || $route_name === 'home' || $route_name === 'register' || $route_name === 'reset.password' || $route_name === 'client.reset.password' || $route_name === 'client.change.password' || $route_name === 'merchant.register.get') {
-            view()->share([
+        if(strpos($route_name, 'web.') !== false || $route_name === 'web.login' || $route_name === 'index' || $route_name === 'home' || $route_name === 'web.register' || $route_name === 'web.reset.password' || $route_name === 'client.reset.password' || $route_name === 'client.change.password' || $route_name === 'merchant.register.get') {
+            $data = [
                 'cart' => Cart::content(),
                 'total' => Cart::subtotal()
-            ]);
+            ];
+            $client = Auth::guard('client')->user();
+            if ($client) {
+                $data['wishlist'] = WishList::where('client_id' ,$client->id)->get();
+            }
+            view()->share($data);
         }
         return $next($request);
     }

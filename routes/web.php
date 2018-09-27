@@ -28,10 +28,17 @@ Route::get('/register' , 'Auth\WebController@getRegisterForm')->name('register')
 Route::get('/reset/password' , 'Auth\WebController@resetPassword')->name('reset.password');
 Route::get('client/reset/{token}' , 'Auth\WebController@clientResetPasswordGet')->name('client.reset.password');
 Route::post('client/change/password' , 'Auth\WebController@clientChangePassword')->name('client.change.password');
+
 Route::get('facebook/redirect','Auth\SocialiteController@facebookRedirect')->name('facebook.redirect');
 Route::get('facebook/callback','Auth\SocialiteController@facebookCallBack')->name('facebook.callback');
 Route::get('google/redirect','Auth\SocialiteController@googleRedirect')->name('google.redirect');
 Route::get('google/callback','Auth\SocialiteController@googleCallBack')->name('google.callback');
+
+Route::group(['as' => 'web.','middleware' => ['shareSessionItems']] , function(){
+    Route::get('/u/login', 'Auth\WebController@getLoginForm')->name('login');
+    Route::get('/u/logout', 'Auth\WebController@logout')->name('logout');
+    Route::post('/u/login', 'Auth\WebController@login');
+});
 
 Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' => 'Web'] , function(){
     Route::get('/', 'HomeController@index')->name('index');
@@ -46,7 +53,7 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     Route::resource('/products', 'ProductController' , [
         'only' => ['index','show']
     ]);
-    Route::group(['prefix' => 'wishlist' , 'as' => 'wishlist.'] , function(){
+    Route::group(['prefix' => 'wishlist' , 'as' => 'wishlist.' ,'middleware' => ['auth:client']] , function(){
         Route::get('/' , 'WishlistController@index')->name('index');
         Route::post('add/product' , 'WishlistController@add')->name('add');
         Route::post('wishlist/delete' , 'WishlistController@delete')->name('delete');
