@@ -52,6 +52,10 @@
         border-top-color: #07d;
         animation: spinner .6s linear infinite;
     }
+    a {
+        cursor: pointer;
+        cursor: hand;
+    }
     </style>
 </head>
 
