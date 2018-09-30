@@ -135,6 +135,17 @@
                             </div>
                         </a>
                     </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.contact_messages.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Contact messages">
+                        <a href="{{route('dashboard.contact_messages.index')}}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-at"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Contact messages</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
                     <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.sliders.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_sliders') }}">
                         <a href="{{route('dashboard.sliders.index')}}" style="text-decoration: none;">
 

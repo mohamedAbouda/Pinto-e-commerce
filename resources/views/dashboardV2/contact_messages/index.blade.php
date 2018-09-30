@@ -56,7 +56,6 @@ body {
             <table class="table table-borderless table-responsive">
                 <tbody>
                     <tr>
-
                         <th>
                             {{ trans('web.dashboard_contact_messages_pages_index_page_table_header_name') }}
                         </th>
@@ -79,26 +78,19 @@ body {
                         </td>
 
                         <td>
-                            <a href="{{route('dashboard.contact_messages.show', $contact->id) }}"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top"
-                                title="{{ trans('web.dashboard_index_page_table_show') }}"><i class="fa fa-eye"></i></a>
+                            <a href="{{route('dashboard.contact_messages.show', $contact->id) }}" class="btn btn-sm btn-primary pull-left" style="margin-right:10px;" data-toggle="tooltip" data-placement="top" title="{{ trans('web.dashboard_index_page_table_show') }}"><i class="fa fa-eye"></i></a>
 
-                                {{ Form::open(['route' => ['dashboard.contact_messages.destroy',$contact->id ],'method'=>'delete']) }}
-                                <button
-                                class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top"
-                                title="{{ trans('web.dashboard_branches_pages_index_page_delete_button') }}">
+                            {{ Form::open(['route' => ['dashboard.contact_messages.destroy',$contact->id ],'method'=>'delete']) }}
+                            <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="{{ trans('web.dashboard_branches_pages_index_page_delete_button') }}">
                                 <i class="fa fa-trash-o"></i>
                             </button>
                             {{ Form::close() }}
                         </td>
-                    </td>
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-
-</div>
 </div>
 @stop
