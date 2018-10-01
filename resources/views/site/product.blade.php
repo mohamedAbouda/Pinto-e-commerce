@@ -19,7 +19,7 @@
 			</li>
 		<?php endif; ?>
 		<li class="active">
-			<a href="#">{{ $product->name }}
+			<a>{{ $product->name }}
 			</a>
 		</li>
 	</ul>
@@ -114,10 +114,10 @@
 					</div>
 					<div class="share-social">
 						<span>Share :</span>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-google-plus"></i></a>
-						<a href="#"><i class="fa fa-pinterest-p"></i></a>
+						<a><i class="fa fa-twitter"></i></a>
+						<a><i class="fa fa-facebook"></i></a>
+						<a><i class="fa fa-google-plus"></i></a>
+						<a><i class="fa fa-pinterest-p"></i></a>
 					</div>
 				</div>
 			</div>
@@ -134,65 +134,95 @@
 		</ul>
 		<div class="tab-content">
 			<div id="desc" class="tab-pane fade in active">
-				<div class="tab-variable">
-					<div class="col-xs-12 col-sm-6 col-md-6 column-1">
-						<div class="product-images">
-							<img src="{{ asset('assets/site/img/detail/MeUndies_SS17-1309_M-mb.png') }}" alt="photo" class="img-reponsive">
+				<?php if ($product->description_section_1_image): ?>
+					<div class="tab-variable">
+						<div class="col-xs-12 col-sm-6 col-md-6 column-1">
+							<div class="product-images">
+								<img src="{{ $product->description_section_1_image_url }}" alt="photo" class="img-reponsive">
+							</div>
 						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6 column-2">
+							<div class="product-info-ver2 center text-center">
+								<h3 class="product-title space-pm ver2 space-pm swith">
+									{{ $product->description_section_1_head }}
+								</h3>
+								<p class="product-desc center">
+									{{ $product->description_section_1_text }}
+								</p>
+							</div>
+						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-6 column-2">
-						<div class="product-info-ver2 center text-center">
-							<h3 class="product-title space-pm ver2 space-pm swith">Quilted Details and Steel Eyelets</h3>
-							<p class="product-desc center">Cortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+					<!--end tab-group-->
+				<?php endif; ?>
+				<?php if ($product->description_section_2_image): ?>
+					<div class="tab-variable-col">
+						<div class="col-xs-12 col-md-4">
+							<div class="product-info-ver2 v3">
+								<h3 class="product-title space-pm">
+									{{ $product->description_section_2_head_1 }}
+								</h3>
+								<p class="product-desc left">
+									{{ $product->description_section_2_text_1 }}
+								</p>
+							</div>
+							<div class="product-info-ver2 v3">
+								<h3 class="product-title space-pm">
+									{{ $product->description_section_2_head_2 }}
+								</h3>
+								<p class="product-desc left">
+									{{ $product->description_section_2_text_2 }}
+								</p>
+							</div>
 						</div>
+						<div class="col-xs-12 col-md-4">
+							<div class="product-images">
+								<img src="{{ $product->description_section_2_image_url }}" alt="photo" class="product-images-middle img-reponsive" style="border-radius: 50%;">
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<div class="product-info-ver2 v3 right">
+								<h3 class="product-title space-pm ver3">
+									{{ $product->description_section_2_head_3 }}
+								</h3>
+								<p class="product-desc right ">
+									{{ $product->description_section_2_text_3 }}
+								</p>
+							</div>
+							<div class="product-info-ver2 v3 right">
+								<h3 class="product-title space-pm ver3">
+									{{ $product->description_section_2_head_4 }}
+								</h3>
+								<p class="product-desc right">
+									{{ $product->description_section_2_text_4 }}
+								</p>
+							</div>
+						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix"></div>
-				</div>
-				<!--end tab-group-->
-				<div class="tab-variable-col">
-					<div class="col-xs-12 col-md-4">
-						<div class="product-info-ver2 v3">
-							<h3 class="product-title space-pm"><a href="#">Pocket at chest</a></h3>
-							<p class="product-desc left ">Cortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+					<!--end tab-group-->
+				<?php endif; ?>
+				<?php if ($product->description_section_3_image): ?>
+					<div class="tab-variable">
+						<div class="col-xs-12 col-sm-6 col-md-6 column-2">
+							<div class="product-info-ver2 center text-center">
+								<h3 class="product-title space-pm ver2 space-pm swith">
+									{{ $product->description_section_3_head }}
+								</h3>
+								<p class="product-desc center">
+									{{ $product->description_section_3_text }}
+								</p>
+							</div>
 						</div>
-						<div class="product-info-ver2 v3">
-							<h3 class="product-title space-pm"><a href="#">Relaxed fit</a></h3>
-							<p class="product-desc left ">Cortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+						<div class="col-xs-12 col-sm-6 col-md-6 column-1">
+							<div class="product-images">
+								<img src="{{ $product->description_section_3_image_url }}" alt="photo" class="img-reponsive">
+							</div>
 						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="col-xs-12 col-md-4">
-						<div class="product-images">
-							<img src="{{ asset('assets/site/img/detail/variable_3.jpg') }}" alt="photo" class="product-images-middle img-reponsive">
-						</div>
-					</div>
-					<div class="col-xs-12 col-md-4">
-						<div class="product-info-ver2  v3   right">
-							<h3 class="product-title space-pm ver3">100% Cotton</h3>
-							<p class="product-desc right ">Cortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-						</div>
-						<div class="product-info-ver2 v3 right">
-							<h3 class="product-title space-pm ver3">Hidden button dow</h3>
-							<p class="product-desc right ">Cortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<!--end tab-group-->
-				<div class="tab-variable">
-					<div class="col-xs-12 col-sm-6 col-md-6 column-2">
-						<div class="product-info-ver2 center text-center">
-							<h3 class="product-title space-pm ver2 space-pm swith">From Athletic To Casual</h3>
-							<p class="product-desc center">Cortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-6 column-1">
-						<div class="product-images">
-							<img src="{{ asset('assets/site/img/detail/BirdsDownUnder-Boxer-2705.png') }}" alt="photo" class="img-reponsive">
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<!--end tab-group-->
+					<!--end tab-group-->
+				<?php endif; ?>
 			</div>
 			<div id="info" class="tab-pane fade in">
 				<p class="p-center space-padding-tb-30">Constructed in cotton sweat fabric, this lovely piece, lacus eu mattis auctor, dolor lectus venenatis nulla, at tristique eros sem vel ante. Sed leo enim, iaculis ornare tristique non, vulputate sit amet ante. Mauris placerat eleifend leo.</p>

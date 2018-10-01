@@ -34,49 +34,42 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_name') }}</label>
-                        <input type="text" class="form-control" id="formInput25" required name="name">
+                        <label class="control-label" for="">{{ trans('web.dashboard_products_create_name') }}</label>
+                        <input type="text" class="form-control" id="" required name="name">
                     </div>
-
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_cat') }}</label>
+                        <label class="control-label" for="">{{ trans('web.dashboard_products_create_cat') }}</label>
                         <select name="sub_category_id" onchange="onCategoryChangeSub()" id="selectCategoryChagne" required  class="form-control select2" required>
                             <option selected disabled>{{ trans('web.dashboard_products_create_please_select_cateogry') }}</option>
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
-
-
                             @endforeach
                         </select>
                     </div>
                 </div>
-
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_sub_category') }}</label>
+                        <label class="control-label" for="">{{ trans('web.dashboard_products_create_sub_category') }}</label>
                         <select name="sub_category_id" required id="selectValue" class="form-control select2" required onchange="categoryChange()">
-                          <option selected disabled>{{ trans('web.dashboard_products_create_select_category_first') }}</option>
+                            <option selected disabled>{{ trans('web.dashboard_products_create_select_category_first') }}</option>
                         </select>
                     </div>
                 </div>
-
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_price') }}</label>
+                        <label class="control-label" for="">{{ trans('web.dashboard_products_create_price') }}</label>
                         <input type="number" id="priceInput" name="price" min="1" required  class="form-control">
                         <p class="AppendP"></p>
                         <p id="AppendPrice"></p>
-
                     </div>
-
                 </div>
 
                 <div class="col-md-12" id="brandDiv">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_brand') }}</label>
+                        <label class="control-label" for="">{{ trans('web.dashboard_products_create_brand') }}</label>
                         <select class="form-control select2" name="brand_id">
                             <option disabled selected>{{ trans('web.dashboard_products_create_select_brand') }}</option>
                             @foreach($brands as $brand)
@@ -84,21 +77,41 @@
                             @endforeach
                         </select>
                     </div>
-
                 </div>
-
-
-
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_short') }}</label>
+                        <label class="control-label" for="">{{ trans('web.dashboard_products_create_short') }}</label>
                         <textarea  name="short_description" required class="form-control autogrow" rows="5" cols="5" >{{ old('short_description') }}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_desc') }}</label>
-                        <textarea  name="description" class="form-control autogrow" rows="5" cols="5" id="description">{{old('description')}}</textarea>
+                        <label class="control-label">
+                            {{ trans('web.dashboard_products_create_desc') }}
+                            <span class="text-info" style="font-size:12px;">Please complete at least one section</span>
+                        </label>
+                        <h5 class="secondry-title" style="font-size: unset;">1st section.</h5>
+                        <input type="file" name="description_section_1_image" class="form-control margin-bottom10" accept="image/*">
+                        <input type="text" class="form-control margin-bottom10" name="description_section_1_head" value="{{ old('description_section_1_head') }}">
+                        <textarea name="description_section_1_text" class="form-control autogrow margin-bottom10">{{ old('description_section_1_text') }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="secondry-title" style="font-size: unset;">2st section.</h5>
+                        <input type="file" name="description_section_2_image" class="form-control margin-bottom10" accept="image/*">
+                        <input type="text" class="form-control margin-bottom10" name="description_section_2_head_1" value="{{ old('description_section_2_head_1') }}">
+                        <textarea name="description_section_2_text_1" class="form-control autogrow margin-bottom10">{{ old('description_section_2_text') }}</textarea>
+                        <input type="text" class="form-control margin-bottom10" name="description_section_2_head_2" value="{{ old('description_section_2_head_2') }}">
+                        <textarea name="description_section_2_text_2" class="form-control autogrow margin-bottom10">{{ old('description_section_2_text') }}</textarea>
+                        <input type="text" class="form-control margin-bottom10" name="description_section_2_head_3" value="{{ old('description_section_2_head_3') }}">
+                        <textarea name="description_section_2_text_3" class="form-control autogrow margin-bottom10">{{ old('description_section_2_text') }}</textarea>
+                        <input type="text" class="form-control margin-bottom10" name="description_section_2_head_4" value="{{ old('description_section_2_head_4') }}">
+                        <textarea name="description_section_2_text_4" class="form-control autogrow margin-bottom10">{{ old('description_section_2_text') }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="secondry-title" style="font-size: unset;">3st section.</h5>
+                        <input type="file" name="description_section_3_image" class="form-control margin-bottom10" accept="image/*">
+                        <input type="text" class="form-control margin-bottom10" name="description_section_3_head" value="{{ old('description_section_3_head') }}">
+                        <textarea name="description_section_3_text" class="form-control autogrow margin-bottom10">{{ old('description_section_3_text') }}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -117,7 +130,7 @@
             </form>
             {{--     <div class="col-md-3">
                 <div class="form-group margin-bottom20">
-                    <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_picture') }}</label>
+                    <label class="control-label" for="">{{ trans('web.dashboard_products_create_picture') }}</label>
                     <input type="file" class="form-control input-file-mod hidden" required>
                     <img src="{{asset('assets/panel-assets/images/fields/01_picture.png')}}" class="img-responsive input-file-custom" onclick="$('.input-file-mod').click();" />
                 </div>
@@ -130,43 +143,43 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
-    $(".select2").select2();
-    CKEDITOR.replace( 'description' );
-    CKEDITOR.replace( 'technical_specs' );
-    function categoryChange() {
-     var id =  $('#selectValue').val();
+$(".select2").select2();
+CKEDITOR.replace( 'description' );
+CKEDITOR.replace( 'technical_specs' );
+function categoryChange() {
+    var id =  $('#selectValue').val();
 
-     $.ajax({
+    $.ajax({
         type: "POST",
 
         url: "{{route('dashboard.product.check.section')}}",
         data: {
-           _token: "{{ csrf_token() }}",
-           id: id
-       },
-       success: function(data) {
-         console.log(data['payment_due_percentage']);
-         $('.AppendP').text('The Site will take '+data['payment_due_percentage']+' % from any product in section '+data['name']);
-         var price = $('#priceInput').val();
-         var discountPercentage = 100 - data['payment_due_percentage'];
-         var Discount =(price*discountPercentage)/100;
-         if(price.length > 0){
-            $('#AppendPrice').html('');
-            $('#AppendPrice').append('You will get <strong><span></span>'+Discount+' EGP</strong>');
+            _token: "{{ csrf_token() }}",
+            id: id
+        },
+        success: function(data) {
+            console.log(data['payment_due_percentage']);
+            $('.AppendP').text('The Site will take '+data['payment_due_percentage']+' % from any product in section '+data['name']);
+            var price = $('#priceInput').val();
+            var discountPercentage = 100 - data['payment_due_percentage'];
+            var Discount =(price*discountPercentage)/100;
+            if(price.length > 0){
+                $('#AppendPrice').html('');
+                $('#AppendPrice').append('You will get <strong><span></span>'+Discount+' EGP</strong>');
                 console.log(Discount);
-         }
+            }
 
 
-         if(data['has_brand'] == 1){
-            $('#brandDiv').css("display", "block");
-        }else{
-            $('#brandDiv').css("display", "none");
+            if(data['has_brand'] == 1){
+                $('#brandDiv').css("display", "block");
+            }else{
+                $('#brandDiv').css("display", "none");
+            }
         }
-    }
-});
- }
+    });
+}
 
- function onCategoryChangeSub() {
+function onCategoryChangeSub() {
     var id =  $('#selectCategoryChagne').val();
 
     $.ajax({
@@ -174,25 +187,25 @@
 
         url: "{{route('dashboard.change.subCategory.ajax.admin')}}",
         data: {
-           _token: "{{ csrf_token() }}",
-           id: id
-       },
-       success: function(data) {
+            _token: "{{ csrf_token() }}",
+            id: id
+        },
+        success: function(data) {
             var options = [];
-             options.push(`
-                    <option selected disabled>Select Sub-Cateogry</option>
+            options.push(`
+                <option selected disabled>Select Sub-Cateogry</option>
                 `);
-            for(var i = 0;i < data.length;i++){
-                options.push(`
-                    <option value=`+data[i].id+`>`+data[i].name+`</option>
-                `);
+                for(var i = 0;i < data.length;i++){
+                    options.push(`
+                        <option value=`+data[i].id+`>`+data[i].name+`</option>
+                        `);
 
-            }
-            $('#selectValue').html('');
-            $('#selectValue').append(options);
+                    }
+                    $('#selectValue').html('');
+                    $('#selectValue').append(options);
 
-       }
-   });
-}
-</script>
-@stop
+                }
+            });
+        }
+    </script>
+    @stop

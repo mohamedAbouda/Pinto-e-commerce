@@ -13,9 +13,12 @@ class Product extends Model
     protected $fillable = [
         'name','description','short_description','technical_specs','cover_image',
         'price','sub_category_id','brand_id','user_id','featured','sku' ,
-        'views','key_word_id','approved','match_keys'
+        'views','key_word_id','approved','match_keys',
+        'description_section_1_image' ,'description_section_1_head' ,'description_section_1_text' ,
+        'description_section_2_image' ,'description_section_2_head_1' ,'description_section_2_text_1' ,'description_section_2_head_2' ,'description_section_2_text_2' ,'description_section_2_head_3' ,'description_section_2_text_3' ,'description_section_2_head_4' ,'description_section_2_text_4' ,
+        'description_section_3_image' ,'description_section_3_head' ,'description_section_3_text'
     ];
-    protected $appends = ['cover_image_url' , 'rate'];
+    protected $appends = ['cover_image_url' ,'description_section_1_image_url' ,'description_section_2_image_url' ,'description_section_3_image_url' , 'rate'];
     protected $dates = ['created_at' , 'updated_at'];
     public $upload_distination = '/uploads/images/products/';
 
@@ -23,18 +26,47 @@ class Product extends Model
     * Accessors & Mutators
     */
 
-    public function setCoverImageAttribute($value)
+    private function upload($field ,$value)
     {
         if (!$value instanceof UploadedFile) {
-            $this->attributes['cover_image'] = $value;
+            $this->attributes[$field] = $value;
             return;
         }
-        $image_name = str_random(60);
-        $image_name = $image_name.'.'.$value->getClientOriginalExtension(); // add the extention
-        $value->move(public_path($this->upload_distination),$image_name);
-        $this->attributes['cover_image'] = $image_name;
+        $name = str_random(60);
+        $name = $name.'.'.$value->getClientOriginalExtension(); // add the extention
+        $value->move(public_path($this->upload_distination),$name);
+        $this->attributes[$field] = $name;
     }
 
+    public function setDescriptionSection1ImageAttribute($value)
+    {
+        $this->upload('description_section_1_image' ,$value);
+    }
+    public function setDescriptionSection2ImageAttribute($value)
+    {
+        $this->upload('description_section_2_image' ,$value);
+    }
+    public function setDescriptionSection3ImageAttribute($value)
+    {
+        $this->upload('description_section_3_image' ,$value);
+    }
+    public function setCoverImageAttribute($value)
+    {
+        $this->upload('cover_image' ,$value);
+    }
+
+    public function getDescriptionSection1ImageUrlAttribute($value)
+    {
+        return strpos($this->description_section_1_image, 'http') === false ? asset('public/'.$this->upload_distination.$this->description_section_1_image) : $this->description_section_1_image;
+    }
+    public function getDescriptionSection2ImageUrlAttribute($value)
+    {
+        return strpos($this->description_section_2_image, 'http') === false ? asset('public/'.$this->upload_distination.$this->description_section_2_image) : $this->description_section_2_image;
+    }
+    public function getDescriptionSection3ImageUrlAttribute($value)
+    {
+        return strpos($this->description_section_3_image, 'http') === false ? asset('public/'.$this->upload_distination.$this->description_section_3_image) : $this->description_section_3_image;
+    }
     public function getCoverImageUrlAttribute()
     {
         return strpos($this->cover_image, 'http') === false ? asset('public/'.$this->upload_distination.$this->cover_image) : $this->cover_image;
