@@ -25,8 +25,7 @@ Route::get('index', 'Web\HomeController@index')->name('index');
 Route::get('/', 'Web\HomeController@index')->name('home');
 Route::get('/logout', 'Auth\WebController@logout')->name('web.logout');
 Route::get('/reset/password' , 'Auth\WebController@resetPassword')->name('reset.password');
-Route::get('client/reset/{token}' , 'Auth\WebController@clientResetPasswordGet')->name('client.reset.password');
-Route::post('client/change/password' , 'Auth\WebController@clientChangePassword')->name('client.change.password');
+
 
 Route::get('facebook/redirect','Auth\SocialiteController@facebookRedirect')->name('facebook.redirect');
 Route::get('facebook/callback','Auth\SocialiteController@facebookCallBack')->name('facebook.callback');
@@ -35,10 +34,15 @@ Route::get('google/callback','Auth\SocialiteController@googleCallBack')->name('g
 
 Route::group(['as' => 'web.','middleware' => ['shareSessionItems']] , function(){
     Route::get('/u/login', 'Auth\WebController@getLoginForm')->name('login');
+    Route::get('/u/forget/password', 'Auth\WebController@getForgetPasswordForm')->name('forget.password');
+    Route::post('/u/forget/password', 'Auth\WebController@ForgetPassword')->name('forget.password.post');
     Route::get('/u/logout', 'Auth\WebController@logout')->name('logout');
     Route::post('/u/login', 'Auth\WebController@login');
     Route::get('/u/register' , 'Auth\WebController@getRegisterForm')->name('register');
     Route::post('/u/register' , 'Auth\WebController@postRegister');
+    Route::get('client/reset/{token}' , 'Auth\WebController@clientResetPasswordGet')->name('client.reset.password');
+    Route::post('/u/client/change/password' , 'Auth\WebController@clientChangePassword')->name('client.change.password');
+
 });
 
 Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' => 'Web'] , function(){
@@ -77,6 +81,7 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     Route::post('check/product/quantity', 'CartController@checkQuantity')->name('check.product.quantity');
     Route::post('/subscribe' , 'HomeController@subscribe')->name('subscribe');
     Route::get('/terms', 'ContactController@terms')->name('terms');
+    Route::get('/shipping', 'ContactController@shipping')->name('shipping');
     Route::get('/policy', 'ContactController@policy')->name('policy');
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');
@@ -138,6 +143,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
 
     // PAGES
     Route::resource('pages', 'PageController');
+    Route::resource('shipping', 'ShippingController');
     Route::get('offers', 'DiscountController@merchantOffers')->name('merchant.offers');
     Route::resource('governorates', 'GovernorateController');
     Route::resource('corporate_deals', 'CorporateDealController');

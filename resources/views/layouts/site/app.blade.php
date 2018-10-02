@@ -245,7 +245,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="menu-footer">
                         <ul>
-                            <li><a href="#">Shipping</a></li>
+                            <li><a href="{{route('web.shipping')}}">Shipping</a></li>
                             <li><a href="{{ route('web.terms') }}">Terms & Conditions</a></li>
                             <li><a href="{{ route('web.policy') }}">Privacy Policy</a></li>
                         </ul>

@@ -11,6 +11,7 @@ use App\Models\About;
 use App\Models\Policy;
 use App\Models\Term;
 use App\PolicyFAQ;
+use App\Models\Shipping;
 use App\TermFAQ;
 
 class ContactController extends Controller
@@ -54,5 +55,11 @@ class ContactController extends Controller
         $data['policy_faq'] = PolicyFAQ::all();
 
         return view('site.policy' ,$data);
+    }
+
+    public function shipping()
+    {
+        $shipping = Shipping::first();
+        return view('site.shipping',compact('shipping'));
     }
 }
