@@ -127,10 +127,10 @@
 					</div>
 					<div class="share-social">
 						<span>Share :</span>
-						<a href="https://twitter.com/intent/tweet?text=<?=urlencode('Checkout this awesome product ' . $product->name);?>&url={{ route('web.products.show' ,$product->id) }}&via=Pinto"><i class="fa fa-twitter"></i></a>
-						<a href="https://www.facebook.com/sharer/sharer.php?u={{ route('web.products.show' ,$product->id) }}"><i class="fa fa-facebook"></i></a>
-						<a href="https://plus.google.com/share?url={{ route('web.products.show' ,$product->id) }}"><i class="fa fa-google-plus"></i></a>
-						<a href="https://pinterest.com/pin/create/button/?url={{ route('web.products.show' ,$product->id) }}&media={{ $product->cover_image_url }}&description=<?=urlencode('Checkout this awesome product ' . $product->name);?>"><i class="fa fa-pinterest-p"></i></a>
+						<a rel="noopener noreferrer" target="_blank" href="https://twitter.com/intent/tweet?text=<?=urlencode('Checkout this awesome product ' . $product->name);?>&url={{ route('web.products.show' ,$product->id) }}&via=Pinto"><i class="fa fa-twitter"></i></a>
+						<a rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('web.products.show' ,$product->id) }}"><i class="fa fa-facebook"></i></a>
+						<a rel="noopener noreferrer" target="_blank" href="https://plus.google.com/share?url={{ route('web.products.show' ,$product->id) }}"><i class="fa fa-google-plus"></i></a>
+						<a rel="noopener noreferrer" target="_blank" href="https://pinterest.com/pin/create/button/?url={{ route('web.products.show' ,$product->id) }}&media={{ $product->cover_image_url }}&description=<?=urlencode('Checkout this awesome product ' . $product->name);?>"><i class="fa fa-pinterest-p"></i></a>
 					</div>
 				</div>
 			</div>
