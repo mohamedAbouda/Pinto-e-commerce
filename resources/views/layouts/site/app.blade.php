@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    @yield('meta')
     <title>Pinto | The World's Most Comfortable Underwears</title>
     <link rel="stylesheet" href="{{ asset('assets/site/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/site/css/slick-theme.css') }}">
@@ -245,8 +246,8 @@
                     <div class="menu-footer">
                         <ul>
                             <li><a href="#">Shipping</a></li>
-                            <li><a href="terms.html">Terms & Conditions</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="{{ route('web.terms') }}">Terms & Conditions</a></li>
+                            <li><a href="{{ route('web.policy') }}">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
