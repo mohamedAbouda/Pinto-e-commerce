@@ -10,6 +10,7 @@ use App\Models\ContactMessage;
 use App\Models\About;
 use App\Models\Policy;
 use App\Models\Term;
+use App\TermFAQ;
 
 class ContactController extends Controller
 {
@@ -40,8 +41,10 @@ class ContactController extends Controller
 
     public function terms()
     {
-        $terms = Term::first();
-        return view('site.terms.index',compact('terms'));
+        $data['terms'] = Term::first();
+        $data['terms_faq'] = TermFAQ::all();
+
+        return view('site.terms' ,$data);
     }
 
     public function policy()

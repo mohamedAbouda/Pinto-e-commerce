@@ -76,6 +76,7 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     });
     Route::post('check/product/quantity', 'CartController@checkQuantity')->name('check.product.quantity');
     Route::post('/subscribe' , 'HomeController@subscribe')->name('subscribe');
+    Route::get('/terms', 'ContactController@terms')->name('terms');
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');
     // Route::post('/products/review/{product?}', 'ProductController@review')->name('products.review');
@@ -91,7 +92,6 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     // Route::post('user/reorder', 'OrderController@userReorder')->name('user.reorder');
     // Route::get('order/{order}/submit/dispute', 'OrderController@submitDispute')->name('order.submit.dispute');
     // Route::post('order/dispute/save', 'OrderController@orderDisputeSubmit')->name('order.dispute.store');
-    // Route::get('/terms/conditions', 'ContactController@terms')->name('terms');
     // Route::get('/policy', 'ContactController@policy')->name('policy');
     // Route::get('/offers', 'HomeController@offers')->name('offers');
     // Route::group(['prefix' => '/auth/password' , 'as' => 'auth.'], function(){
