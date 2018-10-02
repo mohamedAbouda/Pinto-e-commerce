@@ -186,7 +186,7 @@ class WebController extends Controller
             alert()->error('Reset code expired !' , 'Error');
             return redirect()->route('index');
         }
-        return view('site.auth.clientResetPassword' , compact('token','reset'));
+        return view('site.resetPassword' , compact('token','reset'));
     }
 
     public function clientChangePassword(ClientResetPassword $request)
@@ -216,6 +216,30 @@ class WebController extends Controller
         MerchantAdmin::create($data);
         alert()->success('Your data has been saved', 'Success');
         return redirect()->route('index');
+    }
+
+    public function getForgetPasswordForm()
+    {
+        return view('site.forgetPassword');
+    }
+    public function ForgetPassword(Request $request)
+    {
+       $email = $request->get('email');
+        $client = Client::where('email' , $email)->first();
+        $token = str_random(16);
+        PasswordReset::create([
+            'email' => $email , 'token' => $token , 'created_at' => Carbon::now()->toDateTimeString()
+        ]);
+        try {
+            Mail::to($email)->send(new ClientResetPasswordMail($token));
+        } catch (\Exception $e) {
+           
+            alert()->error('Something went wrong ! please try again.' , 'Error');
+            return redirect()->back();
+        }
+
+        alert()->success('Reset link has been sent to your email for confirmation please check your mail.', 'Success');
+        return redirect()->back();
     }
 
 

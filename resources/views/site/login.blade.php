@@ -25,7 +25,7 @@
                                 <input type="checkbox" class="form-check-input" name="remember">
                                 <span>Remember me</span>
                             </label>
-                            <!-- <a href="" class="lost-password">Lost your password?</a> -->
+                            <a href="{{route('web.forget.password')}}" class="lost-password">Lost your password?</a>
                         </div>
                     </form>
                     <span class="divider"></span>
