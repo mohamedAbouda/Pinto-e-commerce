@@ -1,5 +1,18 @@
 @extends('layouts.site.app')
 
+@section('meta')
+<!--  Essential META Tags -->
+<meta property="og:title" content="{{ $product->name }}">
+<meta property="og:description" content="{{ $product->short_description }}">
+<meta property="og:image" content="{{ $product->cover_image_url }}">
+<meta property="og:url" content="{{ route('web.products.show' ,$product->id) }}">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="Pinto | The World's Most Comfortable Underwears">
+<meta name="twitter:image:alt" content="{{ $product->name }}">
+@stop
+
 @section('content')
 <div class="container container-42">
 	<ul class="breadcrumb">
@@ -114,7 +127,7 @@
 					</div>
 					<div class="share-social">
 						<span>Share :</span>
-						<a><i class="fa fa-twitter"></i></a>
+						<a href="https://twitter.com/intent/tweet?text=<?=urlencode('Checkout this awesome product ' . $product->name);?>&url={{ route('site.products.show' ,$product->id) }}&via=Pinto"><i class="fa fa-twitter"></i></a>
 						<a><i class="fa fa-facebook"></i></a>
 						<a><i class="fa fa-google-plus"></i></a>
 						<a><i class="fa fa-pinterest-p"></i></a>

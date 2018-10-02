@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    @yield('meta')
     <title>Pinto | The World's Most Comfortable Underwears</title>
     <link rel="stylesheet" href="{{ asset('assets/site/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/site/css/slick-theme.css') }}">
