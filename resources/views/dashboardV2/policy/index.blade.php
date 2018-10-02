@@ -12,6 +12,7 @@
 }
 </style>
 @endsection
+
 @section('content')
 <div class="col-md-12">
     <div class="panel-heading">
@@ -25,23 +26,29 @@
         </a>
         @endif
     </div>
-    <div class="panel panel-default">
 
-        <div class="panel-body">
-            <table class="table table-bordered">
-                <thead>
-                </thead>
-                <tbody>
-                    @if($policy)
-                    <tr>
-                        <td>{!! $policy->description !!}</td>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
-        </div>
-        <div class="panel-footer">
-        </div>
-    </div>
+    <table class="table table-bordered">
+        <tbody>
+            @if($policy)
+            <tr>
+                <td>Description</td>
+                <td colspan="2">{!! $policy->description !!}</td>
+            </tr>
+            @endif
+            @foreach($policy_faq as $faq)
+            <tr>
+                <td>
+                    {{ $loop->iteration }}
+                </td>
+                <td>
+                    {{ $faq->question }}
+                </td>
+                <td>
+                    {{ $faq->answer }}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection

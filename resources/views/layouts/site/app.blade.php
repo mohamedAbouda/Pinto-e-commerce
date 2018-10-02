@@ -246,7 +246,7 @@
                         <ul>
                             <li><a href="#">Shipping</a></li>
                             <li><a href="{{ route('web.terms') }}">Terms & Conditions</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="{{ route('web.policy') }}">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>

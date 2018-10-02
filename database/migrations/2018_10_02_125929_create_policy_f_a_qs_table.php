@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTermFAQsTable extends Migration
+class CreatePolicyFAQsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTermFAQsTable extends Migration
      */
     public function up()
     {
-        Schema::create('term_faqs', function (Blueprint $table) {
+        Schema::create('policy_faqs', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('question')->nullable();
@@ -30,6 +30,6 @@ class CreateTermFAQsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('term_faqs');
+        Schema::dropIfExists('policy_faqs');
     }
 }

@@ -21,8 +21,8 @@
         <a href="{{ route('dashboard.terms.edit', ['term' => $term->id])  }}" class="resizeBtn btn btn-primary">{{ trans('web.dashboard_terms_index_edit') }}  </a>
         @endif
     </div>
+    
     <table class="table table-bordered">
-        
         <tbody>
             @if($term)
             <tr>
