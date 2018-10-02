@@ -81,6 +81,7 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     Route::post('check/product/quantity', 'CartController@checkQuantity')->name('check.product.quantity');
     Route::post('/subscribe' , 'HomeController@subscribe')->name('subscribe');
     Route::get('/terms', 'ContactController@terms')->name('terms');
+    Route::get('/shipping', 'ContactController@shipping')->name('shipping');
     Route::get('/policy', 'ContactController@policy')->name('policy');
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');

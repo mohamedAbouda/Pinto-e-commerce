@@ -42,7 +42,7 @@
                     <a class="edit-cart" href="{{ route('web.cart.index') }}" title="edit cart">View Cart</a>
                 </div>
             <?php endif; ?>
-            <a href="#" class="text">Our Shipping & Return Policy</a>
+            <a href="{{route('web.shipping')}}" class="text">Our Shipping & Return Policy</a>
         </div>
         <!-- End cart bottom -->
     </div>
