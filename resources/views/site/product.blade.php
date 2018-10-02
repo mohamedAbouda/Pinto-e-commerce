@@ -127,7 +127,7 @@
 					</div>
 					<div class="share-social">
 						<span>Share :</span>
-						<a href="https://twitter.com/intent/tweet?text=<?=urlencode('Checkout this awesome product ' . $product->name);?>&url={{ route('site.products.show' ,$product->id) }}&via=Pinto"><i class="fa fa-twitter"></i></a>
+						<a href="https://twitter.com/intent/tweet?text=<?=urlencode('Checkout this awesome product ' . $product->name);?>&url={{ route('web.products.show' ,$product->id) }}&via=Pinto"><i class="fa fa-twitter"></i></a>
 						<a><i class="fa fa-facebook"></i></a>
 						<a><i class="fa fa-google-plus"></i></a>
 						<a><i class="fa fa-pinterest-p"></i></a>
