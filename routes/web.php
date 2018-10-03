@@ -394,4 +394,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     Route::post('reviews/status/update','ProductController@updateReview')->name('review.update');
     Route::get('approved/reviews','ProductController@approvedReviews')->name('approved.reviews');
     Route::get('disapproved/reviews','ProductController@disapprovedReviews')->name('disapproved.reviews');
+    Route::resource('blog', 'BlogController');
 });

@@ -115,12 +115,22 @@
                             </div>
                         </a>
                     </li>
-                       <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.shipping.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Shipping & return Policy">
+                    <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.shipping.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Shipping & return Policy">
                         <a href="{{route('dashboard.shipping.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-eye"></i>
                                 <div class="c-menu-item__title">
                                     <span>Shipping & return Policy</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.blog.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Blog">
+                        <a href="{{route('dashboard.blog.index')}}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-wordpress"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Blog</span>
                                 </div>
                             </div>
                         </a>
