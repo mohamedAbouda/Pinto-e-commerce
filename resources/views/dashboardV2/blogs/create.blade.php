@@ -42,6 +42,14 @@
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('categories.*') }}</p>
         </div>
         <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="short_description">
+                <span class="text-danger">*</span>
+                Short description
+            </label>
+            {{ Form::textarea('short_description' ,old('short_description') ,['id'=>'short_description','required'=>'required','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('short_description') }}</p>
+        </div>
+        <div class="form-group margin-bottom20 col-md-12">
             <label class="control-label" for="body">
                 <span class="text-danger">*</span>
                 Body
