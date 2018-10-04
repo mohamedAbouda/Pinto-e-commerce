@@ -23,7 +23,7 @@
                         </a>
                     </li>
 
-                    <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.approved.reviews') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Approved Reviews">
+                    <!-- <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.approved.reviews') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Approved Reviews">
                         <a href="{{route('dashboard.approved.reviews')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-binoculars"></i>
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.admins.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Admins">
                         <a href="{{route('dashboard.admins.index')}}" style="text-decoration: none;">
@@ -45,7 +45,7 @@
                         </a>
                     </li>
 
-                    <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.offers.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Offers">
+                    <!-- <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.offers.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Offers">
                         <a href="{{route('dashboard.offers.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-files-o"></i>
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.users.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_users') }}">
                         <a href="{{route('dashboard.users.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
@@ -177,7 +177,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.brands.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_brands') }}">
+                    <!-- <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.brands.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_brands') }}">
                         <a href="{{route('dashboard.brands.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-apple"></i>
@@ -186,9 +186,9 @@
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.gift_cards.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Gift Cards">
+                    <!-- <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.gift_cards.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Gift Cards">
                         <a href="{{route('dashboard.gift_cards.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-files-o"></i>
@@ -197,7 +197,7 @@
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.products.index') ? 'is-active' : '' }}" data-toggle="tooltip" title="Products">
                         <a href="{{route('dashboard.products.index')}}" style="text-decoration: none;">
@@ -220,7 +220,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.corporate_deals.index') ? 'is-active' : '' }}" data-toggle="tooltip" title="Corporate Deals">
+                    <!-- <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.corporate_deals.index') ? 'is-active' : '' }}" data-toggle="tooltip" title="Corporate Deals">
                         <a href="{{route('dashboard.corporate_deals.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-expand"></i>
@@ -229,7 +229,7 @@
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </div>
