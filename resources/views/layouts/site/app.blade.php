@@ -220,7 +220,7 @@
                                         <a href="{{ route('web.about') }}">About</a>
                                     </li>
                                     <li class="level1 dropdown">
-                                        <a href="#">Blog</a>
+                                        <a href="{{ route('web.blog.index') }}">Blog</a>
                                     </li>
                                     <li class="level1 dropdown">
                                         <a href="{{ route('web.contact') }}">Contact Us</a>
