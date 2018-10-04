@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 
 class BlogArticle extends Model
 {
-    protected $fillable = ['title' ,'cover_image' ,'body'];
+    protected $fillable = ['title' ,'cover_image' ,'body' ,'short_description' ,'views'];
     protected $dates = ['created_at'];
     public $upload_distination = '/uploads/images/blog/';
 
@@ -43,5 +43,10 @@ class BlogArticle extends Model
     public function categories()
     {
         return $this->belongsToMany(BlogCategory::class ,'blog_article_categories' ,'blog_article_id' ,'blog_category_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(BlogComment::class ,'blog_article_id');
     }
 }

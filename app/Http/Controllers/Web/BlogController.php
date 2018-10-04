@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\BlogPostCommentRequest;
+use App\Models\BlogArticle;
 use App\Models\BlogCategory;
-use App\Models\BlogPost;
 use App\Models\BlogComment;
+
 class BlogController extends Controller
 {
     /**
@@ -17,37 +18,50 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('catId')) {
-            $data['posts'] = BlogPost::where('blog_category_id' , $request->get('catId'))
-            ->orderBy('created_at' ,'DESC')->paginate(20);
-        }else{
-            $data['posts'] = BlogPost::orderBy('created_at' ,'DESC')->paginate(20);
-        }
-        $data['blog_categories'] = BlogCategory::get();
-        return view('web.blog.index',$data);
+
+        $data['articles'] = BlogArticle::where(function($query) use($request){
+            $query->where('id' ,'<>' ,NULL);
+
+            if ($search = $request->get('search')) {
+                $query->where('title' ,'LIKE' ,'%' . $search . '%')
+                ->orWhere('short_description' ,'LIKE' ,'%' . $search . '%')
+                ->orWhere('body' ,'LIKE' ,'%' . $search . '%');
+            }
+            if ($tag = $request->get('tag')) {
+                $query->whereHas('categories' ,function($query) use($tag){
+                    $query->where('name' ,$tag);
+                });
+            }
+        })->with(['categories' ,'comments'])->paginate(10);
+        $data['popular_articles'] = BlogArticle::orderBy('views' ,'DESC')->take(3)->get();
+        $data['tags'] = BlogCategory::with('articles')->get();
+
+        return view('site.blog' ,$data);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BlogPost $blog)
+    public function show(BlogArticle $blog)
     {
-        $data['post'] = $blog;
-        $data['blog_categories'] = BlogCategory::get();
-        return view('web.blog.show' , $data);
+        $blog->views++;
+        $blog->save();
+        $data['article'] = $blog;
+
+        $data['next_id'] = BlogArticle::where('id' ,'>' ,$blog->id)->orderBy('views' ,'DESC')->first();
+        $data['prev_id'] = BlogArticle::where('id' ,'<' ,$blog->id)->orderBy('views' ,'DESC')->first();
+
+        $data['popular_articles'] = BlogArticle::orderBy('views' ,'DESC')->take(3)->get();
+        $data['tags'] = BlogCategory::with('articles')->get();
+        return view('site.blog-article' ,$data);
     }
 
-    public function comment(BlogPostCommentRequest $request , BlogPost $post)
+    public function comment(Request $request ,BlogArticle $blog)
     {
         $input = $request->all();
-        $input['blog_post_id'] = $post->id;
-        $saved = BlogComment::create($input);
-        if ($saved) {
-            return redirect()->back()->with('success', 'Comment sent successfully.');
-        }
-        return redirect()->back()->withErrors(['msg' => 'Something went wrong please try again later.']);
+        $client = auth()->guard('client')->user();
+        $input['client_id'] = $client->id;
+
+        BlogComment::create($input);
+
+        alert()->success('Comment sent successfully.', 'Success');
+        return redirect()->back();
     }
 }

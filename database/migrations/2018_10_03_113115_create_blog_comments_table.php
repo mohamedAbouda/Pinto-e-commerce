@@ -17,8 +17,8 @@ class CreateBlogCommentsTable extends Migration
             $table->increments('id');
 
             $table->string('comment')->nullable();
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('client_id')->unsigned()->nullable();
+            $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('blog_article_id')->unsigned()->nullable();
             $table->foreign('blog_article_id')->references('id')->on('blog_articles')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('comment_id')->unsigned()->nullable();

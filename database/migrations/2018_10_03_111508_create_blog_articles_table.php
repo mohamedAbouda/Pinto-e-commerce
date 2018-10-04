@@ -18,7 +18,9 @@ class CreateBlogArticlesTable extends Migration
 
             $table->string('title')->nullable();
             $table->string('cover_image')->nullable();
+            $table->text('short_description')->nullable();
             $table->text('body')->nullable();
+            $table->integer('views')->unsigned()->default(0);
 
             $table->timestamps();
         });

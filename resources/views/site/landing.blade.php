@@ -80,7 +80,7 @@
 										</li>
 
 										<li>
-											<a href="blog.html">Blog</a>
+											<a href="{{ route('web.blog.index') }}">Blog</a>
 										</li>
 										<li>
 											<a href="{{ route('web.contact') }}">Contact Us</a>

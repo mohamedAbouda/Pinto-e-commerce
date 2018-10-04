@@ -83,6 +83,12 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     Route::get('/terms', 'ContactController@terms')->name('terms');
     Route::get('/shipping', 'ContactController@shipping')->name('shipping');
     Route::get('/policy', 'ContactController@policy')->name('policy');
+    Route::resource('/blog', 'BlogController' , [
+        'only' => ['index','show']
+    ]);
+    Route::group(['middleware' => ['auth:client']] , function(){
+        Route::post('/blog/comment/{post}','BlogController@comment')->name('blog.comment');
+    });
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');
     // Route::post('/products/review/{product?}', 'ProductController@review')->name('products.review');
@@ -108,10 +114,7 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     // Route::post('/register' , 'Auth\WebController@postRegister')->name('postRegister');
     // Route::get('/login', 'Auth\WebController@getLoginForm')->name('login');
     // Route::post('/login', 'Auth\WebController@login');
-    // Route::resource('/blog', 'BlogController' , [
-    //     'only' => ['index','show']
-    // ]);
-    // Route::post('/blog/comment/{post}','BlogController@comment')->name('blog.comment');
+
     // Route::get('/mail' , 'HomeController@mailTest');
     // Route::group(['prefix' => 'checkout' , 'as' => 'checkout.'], function(){
     //     Route::get('visa' , 'CheckoutController@visaIndex');
