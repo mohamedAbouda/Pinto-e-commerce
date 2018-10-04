@@ -25,6 +25,7 @@ class Client extends Authenticatable
         'phone',
         'address_id',
         'valid',
+        'api_token',
     ];
 
     protected $appends = ['profile_pic_url'];
@@ -75,5 +76,8 @@ class Client extends Authenticatable
     {
         return $this->hasMany('App\Models\WishList');
     }
+
+   
+
 
 }
