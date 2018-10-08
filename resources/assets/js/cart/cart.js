@@ -6,6 +6,7 @@ window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
 
+Vue.component('checkout', require('./components/checkout.vue'));
 Vue.component('cart', require('./components/cart.vue'));
 
 const app = new Vue({

@@ -67,38 +67,30 @@
                         </li>
                         <li>
                             <span class="text">Shipping</span>
-                            <div class="payment">
-                                <input type="radio" name="gender" value="Flat" id="radio1" checked="checked">
-                                <label for="radio1">Free Shipping</label>
-                                <input type="radio" name="gender" value="Free" id="radio2">
-                                <label for="radio2">Standard <span class="number">$20.00</span></label>
-                                <input type="radio" name="gender" value="Delivery" id="radio3">
-                                <label for="radio3">Local Pickup</label>
-
+                            <div class="payment" style="width:100%;">
+                                <template v-for="(shipping ,index) in shipping_methods">
+                                    <input type="radio" name="shipping_method" :value="shipping.id" :id="'shipptinh-radio-' + index" checked>
+                                    <label :for="'shipptinh-radio-' + index" @click="selected_shipping_method = shipping">
+                                        {{ shipping.name }} <span class="number">${{ shipping.cost }}</span>
+                                    </label>
+                                </template>
                             </div>
                         </li>
-                        <li><span class="text calculate">Calculate shipping</span>
-                            <div class="zipcode">
-                                <input type="text" class="form-control form-account input-cart" placeholder="Zipcode">
-                            </div>
-                        </li>
-                        <li><span class="text">Totals</span><span class="number">$89.00</span></li>
+                        <li><span class="text">Totals</span><span class="number">${{ total_cost }}</span></li>
                     </ul>
                 </div>
                 <div class="text-price box-payment">
                     <ul>
                         <li>
                             <div class="payment">
-                                <input type="radio" name="gender" value="Flat" id="radio4" checked="checked">
-                                <label for="radio4">Check Payments</label>
-                                <p class="no-checkbox">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                <input type="radio" name="gender" value="Free" id="radio5">
-                                <label for="radio5">Paypal <img src="img/cart/paypal-icon.jpg" alt=""></label>
+                                <input type="radio" name="payment_method" value="cash" id="payment_method" checked="checked">
+                                <label for="payment_method">Cash</label>
+                                <!-- <p class="no-checkbox">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p> -->
                             </div>
                         </li>
                     </ul>
                 </div>
-                <a class="btn link-button hover-white btn-checkout" href="#" title="Proceed to checkout">Place order</a>
+                <a class="btn link-button hover-white btn-checkout" title="Proceed to checkout" @click="order();">Place order</a>
             </div>
         </div>
     </div>
@@ -110,16 +102,30 @@ export default {
         cart: {
             default: []
         },
+        shipping_methods: {
+            default: []
+        },
+        checkout_url: {
+            default: ''
+        }
     },
     data() {
         return {
             cart_items : [],
             subtotal : 0,
+            selected_shipping_method : undefined,
+            total_cost : 0
         }
     },
     watch: {
         cart_items: function(){
             this.updateSubTotal();
+        },
+        selected_shipping_method: function(){
+            this.updateTotalCost();
+        },
+        subtotal: function(){
+            this.updateTotalCost();
         }
     },
     // updated: function () {
@@ -147,6 +153,11 @@ export default {
             subtotal += this.cart_items[key].qty * this.cart_items[key].price;
         }
         this.subtotal = subtotal;
+
+        if (this.shipping_methods.length > 0 && !this.selected_shipping_method) {
+            this.selected_shipping_method = this.shipping_methods[this.shipping_methods.length - 1];
+            // this.updateTotalCost();
+        }
     },
     methods : {
         updateSubTotal(){
@@ -156,8 +167,40 @@ export default {
             }
             this.subtotal = subtotal;
         },
+        updateTotalCost(){
+            this.total_cost = this.subtotal;
+
+            if (this.selected_shipping_method) {
+                var cost =  parseFloat(this.selected_shipping_method.cost);
+                this.total_cost += cost;
+            }
+        },
         remove(key){
             this.cart_items.splice(key, 1);
+        },
+        order(){
+            /**
+            * Show loading screen
+            */
+            Event.$emit('show-loading-screen');
+            var data = {
+                cart: [],
+                shipping_method: this.selected_shipping_method.id,
+            };
+            for (var cart_key in this.cart_items) {
+                data.cart.push(this.cart_items[cart_key]);
+            }
+            var vm = this;
+            axios({
+                method: 'POST',
+                params: data,
+                url: vm.checkout_url
+            }).then(function (response) {
+                console.log(response);
+                if (response.data.redirectTo != undefined) {
+                    window.location = response.data.redirectTo;
+                }
+            });
         }
     }
 }

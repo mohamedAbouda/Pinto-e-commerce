@@ -209,6 +209,26 @@
                             </div>
                         </a>
                     </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.colors') !== FALSE ? 'is-active' : '' }}" data-toggle="tooltip" title="Colors">
+                        <a href="{{route('dashboard.colors.index')}}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-paint-brush"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Colors</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.sizes') !== FALSE ? 'is-active' : '' }}" data-toggle="tooltip" title="Sizes">
+                        <a href="{{route('dashboard.sizes.index')}}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-balance-scale"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Sizes</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
 
                     <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.orders.index') ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_orders') }}">
                         <a href="{{route('dashboard.orders.index')}}" style="text-decoration: none;">

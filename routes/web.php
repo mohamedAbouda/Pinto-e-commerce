@@ -75,8 +75,10 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
         Route::post('remove/item/cart','CartController@removeItem')->name('remove.item');
         Route::post('remove/item/cart/row','CartController@removeItemRow')->name('remove.item.row');
         Route::post('add/coupon','CartController@AddCouponAndSave')->name('add.coupon.save');
+        Route::post('update','CartController@updateCart')->name('update')->middleware('auth:client');
         Route::get('checkout','CartController@checkout')->name('checkout')->middleware('auth:client');
-        Route::post('checkout/submit','CartController@checkoutSubmit')->name('checkout.submit');
+        Route::post('checkout','CartController@checkoutSubmit')->middleware('auth:client');
+        // Route::post('checkout/submit','CartController@checkoutSubmit')->name('checkout.submit');
     });
     Route::post('check/product/quantity', 'CartController@checkQuantity')->name('check.product.quantity');
     Route::post('/subscribe' , 'HomeController@subscribe')->name('subscribe');

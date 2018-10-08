@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\OrderCheckoutRequest;
-use Cart;
+use App\Http\Requests\Web\CheckoutSubmitRequest;
 use App\Models\Product;
 use App\Models\Country;
 use App\Models\Coupon;
@@ -21,12 +21,13 @@ use App\Models\Address;
 use App\Models\AddressClient;
 use App\Models\Cart as DbCart;
 use App\Mail\OrderInvoiceEmail;
-use Mail;
 use App\Models\OrderProduct;
-use App\Http\Requests\Web\CheckoutSubmitRequest;
+use App\Models\ShippingMethod;
 use Session;
-use Auth;
 use Alert;
+use Cart;
+use Mail;
+use Auth;
 
 class CartController extends Controller
 {
@@ -37,7 +38,8 @@ class CartController extends Controller
             /**
             * Cart data is shared in Controller.php
             */
-            return view('site.cart.index');
+            $data['shipping_methods'] = ShippingMethod::get();
+            return view('site.cart.index' ,$data);
         }
         Alert::error('No items in your cart', 'Oops!')->persistent('Close');
         return redirect()->back();
@@ -121,93 +123,74 @@ class CartController extends Controller
     }
 
 
-    public function checkout()
+    public function updateCart(Request $request)
     {
+        $input = $request->all();
 
+        //update el cart
+        Cart::destroy();
+        foreach ($input['cart'] as $item) {
+            $cart_row = json_decode($item);
+            Cart::add([
+                'id' => $cart_row->id,
+                'name' => $cart_row->name,
+                'qty' => $cart_row->qty,
+                'price' => $cart_row->price,
+                'options' => [
+                    'obj' => $cart_row->options->obj,
+                    'color' => $cart_row->options->color,
+                    'size' => $cart_row->options->size,
+                ]
+            ]);
+        }
+
+        if ($request->get('shipping_method')) {
+            $request->session()->put('shipping_method', $input['shipping_method']);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'redirectTo' => route('web.cart.checkout')
+        ]);
+    }
+
+    public function checkout(Request $request)
+    {
         $count = Cart::content()->count();
         if($count > 0){
-            $productIds = [];
-            $CorporateDealsProducts = [];
-            $string = '';
-            $total = 0;
-            $cartSubTotal = 0;
-            foreach(Cart::content() as $item){
-                array_push($productIds, $item->options->obj->id);
+            /**
+            * Cart data is shared in Controller.php
+            */
+            $data['shipping_methods'] = ShippingMethod::get();
+            $data['countries'] = Country::get();
+            if ($addresses = auth()->guard('client')->user()->addresses) {
+                $data['addresses'] = $addresses;
+                $data['client'] = auth()->guard('client')->user();
             }
-            $CorporateDeals = CorporateDeal::whereIn('first_product_id',$productIds)->whereIn('second_product_id',$productIds)->where('approved',1)->with('firstProduct','secondProduct')->get();
-            foreach($CorporateDeals as $CorporateDeal){
-                if(!in_array($CorporateDeal->first_product_id, $CorporateDealsProducts) && !in_array($CorporateDeal->second_product_id, $CorporateDealsProducts)){
-                    $itemQtyFirstProduct = Cart::search(function ($cart, $key) use($CorporateDeal) {
-                        return $cart->id == $CorporateDeal->firstProduct->id;
-                    })->pluck('qty')->first();
-                    $itemQtySecondProduct = Cart::search(function ($cart, $key) use($CorporateDeal) {
-                        return $cart->id == $CorporateDeal->secondProduct->id;
-                    })->pluck('qty')->first();
-                    $discountFirstProduct = ($CorporateDeal->firstProduct->price * $itemQtyFirstProduct) - ($CorporateDeal->discount*$itemQtyFirstProduct);
-                    $discountSecondProduct = ($CorporateDeal->secondProduct->price * $itemQtySecondProduct) - ($CorporateDeal->discount*$itemQtySecondProduct);
-                    $total += $discountFirstProduct;
-                    $total += $discountSecondProduct;
-                    $string .= 'You have discount '.$CorporateDeal->discount.' EGP on product '.$CorporateDeal->firstProduct->name.' according to corporate deal with other product its total price after discount is '.$discountFirstProduct.' EGP<br>';
-                    $string .=  'You have discount '.$CorporateDeal->discount.' EGP on product '.$CorporateDeal->secondProduct->name.' according to corporate deal with other product its total price after discount is '.$discountSecondProduct.' EGP<br>';
-                    array_push($CorporateDealsProducts, $CorporateDeal->first_product_id,$CorporateDeal->second_product_id);
-                }
-            }
-
-            $productsDiscounts = Product::whereIn('id',$productIds)->whereNotIn('id',$CorporateDealsProducts)->with('discount')->get();
-            foreach($productsDiscounts as $productDiscount){
-                if($productDiscount->discount){
-                    $itemQtyProduct = Cart::search(function ($cart, $key) use($productDiscount) {
-                        return $cart->id == $productDiscount->id;
-                    })->pluck('qty')->first();
-                    $productAfterPriceDiscount = ($productDiscount->price * $itemQtyProduct) - (($productDiscount->discount->percentage * $productDiscount->price) /100);
-                    $string .= 'you have offer discount '.$productDiscount->discount->percentage.' % on the product '.$productDiscount->name.' its total price after the offer is '.$productAfterPriceDiscount.'EGP<br>';
-                    $total +=$productAfterPriceDiscount;
-                    array_push($CorporateDealsProducts, $productDiscount->id);
-                }
-            }
-            if(Session::has('giftCardId')){
-                if(Session::get('giftCardId') != null){
-                    $giftCard = GiftCard::where('id',Session::get('giftCardId'))->first();
-                    $productsGiftCards = Product::whereIn('id',$productIds)->whereNotIn('id',$CorporateDealsProducts)->with('discount')->get();
-                    foreach($productsGiftCards as $productGiftCards){
-                        if($giftCard->merchant_id == $productGiftCards->merchant_id){
-                            $giftCardQtyProduct = Cart::search(function ($cart, $key) use($productGiftCards) {
-                                return $cart->id == $productGiftCards->id;
-                            })->pluck('qty')->first();
-                            if($giftCard->discount < 1){
-                                $discountGiftCard = ($productGiftCards->price * $giftCardQtyProduct) - ((($giftCard->discount * 100) * $productGiftCards->price) /100);
-                                $total += $discountGiftCard;
-                                $string .= 'you have discount on product '.$productGiftCards->name.' due to gift card its total price after discount is '.$discountGiftCard.' EGP';
-                            }else{
-                                $discountGiftCard = ($productGiftCards->price * $giftCardQtyProduct) - ($giftCard->discount*$giftCardQtyProduct);
-                                $total += $discountGiftCard;
-                                $string .= 'you have discount on product '.$productGiftCards->name.' due to gift card its total price after discount is '.$discountGiftCard.' EGP';
-                            }
-                        }
-                    }
-                }
-            }
-            if($total == 0){
-                $total = Cart::subtotal();
-            }
-            $cartItems = Cart::content();
-            $cartSubTotal = Cart::subtotal();
-            return view('site.cart.checkout',compact('total','CorporateDealsProducts','cartItems','cartSubTotal','string'));
-        }else{
-            Alert::error('No items in your cart', 'Oops!')->persistent('Close');
-            return redirect()->back();
+            return view('site.cart.checkout' ,$data);
         }
+        Alert::error('No items in your cart', 'Oops!')->persistent('Close');
+        return redirect()->back();
     }
 
     public function checkoutSubmit(CheckoutSubmitRequest $request)
     {
         $data = $request->all();
+
+        if (!$request->get('new_address') && !$request->get('address_id')) {
+            alert()->error('Please select an address or add a new one.', 'Error');
+            return redirect()->back();
+        }
+
         $data['status'] = 2;
         $data['client_id'] = $data['user_id'] = Auth::guard('client')->user()->id;
-        if(Session::has('giftCardId')){
-            if(Session::get('giftCardId') != null){
-                $data['gift_card_id'] = Session::get('giftCardId');
-            }
+
+        if($request->get('new_address')){
+            $createAddress = Address::create($data);
+            $data['address_id'] = $createAddress->id;
+            $createClientAddress = AddressClient::create($data);
+        }else{
+            $data['address_id'] = $request->get('address_id');
         }
 
         $createOrder = Order::create($data);
@@ -222,11 +205,6 @@ class CartController extends Controller
             $createOrderProduct->save();
         }
 
-        if($request->input('address')){
-            $createAddress = Address::create($data);
-            $data['address_id'] = $createAddress->id;
-            $createClientAddress = AddressClient::create($data);
-        }
         Session::forget('giftCardId');
         Cart::destroy();
         Alert::success('Your order has been placed', 'Done')->persistent('Close');

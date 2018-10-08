@@ -24,6 +24,7 @@
 	<!--[if IE 9]>
 	<link href="{{ asset('assets/site/css/ie9.css') }}" rel="stylesheet" type="text/css" />
 	<![endif]-->
+	{{ Html::style('assets/panel-assets/css/sweetalert.css') }}
 
 	<link rel="shortcut icon" href="{{ asset('assets/site/img/favicon.ico') }}" />
 	<title>Pinto | The World's Most Comfortable Underwears</title>
@@ -188,6 +189,8 @@
 	<script src="{{ asset('assets/site/js/global.js') }}"></script>
 	<script src="{{ asset('assets/site/js/modernizr.custom.js') }}"></script>
 	<script src="{{ asset('assets/site/js/boxesFx.js') }}"></script>
+	{{ Html::script('assets/panel-assets/js/sweetalert.min.js') }}
+    @include('sweet::alert')
 	<script>
 	new BoxesFx(document.getElementById('boxgallery'));
 	</script>
