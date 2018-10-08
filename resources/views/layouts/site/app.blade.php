@@ -315,6 +315,8 @@
                 }
                 $('#wishListCount').text(data[1]);
             }
+        }).error(function(response){
+            return swal('Error' ,'Please log in first.' ,"error");
         });
     }
     function addCart(id) {
