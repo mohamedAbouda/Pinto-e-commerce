@@ -88,6 +88,10 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Size');
     }
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag');
+    }
     public function colors()
     {
         return $this->belongsToMany('App\Models\Color');

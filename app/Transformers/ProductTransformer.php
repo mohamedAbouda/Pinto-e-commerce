@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 use App\Models\Product;
 class ProductTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['brand','subcategory'];
+    protected $defaultIncludes = ['brand','subcategory','images','reviews','sizes','tags'];
     public function transform(Product $product)
     {
         return [
@@ -48,6 +48,33 @@ class ProductTransformer extends TransformerAbstract
     {
         if($product->subcategory){
             return $this->item($product->subcategory,new SubCategoryTransformer);
+        }
+    }
+    public function includeImages(Product $product)
+    {
+        if($product->images){
+            return $this->collection($product->images,new ProductImageTransformer);
+        }
+    }
+
+    public function includeReviews(Product $product)
+    {
+        if($product->reviews){
+            return $this->collection($product->reviews,new ProductReviewTransformer);
+        }
+    }
+
+    public function includeSizes(Product $product)
+    {
+        if($product->sizes){
+            return $this->collection($product->sizes,new ProductSizeTransformer);
+        }
+    }
+
+    public function includeTags(Product $product)
+    {
+        if($product->tags){
+            return $this->collection($product->tags,new ProductTagTransformer);
         }
     }
 
