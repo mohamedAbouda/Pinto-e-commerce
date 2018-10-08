@@ -42,11 +42,15 @@ Route::group(['namespace' => 'Apis' ,'middleware' => 'auth:api_clients'] ,functi
 	Route::post('cart/remove/item','CartController@cartRemoveItem');
 	Route::post('user/add/address','AddressController@userAddAddress');
 	Route::post('user/edit/address','AddressController@userEditAddress');
+	Route::post('user/delete/address','AddressController@userDeleteAddress');
 	Route::post('product/details','ProductController@productDetails');
 	Route::post('add/product/review','ProductController@addProductReview');
 	Route::post('history/orders','OrderController@historyOrders');
 	Route::post('active/orders','OrderController@activeOrders');
 	Route::post('order/details','OrderController@orderDetails');
-
+	Route::post('phone/verfiy' ,'AuthController@phoneVerfiy');
+	Route::post('checkout' ,'CartController@checkout');
+	Route::post('get/coupon' ,'CartController@getCoupon');
+	Route::get('all/sliders' ,'SliderController@allSliders');
 
 });

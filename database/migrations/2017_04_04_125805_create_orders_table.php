@@ -26,6 +26,8 @@ class CreateOrdersTable extends Migration
             $table->foreign('address_id')->references('id')->on('addresses')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('gift_card_id')->unsigned()->nullable();
             $table->foreign('gift_card_id')->references('id')->on('gift_cards')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('coupon_id')->unsigned()->nullable();
+            $table->foreign('coupon_id')->references('id')->on('coupons')->onUpdate('cascade')->onDelete('cascade');
 
             $table->decimal('total_price' ,20 ,2)->defaule(0)->unsigned();
             $table->decimal('total_price_after_discount' ,20 ,2)->defaule(0)->unsigned();

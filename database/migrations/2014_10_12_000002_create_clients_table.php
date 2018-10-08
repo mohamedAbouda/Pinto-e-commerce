@@ -27,6 +27,8 @@ class CreateClientsTable extends Migration
             $table->foreign('address_id')->references('id')->on('addresses')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('valid');
+            $table->integer('is_phone_verfied')->default(0);
+            $table->string('phone_verfication_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

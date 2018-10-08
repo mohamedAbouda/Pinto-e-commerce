@@ -25,13 +25,26 @@ class AddressController extends Controller
 		if(!$request->input('address_id')){
 			return response()->json([
 				'error' => 'Please provide the address id'
-			],404);
+			],422);
 		}
 		$data = $request->all();
 		$address = Address::where('id',$request->input('address_id'))->first();
 		$address->update($data);
 		return response()->json([
 			'success' => 'Address updated successfully',
+		],200);
+	}
+
+	public function userDeleteAddress(Request $request)
+	{
+		if(!$request->input('address_id')){
+			return response()->json([
+				'error' => 'Please provide the address id'
+			],422);
+		}
+		$address = Address::where('id',$request->input('address_id'))->delete();
+		return response()->json([
+			'success' => 'Address deleted successfully',
 		],200);
 	}
 }
