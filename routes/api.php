@@ -51,5 +51,6 @@ Route::group(['namespace' => 'Apis' ,'middleware' => 'auth:api_clients'] ,functi
 	Route::post('phone/verfiy' ,'AuthController@phoneVerfiy');
 	Route::post('checkout' ,'CartController@checkout');
 	Route::post('get/coupon' ,'CartController@getCoupon');
+	Route::get('all/sliders' ,'SliderController@allSliders');
 
 });
