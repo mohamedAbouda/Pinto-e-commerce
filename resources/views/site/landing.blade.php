@@ -86,6 +86,13 @@
 										<li>
 											<a href="{{ route('web.contact') }}">Contact Us</a>
 										</li>
+										<li>
+											<?php if (!Auth::guard('client')->check()): ?>
+				                                <a href="{{ route('web.login') }}">Log in</a>
+				                            <?php else: ?>
+												<a href="{{ route('web.logout') }}">Log out</a>
+				                            <?php endif; ?>
+										</li>
 									</ul>
 								</nav>
 							</div>
