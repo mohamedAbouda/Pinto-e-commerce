@@ -26,6 +26,8 @@ class Client extends Authenticatable
         'address_id',
         'valid',
         'api_token',
+        'is_phone_verfied',
+        'phone_verfication_code',
     ];
 
     protected $appends = ['profile_pic_url'];

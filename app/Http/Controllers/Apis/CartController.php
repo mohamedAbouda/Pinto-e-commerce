@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Stock;
+use App\Models\Order;
+use App\Models\Coupon;
 use App\Models\OrderProduct;
 use Cart;
 
@@ -72,6 +74,57 @@ class CartController extends Controller
 		Cart::remove($request->input('row_id'));
 		return response()->json([
 			'success' => 'Product removed from you cart',
+		],200);
+	}
+
+	public function getCoupon(Request $request)
+	{
+		if(!$request->input('coupon_code')){
+			return response()->json([
+				'error' => 'Please provide the coupon code',
+			],422);
+		}
+		$coupon = Coupon::where('code',$request->input('coupon_code'))->first();
+		if($coupon){
+			return response()->json([
+				'data' => $coupon,
+			],200);
+		}else{
+			return response()->json([
+				'error' => 'NO coupon with this code',
+			],404);
+		}
+	}
+
+	public function checkout(Request $request)
+	{
+		$coupon_code = $request->input('coupon_code',null);
+		$cart = Cart::content();
+		$data['total_price'] = 0;
+		$data['status'] = 1;
+		$data['payment_method'] = 1;
+		$data['user_id'] = $request->user()->id;
+		$createOrder = Order::create($data);
+		foreach ($cart as $key => $item) {
+			$createOrderItem = new OrderProduct;
+			$createOrderItem->product_id = $item->options->obj->id;
+			$createOrderItem->order_id = $createOrder->id;
+			$createOrderItem->amount = $item->qty;
+			$createOrderItem->price_per_item = $item->price;
+			$createOrderItem->save();
+			$data['total_price'] += $item->qty * $item->price;
+		}
+		$updateOrder = $createOrder->update(['total_price'=>$data['total_price']]);
+		if($coupon_code != null){
+			$checkCode = Coupon::where('code',$request->input('coupon_code'))->first();
+			if($checkCode){
+				$data['total_price_after_discount'] = $createOrder->total_price - (($createOrder->total_price * $checkCode->percentage) / 100);
+				$updateOrder = $createOrder->update(['total_price_after_discount'=>$data['total_price_after_discount'],'coupon_id'=>$checkCode->id]);
+			}
+		}
+		Cart::destroy();
+		return response()->json([
+			'success' => 'your order has been submitted',
 		],200);
 	}
 }

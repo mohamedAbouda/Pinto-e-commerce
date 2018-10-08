@@ -28,11 +28,18 @@ class AuthController extends Controller
 				'error' => $validator->errors()
 			],422);
 		}
-		Auth::guard('client')->attempt($request->only('email' ,'password'));
-		$user = Auth::guard('client')->user();
-		if($user){
-			$user->api_token = str_random(60);
-			$user->save();
+		$check = Auth::guard('client')->attempt($request->only('email' ,'password'));
+
+		if($check){
+			$user = Auth::guard('client')->user();
+			if($user->is_phone_verfied == 0){
+				return response()->json(['token'=> $user->api_token,
+					'phone_verfication_code'=>$user->phone_verfication_code,
+				],200);
+			}else{
+				$user->api_token = str_random(60);
+				$user->save();
+			}
 		}else{
 			return response()->json([
 				'error' => 'wrong credentials',
@@ -54,18 +61,15 @@ class AuthController extends Controller
 		$address_data = $request->only(['address' , 'city']);
 		$address = Address::create($address_data);
 		$user_data['valid'] = 1;
+		$user_data['is_phone_verfied'] = 0;
 		if ($address) {
 			$user_data['address_id'] = $address->id;
 		}
 
 		if ($client = Client::create($user_data)) {
-			$client->update(['api_token'=> str_random(60)]);
-			return response()->json(['data'=>
-				fractal()
-				->item($client)
-				->transformWith(new ClientTransformer)
-				->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
-				->toArray()
+			$client->update(['api_token'=> str_random(60),'phone_verfication_code'=>str_random(6)]);
+			return response()->json(['token'=> $client->api_token,
+				'phone_verfication_code'=>$client->phone_verfication_code,
 			],200);
 			
 		}
@@ -78,15 +82,13 @@ class AuthController extends Controller
 	{
 		$data = $request->all();
 		$data['api_token'] = str_random(60);
+		$data['is_phone_verfied'] = 0;
+		$data['phone_verfication_code'] = str_random(6);
 		$data['valid'] = 1;
 		$data['is_confirmed'] = 1;
 		$client = Client::create($data);
-		return response()->json(['data'=>
-			fractal()
-			->item($client)
-			->transformWith(new ClientTransformer)
-			->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
-			->toArray()
+		return response()->json(['token'=> $client->api_token,
+			'phone_verfication_code'=>$client->phone_verfication_code,
 		],200);
 	}
 
@@ -107,14 +109,20 @@ class AuthController extends Controller
 				,
 			],422);
 		}
-		$user->update(['api_token'=>str_random(60)]);
-		return response()->json(['data'=>
-			fractal()
-			->item($user)
-			->transformWith(new ClientTransformer)
-			->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
-			->toArray()
-		],200);
+		if($user->is_phone_verfied == 1){
+			$user->update(['api_token'=>str_random(60)]);
+			return response()->json(['data'=>
+				fractal()
+				->item($user)
+				->transformWith(new ClientTransformer)
+				->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+				->toArray()
+			],200);
+		}else{
+			return response()->json(['token'=> $user->api_token,
+				'phone_verfication_code'=>$user->phone_verfication_code,
+			],200);
+		}
 	}
 
 	public function forgetPassword(Request $request)
@@ -143,5 +151,29 @@ class AuthController extends Controller
 		return response()->json([
 			'success' => 'email sent successfully',
 		],200);
+	}
+
+	public function phoneVerfiy(Request $request)
+	{
+		if(!$request->input('phone_verfication_code')){
+			return response()->json([
+				'error' => 'please provide phone verfication code',
+			],422);
+		}
+		$user = Client::where('id',$request->user()->id)->where('phone_verfication_code',$request->input('phone_verfication_code'))->first();
+		if($user){
+			$user->update(['is_phone_verfied'=>1,'phone_verfication_code'=>null]);
+			return response()->json(['data'=>
+				fractal()
+				->item($user)
+				->transformWith(new ClientTransformer)
+				->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+				->toArray()
+			],200);
+		}else{
+			return response()->json([
+				'error' => 'no user found with this token or code.',
+			],404);
+		}
 	}
 }
