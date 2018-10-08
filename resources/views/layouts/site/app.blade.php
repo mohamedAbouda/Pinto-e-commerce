@@ -200,7 +200,7 @@
                                                         <ul class="menu-level-2">
                                                             @foreach($category->subCategories as $sub_category)
                                                             <li class="level3">
-                                                                <a href="products.html">
+                                                                <a href="{{ route('web.products.shop' ,['section_id' => $sub_category->id]) }}">
                                                                     {{ $sub_category->name }}
                                                                 </a>
                                                             </li>
