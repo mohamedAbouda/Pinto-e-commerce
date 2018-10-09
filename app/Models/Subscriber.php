@@ -8,5 +8,5 @@ class Subscriber extends Model
 {
     protected $connection = 'mysql';
     protected $table = 'subscribers';
-    protected $fillable = ['email','name'];
+    protected $fillable = ['email'];
 }

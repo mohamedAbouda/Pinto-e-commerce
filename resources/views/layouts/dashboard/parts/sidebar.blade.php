@@ -240,6 +240,17 @@
                             </div>
                         </a>
                     </li>
+
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.subscribers') !== FALSE ? 'is-active' : '' }}" data-toggle="tooltip" title="Newsletter subscribers">
+                        <a href="{{route('dashboard.subscribers.index')}}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-group"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Newsletter subscribers</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     <!-- <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.corporate_deals.index') ? 'is-active' : '' }}" data-toggle="tooltip" title="Corporate Deals">
                         <a href="{{route('dashboard.corporate_deals.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
