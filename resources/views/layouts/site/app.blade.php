@@ -119,7 +119,9 @@
                             <a href="{{ route('web.wishlist.index') }}">
                                 <i class="icon-heart f-15"></i>
                                 <?php if (isset($wishlist) && !$wishlist->isEmpty()): ?>
-                                    <span class="count wishlist-count">{{ $wishlist->count() }}</span>
+                                    <span class="count wishlist-count" id="wishListCount">{{ $wishlist->count() }}</span>
+                                <?php else: ?>
+                                    <span class="count wishlist-count hidden" id="wishListCount">0</span>
                                 <?php endif; ?>
                             </a>
                         </div>
@@ -311,13 +313,16 @@
             },
             dataType: 'json',
             success: function(data) {
-                if (data.error != undefined) {
+                console.log(data);
+                if (typeof data.count !== 'undefined') {
+                    $('#wishListCount').removeClass('hidden').text(data.count);
+                }
+                if (typeof data.error !== 'undefined') {
                     return swal("Error", data.error, "error");
                 }
-                if (data.message != undefined) {
+                if (typeof data.message !== 'undefined') {
                     return swal("Done", data.message, "success");
                 }
-                $('#wishListCount').text(data[1]);
             }
         }).error(function(response){
             return swal('Error' ,'Please log in first.' ,"error");
