@@ -12,7 +12,7 @@ use DB;
 class UserController extends Controller
 {
     protected $mainRedirect = 'dashboardV2.users.';
-    
+
     public function index()
     {
         $users = Client::paginate(10);
@@ -93,6 +93,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($email = $request->get('email')) {
+            $duplicate = Client::where('email' ,$email)->where('id' ,'<>' ,$id)->exists();
+            if ($duplicate) {
+                alert()->error('The email you entered is already used.', 'Error');
+                return redirect()->back();
+            }
+        }
         $data = $request->all();
         $user = Client::where('id',$id)->first();
 
