@@ -13308,6 +13308,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             /**
             * Show loading screen
             */
+            if (this.selected_shipping_method == undefined) {
+                window.swal("Error!", 'Please select a shipping method', "error");
+            }
             Event.$emit('show-loading-screen');
             var data = {
                 cart: [],
