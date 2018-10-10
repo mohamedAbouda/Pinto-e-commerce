@@ -177,7 +177,7 @@ class CartController extends Controller
     {
         $data = $request->all();
 
-        if (!$request->get('new_address') && !$request->get('address_id')) {
+        if (!$request->get('new_address') && (!$request->get('address_id') || !is_numeric($request->get('address_id')))) {
             alert()->error('Please select an address or add a new one.', 'Error');
             return redirect()->back();
         }
