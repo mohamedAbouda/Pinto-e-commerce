@@ -77,7 +77,14 @@ class CartController extends Controller
                 'size' => $request->input('size' , NULL),
             ]
         ]);
-        return ['message'=>'Item Added to Cart.','cartSubTotal'=>Cart::subtotal(),'cartItem'=>$item,'CartCount'=>Cart::content()->count()];
+
+        return response()->json([
+            'message' => 'Item Added to Cart.',
+            'side_bar_cart' => view('layouts.site.parts.cart')->render(),
+            'cartSubTotal' => Cart::subtotal(),
+            'cartItem' => $item,
+            'CartCount' => Cart::content()->count()
+        ]);
     }
 
 

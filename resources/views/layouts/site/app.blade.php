@@ -62,7 +62,9 @@
 
 <body>
     <!--push menu cart -->
-    @include('layouts.site.parts.cart')
+    <div class="pushmenu pushmenu-left cart-box-container" style="overflow-y: scroll;">
+        @include('layouts.site.parts.cart')
+    </div>
     <!-- End cart -->
 
     <div class="modal fade" id="myModal" role="dialog">
@@ -158,10 +160,12 @@
                             </div>
                         </div>
                         <div class="topbar-cart">
-                            <a href="#" class="icon-cart">
+                            <a href="#" class="icon-cart" id="icon-cart-header">
                                 <i class="icon-basket f-15"></i>
                                 <?php if ($cart->count()): ?>
                                     <span class="count cart-count">{{ $cart->count() }}</span>
+                                <?php else: ?>
+                                <span class="count cart-count hidden">0</span>
                                 <?php endif; ?>
                             </a>
                         </div>
@@ -339,11 +343,17 @@
                 color : color,
                 size : size,
             },
+            dataType: 'json',
             success: function(data) {
-                if(data['message'] == 'Not Available Amount.'){
+                if(typeof data.message !== 'undefined' && data.message == 'Not Available Amount.'){
                     swal("Sorry", "Product not available", "error");
                 }else{
                     swal("Success", "Product added to your cart", "success");
+                }
+
+                if (typeof data.side_bar_cart !== 'undefined') {
+                    $('span.cart-count').removeClass('hidden').text(data.CartCount);
+                    $('.cart-box-container').html(data.side_bar_cart);
                 }
             }
         }).done(function(data) {
