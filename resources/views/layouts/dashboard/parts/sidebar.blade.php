@@ -95,7 +95,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.about.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_about') }}">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.about.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_about') }}">
                         <a href="{{route('dashboard.about.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-file"></i>
@@ -105,7 +105,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.policy.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_policy') }}">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.policy.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_policy') }}">
                         <a href="{{route('dashboard.policy.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-eye"></i>
@@ -115,7 +115,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.shipping.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Shipping & return Policy">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.shipping.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Shipping & return Policy">
                         <a href="{{route('dashboard.shipping.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-eye"></i>
@@ -125,7 +125,17 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.blog.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Blog">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.delivery_options.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Shipping methods">
+                        <a href="{{route('dashboard.delivery_options.index')}}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-shopping-cart"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Shipping methods</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.blog.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="Blog">
                         <a href="{{route('dashboard.blog.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-wordpress"></i>
@@ -135,7 +145,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{  strpos(request()->route()->getName(), 'dashboard.terms.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_terms') }}">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName(), 'dashboard.terms.') !== false ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_terms') }}">
                         <a href="{{route('dashboard.terms.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-paperclip"></i>

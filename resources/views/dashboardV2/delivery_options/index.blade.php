@@ -68,9 +68,6 @@ body {
                         <th>
                             {{ trans('web.dashboard_delivery_option_pages_index_page_table_header_price') }}
                         </th>
-                        <th>
-                            {{ trans('web.dashboard_delivery_option_pages_index_page_table_header_availablity') }}
-                        </th>
                         <th></th>
                     </tr>
                     @foreach($resources as $resource)
@@ -87,16 +84,7 @@ body {
                         </td>
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->availability === 0)
-                                {{ trans('web.dashboard_delivery_option_pages_create_page_disabled') }}
-                                @else
-                                {{ trans('web.dashboard_delivery_option_pages_create_page_enabled') }}
-                                @endif
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->price }}
+                                {{ $resource->cost }}
                             </h3>
                         </td>
                         <td>
@@ -123,9 +111,4 @@ body {
         </div>
     </div>
 </div>
-@stop
-@section('scripts')
-<script>
-
-</script>
 @stop
