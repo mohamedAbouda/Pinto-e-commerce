@@ -60,11 +60,11 @@
 													<div class="row">
 														@foreach($categories as $category)
 														<div class="col-md-3">
-															<a href="products.html" class="title">{{ $category->name }}</a>
+															<a href="{{ route('web.products.shop' ,['section_id' => $category->id]) }}" class="title">{{ $category->name }}</a>
 															<span class="toggle-icon"></span>
 															<div class="rs-slide">
 																@foreach($category->subCategories as $sub_category)
-																<a href="products.html">{{ $sub_category->name }}</a>
+																<a href="{{ route('web.products.shop' ,['sub_category_id' => $sub_category->id]) }}">{{ $sub_category->name }}</a>
 																@endforeach
 															</div>
 														</div>

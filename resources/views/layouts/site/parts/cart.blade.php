@@ -38,11 +38,11 @@
             <?php if ($cart->count() > 0): ?>
                 <p class="total"><span>Subtotal</span> ${{ Cart::subtotal() }}</p>
                 <div class="cart-button">
-                    <a class="checkout" href="checkout.html" title="">Check Out</a>
+                    <a class="checkout" href="{{ route('web.cart.checkout') }}" title="">Check Out</a>
                     <a class="edit-cart" href="{{ route('web.cart.index') }}" title="edit cart">View Cart</a>
                 </div>
             <?php endif; ?>
-            <a href="{{route('web.shipping')}}" class="text">Our Shipping & Return Policy</a>
+            <a href="{{ route('web.shipping') }}" class="text">Our Shipping & Return Policy</a>
         </div>
         <!-- End cart bottom -->
     </div>

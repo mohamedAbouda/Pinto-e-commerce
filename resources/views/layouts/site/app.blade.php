@@ -196,11 +196,11 @@
                                                 <ul class="level1">
                                                     @foreach($categories as $category)
                                                     <li class="level2 col-3">
-                                                        <a href="products.html">{{ $category->name }}</a>
+                                                        <a href="{{ route('web.products.shop' ,['section_id' => $category->id]) }}">{{ $category->name }}</a>
                                                         <ul class="menu-level-2">
                                                             @foreach($category->subCategories as $sub_category)
                                                             <li class="level3">
-                                                                <a href="{{ route('web.products.shop' ,['section_id' => $sub_category->id]) }}">
+                                                                <a href="{{ route('web.products.shop' ,['sub_category_id' => $sub_category->id]) }}">
                                                                     {{ $sub_category->name }}
                                                                 </a>
                                                             </li>
