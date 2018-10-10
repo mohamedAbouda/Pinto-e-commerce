@@ -42,7 +42,7 @@
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label" for="">{{ trans('web.dashboard_products_create_cat') }}</label>
-                        <select name="sub_category_id" onchange="onCategoryChangeSub()" id="selectCategoryChagne" required  class="form-control select2" required>
+                        <select name="category_id" onchange="onCategoryChangeSub()" id="selectCategoryChagne" required  class="form-control select2" required>
                             <option selected disabled>{{ trans('web.dashboard_products_create_please_select_cateogry') }}</option>
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
