@@ -42,7 +42,7 @@ class CartController extends Controller
             return view('site.cart.index' ,$data);
         }
         Alert::error('No items in your cart', 'Oops!')->persistent('Close');
-        return redirect()->back();
+        return redirect()->route('web.products.shop');
     }
 
     /**
@@ -80,7 +80,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => 'Item Added to Cart.',
-            'side_bar_cart' => view('layouts.site.parts.cart')->render(),
+            'side_bar_cart' => view('layouts.site.parts.cart' ,['cart' => Cart::content()])->render(),
             'cartSubTotal' => Cart::subtotal(),
             'cartItem' => $item,
             'CartCount' => Cart::content()->count()
@@ -136,6 +136,16 @@ class CartController extends Controller
 
         //update el cart
         Cart::destroy();
+
+        if (!$request->get('cart')) {
+            alert()->error('Your cart is empty.', 'Error');
+            return response()->json([
+                'status' => 'error',
+                'error' => 'Your cart is empty.',
+                'redirectTo' => route('web.products.shop')
+            ]);
+        }
+
         foreach ($input['cart'] as $item) {
             $cart_row = json_decode($item);
             Cart::add([
@@ -177,7 +187,7 @@ class CartController extends Controller
             return view('site.cart.checkout' ,$data);
         }
         Alert::error('No items in your cart', 'Oops!')->persistent('Close');
-        return redirect()->back();
+        return redirect()->route();
     }
 
     public function checkoutSubmit(CheckoutSubmitRequest $request)
@@ -186,11 +196,11 @@ class CartController extends Controller
 
         if (!$request->get('shipping_method')) {
             alert()->error('Please select an shipping method.', 'Error');
-            return redirect()->back();
+            return redirect()->route('web.products.shop');
         }
         if (!$request->get('new_address') && (!$request->get('address_id') || !is_numeric($request->get('address_id')))) {
             alert()->error('Please select an address or add a new one.', 'Error');
-            return redirect()->back();
+            return redirect()->route('web.products.shop');
         }
 
         $data['status'] = 2;

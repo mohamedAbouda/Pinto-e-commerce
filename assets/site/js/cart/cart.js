@@ -13325,8 +13325,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 params: data,
                 url: vm.checkout_url
             }).then(function (response) {
-                console.log(response);
-                if (response.data.redirectTo != undefined) {
+                // console.log(response);
+                // if (typeof response.data.error !== 'undefined') {
+                //     return window.swal("Error!", response.data.error, "error");
+                // }
+                if (typeof response.data.redirectTo !== 'undefined') {
                     window.location = response.data.redirectTo;
                 }
             });

@@ -350,7 +350,6 @@
                 }else{
                     swal("Success", "Product added to your cart", "success");
                 }
-
                 if (typeof data.side_bar_cart !== 'undefined') {
                     $('span.cart-count').removeClass('hidden').text(data.CartCount);
                     $('.cart-box-container').html(data.side_bar_cart);
