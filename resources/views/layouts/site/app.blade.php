@@ -62,7 +62,9 @@
 
 <body>
     <!--push menu cart -->
-    @include('layouts.site.parts.cart')
+    <div class="pushmenu pushmenu-left cart-box-container" style="overflow-y: scroll;">
+        @include('layouts.site.parts.cart')
+    </div>
     <!-- End cart -->
 
     <div class="modal fade" id="myModal" role="dialog">
@@ -117,7 +119,9 @@
                             <a href="{{ route('web.wishlist.index') }}">
                                 <i class="icon-heart f-15"></i>
                                 <?php if (isset($wishlist) && !$wishlist->isEmpty()): ?>
-                                    <span class="count wishlist-count">{{ $wishlist->count() }}</span>
+                                    <span class="count wishlist-count" id="wishListCount">{{ $wishlist->count() }}</span>
+                                <?php else: ?>
+                                    <span class="count wishlist-count hidden" id="wishListCount">0</span>
                                 <?php endif; ?>
                             </a>
                         </div>
@@ -158,10 +162,12 @@
                             </div>
                         </div>
                         <div class="topbar-cart">
-                            <a href="#" class="icon-cart">
+                            <a href="#" class="icon-cart" id="icon-cart-header">
                                 <i class="icon-basket f-15"></i>
                                 <?php if ($cart->count()): ?>
                                     <span class="count cart-count">{{ $cart->count() }}</span>
+                                <?php else: ?>
+                                <span class="count cart-count hidden">0</span>
                                 <?php endif; ?>
                             </a>
                         </div>
@@ -196,11 +202,11 @@
                                                 <ul class="level1">
                                                     @foreach($categories as $category)
                                                     <li class="level2 col-3">
-                                                        <a href="products.html">{{ $category->name }}</a>
+                                                        <a href="{{ route('web.products.shop' ,['section_id' => $category->id]) }}" style="color: #000;">{{ $category->name }}</a>
                                                         <ul class="menu-level-2">
                                                             @foreach($category->subCategories as $sub_category)
                                                             <li class="level3">
-                                                                <a href="products.html">
+                                                                <a href="{{ route('web.products.shop' ,['sub_category_id' => $sub_category->id]) }}">
                                                                     {{ $sub_category->name }}
                                                                 </a>
                                                             </li>
@@ -307,14 +313,19 @@
             },
             dataType: 'json',
             success: function(data) {
-                if (data.error != undefined) {
+                console.log(data);
+                if (typeof data.count !== 'undefined') {
+                    $('#wishListCount').removeClass('hidden').text(data.count);
+                }
+                if (typeof data.error !== 'undefined') {
                     return swal("Error", data.error, "error");
                 }
-                if (data.message != undefined) {
+                if (typeof data.message !== 'undefined') {
                     return swal("Done", data.message, "success");
                 }
-                $('#wishListCount').text(data[1]);
             }
+        }).error(function(response){
+            return swal('Error' ,'Please log in first.' ,"error");
         });
     }
     function addCart(id) {
@@ -337,11 +348,16 @@
                 color : color,
                 size : size,
             },
+            dataType: 'json',
             success: function(data) {
-                if(data['message'] == 'Not Available Amount.'){
+                if(typeof data.message !== 'undefined' && data.message == 'Not Available Amount.'){
                     swal("Sorry", "Product not available", "error");
                 }else{
                     swal("Success", "Product added to your cart", "success");
+                }
+                if (typeof data.side_bar_cart !== 'undefined') {
+                    $('span.cart-count').removeClass('hidden').text(data.CartCount);
+                    $('.cart-box-container').html(data.side_bar_cart);
                 }
             }
         }).done(function(data) {

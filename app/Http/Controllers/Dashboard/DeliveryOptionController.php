@@ -2,42 +2,36 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\DeliveryOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ShippingMethod;
 
 class DeliveryOptionController extends BaseController
 {
 
     public function index()
     {
-        $data['resources'] = DeliveryOption::paginate(20);
-        $data['total_resources_count'] = DeliveryOption::count();
+        $data['resources'] = ShippingMethod::paginate(20);
+        $data['total_resources_count'] = ShippingMethod::count();
         $index = request()->get('page' , 1);
         $data['counter_offset'] = ($index * 20) - 20;
         return view('dashboardV2.delivery_options.index', $data);
-        return view('dashboard.deliveryOptions.index', compact('deliveryOptions'));
     }
 
     public function create()
     {
         return view('dashboardV2.delivery_options.add');
-        return view('dashboard.deliveryOptions.create');
     }
 
     public function store(Request $request)
     {
         $this->validate($request,[
             'name'=>'required',
-            'icon'=>'image',
-            'price' => 'min:0'
+            'cost' => 'min:0'
         ]);
         $data = $request->all();
-        if ($request->hasFile('icon')) {
-            $data['icon'] = $request->file('icon')->store('icons/deliveryOptions');
-        }
-        if (DeliveryOption::create($data)) {
-            alert()->success('Delivery option added.', 'Success');
+        if (ShippingMethod::create($data)) {
+            alert()->success('Shipping method option added.', 'Success');
             return redirect()->route('dashboard.delivery_options.index');
         }
         alert()->error('Something went wrong ! please try again.' , 'Error');
@@ -46,28 +40,23 @@ class DeliveryOptionController extends BaseController
 
     public function edit($id)
     {
-        if ($deliveryOption = DeliveryOption::find($id)) {
-            // $countries=[['id'=>1,'name'=>'EGY']];
-            return view('dashboardV2.delivery_options.edit' , compact('deliveryOption'));
-            return view('dashboard.deliveryOptions.edit', compact('deliveryOption'));
+        if ($shipping_method = ShippingMethod::find($id)) {
+            return view('dashboardV2.delivery_options.edit' , compact('shipping_method'));
         }
-        return back()->with('info', 'Delivery option wasn\'t found !');
+        return back()->with('info', 'Shipping method wasn\'t found !');
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request,[
             'name'=>'required',
-            'icon'=>'image',
-            'price' => 'min:0'
+            'cost' => 'min:0'
         ]);
         $data = $request->all();
-        $customer = DeliveryOption::find($id);
-        if ($request->hasFile('icon')) {
-            $data['icon'] = $request->file('icon')->store('icons/deliveryOptions');
-        }
-        if ($customer->update($data)) {
-            alert()->success('Delivery option updated.', 'Success');
+        $shipping_method = ShippingMethod::find($id);
+
+        if ($shipping_method->update($data)) {
+            alert()->success('Shipping method updated.', 'Success');
             return redirect()->route('dashboard.delivery_options.index');
         }
         alert()->error('Something went wrong ! please try again.' , 'Error');
@@ -76,9 +65,9 @@ class DeliveryOptionController extends BaseController
 
     public function destroy($id)
     {
-        if ($customer = DeliveryOption::find($id)) {
-            $customer->delete();
-            alert()->success('Delivery option deleted.', 'Success');
+        if ($shipping_method = ShippingMethod::find($id)) {
+            $shipping_method->delete();
+            alert()->success('Shipping method deleted.', 'Success');
             return redirect()->route('dashboard.delivery_options.index');
         }
         alert()->error('Something went wrong ! please try again.' , 'Error');

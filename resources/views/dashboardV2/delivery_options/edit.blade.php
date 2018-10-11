@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-{{ Form::open(['route' => ['dashboard.delivery_options.update',$deliveryOption->id]]) }}
+{{ Form::open(['route' => ['dashboard.delivery_options.update',$shipping_method->id]]) }}
 <div class="row">
     <div class="col-md-12">
         <h3 class="secondry-title">{{ trans('web.dashboard_delivery_option_pages_create_page_delivery_option_info') }}.</h3>
@@ -22,7 +22,7 @@
                 <span class="text-danger">*</span>
                 {{ trans('web.dashboard_delivery_option_pages_create_page_name') }}
             </label>
-            {{ Form::text('name', $deliveryOption->name ,['id'=>'name','required'=>'required','class' => 'form-control']) }}
+            {{ Form::text('name', $shipping_method->name ,['id'=>'name','required'=>'required','class' => 'form-control']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('name') }}</p>
         </div>
         <div class="form-group margin-bottom20 col-md-6">
@@ -30,21 +30,10 @@
                 <span class="text-danger">*</span>
                 {{ trans('web.dashboard_delivery_option_pages_create_page_price') }}
             </label>
-            {{ Form::number('price', $deliveryOption->price ,['id'=>'price','min'=>0,'required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('price') }}</p>
+            {{ Form::number('cost', $shipping_method->cost ,['id'=>'cost','min'=>0,'required'=>'required','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('cost') }}</p>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="availability">
-                <span class="text-danger">*</span>
-                {{ trans('web.dashboard_delivery_option_pages_create_page_availablity') }}
-            </label>
-            {{ Form::select('availability' , [0=>trans('web.dashboard_delivery_option_pages_create_page_disabled'),1=>trans('web.dashboard_delivery_option_pages_create_page_enabled')] , $deliveryOption->availability , ['id'=>'availability','required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('availability') }}</p>
-        </div>
-    </div>
-
 </div>
 <div class="row">
     <div class="col-md-1 col-xs-4">

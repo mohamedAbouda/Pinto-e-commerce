@@ -23,7 +23,6 @@ class SubscriberController extends BaseController
         $index = request()->get('page' , 1);
         $data['counter_offset'] = ($index * 20) - 20;
         return view('dashboardV2.subscripers.index' , $data);
-        return view('dashboard.subscriber.index' , $data);
     }
 
     /**
@@ -47,7 +46,6 @@ class SubscriberController extends BaseController
     public function import()
     {
         return view('dashboardV2.subscripers.import');
-        return view('dashboard.subscriber.import');
     }
 
     /**
@@ -94,7 +92,6 @@ class SubscriberController extends BaseController
                     }
                     try {
                         $user_data['email'] = $row[0];
-                        $user_data['name'] = isset($row[1]) && $row[1] ? $row[1] : '';
                         Subscriber::create($user_data);
                         $succeed++;
                     } catch (\Exception $exception) {

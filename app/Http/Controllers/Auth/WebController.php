@@ -176,7 +176,7 @@ class WebController extends Controller
     public function clientResetPasswordGet($token)
     {
 
-         $reset = PasswordReset::where('token' , $token)->first();
+        $reset = PasswordReset::where('token' , $token)->first();
         if (!$reset) {
             alert()->error('Invalid reset code !' , 'Error');
             return redirect()->route('index');
@@ -198,7 +198,7 @@ class WebController extends Controller
         return redirect()->route('index');
     }
 
-     public function merchantRegisterGet()
+    public function merchantRegisterGet()
     {
         return view('site.auth.registerMerchant');
     }
@@ -224,8 +224,12 @@ class WebController extends Controller
     }
     public function ForgetPassword(Request $request)
     {
-       $email = $request->get('email');
+        $email = $request->get('email');
         $client = Client::where('email' , $email)->first();
+        if (!$client) {
+            alert()->error('This email is invalid or doesn\'t exist.' , 'Error');
+            return redirect()->back();
+        }
         $token = str_random(16);
         PasswordReset::create([
             'email' => $email , 'token' => $token , 'created_at' => Carbon::now()->toDateTimeString()
@@ -233,7 +237,6 @@ class WebController extends Controller
         try {
             Mail::to($email)->send(new ClientResetPasswordMail($token));
         } catch (\Exception $e) {
-           
             alert()->error('Something went wrong ! please try again.' , 'Error');
             return redirect()->back();
         }

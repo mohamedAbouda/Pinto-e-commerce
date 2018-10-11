@@ -68,9 +68,6 @@ body {
                     <tr>
                         <th class="text-center">#</th>
                         <th>
-                            {{ trans('web.dashboard_subscripers_index_name') }}
-                        </th>
-                        <th>
                             {{ trans('web.dashboard_subscripers_index_email') }}
                         </th>
                         <th></th>
@@ -80,11 +77,6 @@ body {
                         <td class="text-center">
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                                 {{ $counter_offset + $loop->iteration }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->name }}
                             </h3>
                         </td>
                         <td>

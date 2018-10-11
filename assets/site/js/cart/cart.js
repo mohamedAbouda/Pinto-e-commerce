@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 50);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -667,33 +667,6 @@ module.exports = defaults;
 /* 3 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
 module.exports = function normalizeComponent (
   rawScriptExports,
   compiledTemplate,
@@ -741,6 +714,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -2040,7 +2040,7 @@ module.exports = function spread(callback) {
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(1)))
 
 /***/ }),
 /* 29 */
@@ -2110,7 +2110,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
 /* 30 */
@@ -13078,7 +13078,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(3), __webpack_require__(29).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(4), __webpack_require__(29).setImmediate))
 
 /***/ }),
 /* 31 */
@@ -13092,7 +13092,8 @@ window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
 
-Vue.component('cart', __webpack_require__(40));
+Vue.component('checkout', __webpack_require__(42));
+Vue.component('cart', __webpack_require__(41));
 
 var app = new Vue({
     el: '#app',
@@ -13219,31 +13220,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         cart: {
             default: []
+        },
+        shipping_methods: {
+            default: []
+        },
+        checkout_url: {
+            default: ''
         }
     },
     data: function data() {
         return {
             cart_items: [],
-            subtotal: 0
+            subtotal: 0,
+            selected_shipping_method: undefined,
+            total_cost: 0
         };
     },
 
     watch: {
         cart_items: function cart_items() {
             this.updateSubTotal();
+        },
+        selected_shipping_method: function selected_shipping_method() {
+            this.updateTotalCost();
+        },
+        subtotal: function subtotal() {
+            this.updateTotalCost();
         }
     },
     // updated: function () {
@@ -13271,6 +13278,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             subtotal += this.cart_items[key].qty * this.cart_items[key].price;
         }
         this.subtotal = subtotal;
+
+        if (this.shipping_methods.length > 0 && !this.selected_shipping_method) {
+            this.selected_shipping_method = this.shipping_methods[this.shipping_methods.length - 1];
+            // this.updateTotalCost();
+        }
     },
 
     methods: {
@@ -13281,27 +13293,269 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.subtotal = subtotal;
         },
+        updateTotalCost: function updateTotalCost() {
+            this.total_cost = this.subtotal;
+
+            if (this.selected_shipping_method) {
+                var cost = parseFloat(this.selected_shipping_method.cost);
+                this.total_cost += cost;
+            }
+        },
         remove: function remove(key) {
             this.cart_items.splice(key, 1);
+        },
+        order: function order() {
+            /**
+            * Show loading screen
+            */
+            if (this.selected_shipping_method == undefined) {
+                return window.swal("Error!", 'Please select a shipping method', "error");
+            }
+            Event.$emit('show-loading-screen');
+            var data = {
+                cart: [],
+                shipping_method: this.selected_shipping_method.id
+            };
+            for (var cart_key in this.cart_items) {
+                data.cart.push(this.cart_items[cart_key]);
+            }
+            var vm = this;
+            axios({
+                method: 'POST',
+                params: data,
+                url: vm.checkout_url
+            }).then(function (response) {
+                // console.log(response);
+                // if (typeof response.data.error !== 'undefined') {
+                //     return window.swal("Error!", response.data.error, "error");
+                // }
+                if (typeof response.data.redirectTo !== 'undefined') {
+                    window.location = response.data.redirectTo;
+                }
+            });
         }
     }
 });
 
 /***/ }),
-/* 34 */,
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        cart: {
+            default: []
+        },
+        shipping_methods: {
+            default: []
+        },
+        addresses: {
+            default: []
+        },
+        countries: {
+            default: []
+        },
+        client: {
+            default: {}
+        },
+        checkout_url: {
+            default: ''
+        }
+    },
+    data: function data() {
+        return {
+            cart_items: [],
+            subtotal: 0,
+            selected_shipping_method: undefined,
+            total_cost: 0,
+            new_address: false,
+            csrfToken: window.Laravel.csrfToken
+        };
+    },
+
+    watch: {
+        selected_shipping_method: function selected_shipping_method() {
+            this.updateTotalCost();
+        },
+        subtotal: function subtotal() {
+            this.updateTotalCost();
+        }
+    },
+    created: function created() {
+        for (var key in this.cart) {
+            this.cart_items.push(this.cart[key]);
+        }
+        var subtotal = 0;
+        for (var key in this.cart_items) {
+            subtotal += this.cart_items[key].qty * this.cart_items[key].price;
+        }
+        this.subtotal = subtotal;
+
+        if (this.shipping_methods.length > 0 && !this.selected_shipping_method) {
+            this.selected_shipping_method = this.shipping_methods[this.shipping_methods.length - 1];
+        }
+    },
+
+    methods: {
+        updateTotalCost: function updateTotalCost() {
+            this.total_cost = this.subtotal;
+
+            if (this.selected_shipping_method) {
+                var cost = parseFloat(this.selected_shipping_method.cost);
+                this.total_cost += cost;
+            }
+        }
+    }
+});
+
+/***/ }),
 /* 35 */,
 /* 36 */,
 /* 37 */,
 /* 38 */,
 /* 39 */,
-/* 40 */
+/* 40 */,
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(4)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(33),
   /* template */
-  __webpack_require__(47),
+  __webpack_require__(50),
   /* scopeId */
   null,
   /* cssModules */
@@ -13328,13 +13582,461 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 41 */,
-/* 42 */,
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(34),
+  /* template */
+  __webpack_require__(48),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\pinto\\resources\\assets\\js\\cart\\components\\checkout.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] checkout.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-26f5bdc1", Component.options)
+  } else {
+    hotAPI.reload("data-v-26f5bdc1", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
 /* 43 */,
 /* 44 */,
 /* 45 */,
 /* 46 */,
-/* 47 */
+/* 47 */,
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('form', {
+    staticClass: "checkout",
+    attrs: {
+      "method": "post",
+      "action": _vm.checkout_url
+    }
+  }, [_c('div', {
+    staticClass: "cart-box-container-ver2"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-8"
+  }, [_c('h3', [_vm._v("Billing Details")]), _vm._v(" "), _c('div', {
+    staticClass: "row form-customer"
+  }, [_c('div', {
+    staticClass: "form-group col-md-12"
+  }, [_c('label', {
+    staticClass: " control-label",
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Full name *")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.client.name),
+      expression: "client.name"
+    }],
+    staticClass: "form-control form-account",
+    attrs: {
+      "type": "text",
+      "name": "name",
+      "id": "name",
+      "required": ""
+    },
+    domProps: {
+      "value": (_vm.client.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.$set(_vm.client, "name", $event.target.value)
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-md-6"
+  }, [_c('label', {
+    staticClass: " control-label",
+    attrs: {
+      "for": "email"
+    }
+  }, [_vm._v("Email Address")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.client.email),
+      expression: "client.email"
+    }],
+    staticClass: "form-control form-account",
+    attrs: {
+      "type": "email",
+      "name": "email",
+      "id": "email"
+    },
+    domProps: {
+      "value": (_vm.client.email)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.$set(_vm.client, "email", $event.target.value)
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-md-6"
+  }, [_c('label', {
+    staticClass: " control-label",
+    attrs: {
+      "for": "phone"
+    }
+  }, [_vm._v("Phone")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.client.phone),
+      expression: "client.phone"
+    }],
+    staticClass: "form-control form-account",
+    attrs: {
+      "type": "text",
+      "name": "phone",
+      "id": "phone"
+    },
+    domProps: {
+      "value": (_vm.client.phone)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.$set(_vm.client, "phone", $event.target.value)
+      }
+    }
+  })])]), _vm._v(" "), _c('h3', [_vm._v("Shipping Details")]), _vm._v(" "), _c('div', {
+    staticClass: "row form-customer"
+  }, [_c('div', {
+    staticClass: "form-group col-md-12"
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "address_id"
+    }
+  }, [_vm._v("Address")]), _vm._v(" "), _c('select', {
+    staticClass: "country form-control form-account",
+    attrs: {
+      "name": "address_id",
+      "id": "address_id",
+      "disabled": _vm.new_address
+    }
+  }, [_c('option', {
+    attrs: {
+      "selected": ""
+    }
+  }, [_vm._v("Select address")]), _vm._v(" "), _vm._l((_vm.addresses), function(address) {
+    return _c('option', {
+      domProps: {
+        "value": address.id
+      }
+    }, [_vm._v("\n                                    " + _vm._s(address.country) + " - " + _vm._s(address.city) + " - " + _vm._s(address.address) + "\n                                ")])
+  })], 2)]), _vm._v(" "), _c('div', {
+    staticClass: "form-check col-md-12"
+  }, [_c('label', {
+    staticClass: "form-check-label ver2"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.new_address),
+      expression: "new_address"
+    }],
+    staticClass: "form-check-input",
+    attrs: {
+      "type": "checkbox",
+      "name": "new_address",
+      "value": "1"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.new_address) ? _vm._i(_vm.new_address, "1") > -1 : (_vm.new_address)
+    },
+    on: {
+      "change": function($event) {
+        var $$a = _vm.new_address,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "1",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.new_address = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.new_address = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.new_address = $$c
+        }
+      }
+    }
+  }), _vm._v(" "), _c('span', [_vm._v("Ship to a different address?")])])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.new_address),
+      expression: "new_address"
+    }]
+  }, [_c('div', {
+    staticClass: "form-group col-md-6"
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "country"
+    }
+  }, [_vm._v("Country")]), _vm._v(" "), _c('select', {
+    staticClass: "country form-control form-account",
+    attrs: {
+      "name": "country"
+    }
+  }, [_c('option', {
+    attrs: {
+      "selected": ""
+    }
+  }, [_vm._v("Select country")]), _vm._v(" "), _vm._l((_vm.countries), function(country) {
+    return _c('option', {
+      domProps: {
+        "value": country.id
+      }
+    }, [_vm._v("\n                                        " + _vm._s(country.name) + "\n                                    ")])
+  })], 2)]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3)])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-4"
+  }, [_c('h3', [_vm._v("Your order")]), _vm._v(" "), _c('div', {
+    staticClass: "cart-list"
+  }, [_c('ul', {
+    staticClass: "list"
+  }, _vm._l((_vm.cart_items), function(item, key) {
+    return _c('li', {
+      staticClass: "flex"
+    }, [_c('a', {
+      staticClass: "cart-product-image"
+    }, [_c('img', {
+      attrs: {
+        "src": item.options.obj.cover_image_url,
+        "alt": "Product"
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "text"
+    }, [_c('p', {
+      staticClass: "product-name"
+    }, [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('div', {
+      staticClass: "quantity"
+    }, [_vm._v("x" + _vm._s(item.qty))]), _vm._v(" "), _c('p', {
+      staticClass: "product-price"
+    }, [_vm._v("$" + _vm._s(item.price * item.qty))])])])
+  }))]), _vm._v(" "), _c('h3', [_vm._v("Cart Totals")]), _vm._v(" "), _c('div', {
+    staticClass: "text-price"
+  }, [_c('ul', [_c('li', [_c('span', {
+    staticClass: "text"
+  }, [_vm._v("Subtotal")]), _vm._v(" "), _c('span', {
+    staticClass: "number"
+  }, [_vm._v("$" + _vm._s(_vm.subtotal))])]), _vm._v(" "), _c('li', [_c('span', {
+    staticClass: "text"
+  }, [_vm._v("Shipping")]), _vm._v(" "), _c('div', {
+    staticClass: "payment",
+    staticStyle: {
+      "width": "100%"
+    }
+  }, [_vm._l((_vm.shipping_methods), function(shipping, index) {
+    return [_c('input', {
+      attrs: {
+        "type": "radio",
+        "name": "shipping_method",
+        "id": 'shipptinh-radio-' + index,
+        "checked": ""
+      },
+      domProps: {
+        "value": shipping.id
+      }
+    }), _vm._v(" "), _c('label', {
+      attrs: {
+        "for": 'shipptinh-radio-' + index
+      },
+      on: {
+        "click": function($event) {
+          _vm.selected_shipping_method = shipping
+        }
+      }
+    }, [_vm._v("\n                                            " + _vm._s(shipping.name) + " "), _c('span', {
+      staticClass: "number"
+    }, [_vm._v("$" + _vm._s(shipping.cost))])])]
+  })], 2)]), _vm._v(" "), _c('li', [_c('span', {
+    staticClass: "text"
+  }, [_vm._v("Totals")]), _c('span', {
+    staticClass: "number"
+  }, [_vm._v("$" + _vm._s(_vm.total_cost))])])])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.subtotal),
+      expression: "subtotal"
+    }],
+    attrs: {
+      "type": "hidden",
+      "name": "subtotal"
+    },
+    domProps: {
+      "value": (_vm.subtotal)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.subtotal = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.total_cost),
+      expression: "total_cost"
+    }],
+    attrs: {
+      "type": "hidden",
+      "name": "total_cost"
+    },
+    domProps: {
+      "value": (_vm.total_cost)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.total_cost = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "_token"
+    },
+    domProps: {
+      "value": _vm.csrfToken
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn link-button hover-white btn-checkout",
+    attrs: {
+      "type": "submit",
+      "title": "Proceed to checkout"
+    }
+  }, [_vm._v("\n                        Proceed to checkout\n                    ")])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group col-md-6"
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "city"
+    }
+  }, [_vm._v("Town / City")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control form-account",
+    attrs: {
+      "type": "text",
+      "name": "city",
+      "id": "city"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group col-md-12"
+  }, [_c('label', {
+    staticClass: " control-label",
+    attrs: {
+      "for": "address"
+    }
+  }, [_vm._v("Address")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control form-account",
+    attrs: {
+      "type": "text",
+      "name": "address",
+      "id": "address"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group col-md-12"
+  }, [_c('label', {
+    staticClass: " control-label",
+    attrs: {
+      "for": "postal_code"
+    }
+  }, [_vm._v("Postcode / ZIP")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control form-account",
+    attrs: {
+      "type": "text",
+      "name": "postal_code",
+      "id": "postal_code"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group col-md-12"
+  }, [_c('label', {
+    staticClass: " control-label",
+    attrs: {
+      "for": "note"
+    }
+  }, [_vm._v("Order Notes")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control form-note",
+    attrs: {
+      "name": "note",
+      "rows": "5",
+      "id": "note",
+      "placeholder": "Notes about your order, e.g. special notes for delivery."
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "text-price box-payment"
+  }, [_c('ul', [_c('li', [_c('div', {
+    staticClass: "payment"
+  }, [_c('input', {
+    attrs: {
+      "type": "radio",
+      "name": "payment_method",
+      "value": "cash",
+      "id": "payment_method",
+      "checked": "checked"
+    }
+  }), _vm._v(" "), _c('label', {
+    attrs: {
+      "for": "payment_method"
+    }
+  }, [_vm._v("Cash")])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-26f5bdc1", module.exports)
+  }
+}
+
+/***/ }),
+/* 49 */,
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13436,11 +14138,49 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "text"
   }, [_vm._v("Subtotal")]), _vm._v(" "), _c('span', {
     staticClass: "number"
-  }, [_vm._v("$" + _vm._s(_vm.subtotal))])]), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4)])]), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('a', {
+  }, [_vm._v("$" + _vm._s(_vm.subtotal))])]), _vm._v(" "), _c('li', [_c('span', {
+    staticClass: "text"
+  }, [_vm._v("Shipping")]), _vm._v(" "), _c('div', {
+    staticClass: "payment",
+    staticStyle: {
+      "width": "100%"
+    }
+  }, [_vm._l((_vm.shipping_methods), function(shipping, index) {
+    return [_c('input', {
+      attrs: {
+        "type": "radio",
+        "name": "shipping_method",
+        "id": 'shipptinh-radio-' + index,
+        "checked": ""
+      },
+      domProps: {
+        "value": shipping.id
+      }
+    }), _vm._v(" "), _c('label', {
+      attrs: {
+        "for": 'shipptinh-radio-' + index
+      },
+      on: {
+        "click": function($event) {
+          _vm.selected_shipping_method = shipping
+        }
+      }
+    }, [_vm._v("\n                                    " + _vm._s(shipping.name) + " "), _c('span', {
+      staticClass: "number"
+    }, [_vm._v("$" + _vm._s(shipping.cost))])])]
+  })], 2)]), _vm._v(" "), _c('li', [_c('span', {
+    staticClass: "text"
+  }, [_vm._v("Totals")]), _c('span', {
+    staticClass: "number"
+  }, [_vm._v("$" + _vm._s(_vm.total_cost))])])])]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('a', {
     staticClass: "btn link-button hover-white btn-checkout",
     attrs: {
-      "href": "#",
       "title": "Proceed to checkout"
+    },
+    on: {
+      "click": function($event) {
+        _vm.order();
+      }
     }
   }, [_vm._v("Place order")])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13450,66 +14190,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("Image")]), _vm._v(" "), _c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Price")]), _vm._v(" "), _c('th', [_vm._v("Size")]), _vm._v(" "), _c('th', [_vm._v("Color")]), _vm._v(" "), _c('th', [_vm._v("Qty")]), _vm._v(" "), _c('th')])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('span', {
-    staticClass: "text"
-  }, [_vm._v("Shipping")]), _vm._v(" "), _c('div', {
-    staticClass: "payment"
-  }, [_c('input', {
-    attrs: {
-      "type": "radio",
-      "name": "gender",
-      "value": "Flat",
-      "id": "radio1",
-      "checked": "checked"
-    }
-  }), _vm._v(" "), _c('label', {
-    attrs: {
-      "for": "radio1"
-    }
-  }, [_vm._v("Free Shipping")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "radio",
-      "name": "gender",
-      "value": "Free",
-      "id": "radio2"
-    }
-  }), _vm._v(" "), _c('label', {
-    attrs: {
-      "for": "radio2"
-    }
-  }, [_vm._v("Standard "), _c('span', {
-    staticClass: "number"
-  }, [_vm._v("$20.00")])]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "radio",
-      "name": "gender",
-      "value": "Delivery",
-      "id": "radio3"
-    }
-  }), _vm._v(" "), _c('label', {
-    attrs: {
-      "for": "radio3"
-    }
-  }, [_vm._v("Local Pickup")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('span', {
-    staticClass: "text calculate"
-  }, [_vm._v("Calculate shipping")]), _vm._v(" "), _c('div', {
-    staticClass: "zipcode"
-  }, [_c('input', {
-    staticClass: "form-control form-account input-cart",
-    attrs: {
-      "type": "text",
-      "placeholder": "Zipcode"
-    }
-  })])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('span', {
-    staticClass: "text"
-  }, [_vm._v("Totals")]), _c('span', {
-    staticClass: "number"
-  }, [_vm._v("$89.00")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "text-price box-payment"
   }, [_c('ul', [_c('li', [_c('div', {
@@ -13517,34 +14197,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('input', {
     attrs: {
       "type": "radio",
-      "name": "gender",
-      "value": "Flat",
-      "id": "radio4",
+      "name": "payment_method",
+      "value": "cash",
+      "id": "payment_method",
       "checked": "checked"
     }
   }), _vm._v(" "), _c('label', {
     attrs: {
-      "for": "radio4"
+      "for": "payment_method"
     }
-  }, [_vm._v("Check Payments")]), _vm._v(" "), _c('p', {
-    staticClass: "no-checkbox"
-  }, [_vm._v("Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "radio",
-      "name": "gender",
-      "value": "Free",
-      "id": "radio5"
-    }
-  }), _vm._v(" "), _c('label', {
-    attrs: {
-      "for": "radio5"
-    }
-  }, [_vm._v("Paypal "), _c('img', {
-    attrs: {
-      "src": "img/cart/paypal-icon.jpg",
-      "alt": ""
-    }
-  })])])])])])
+  }, [_vm._v("Cash")])])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -13555,9 +14217,9 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */,
-/* 49 */,
-/* 50 */
+/* 51 */,
+/* 52 */,
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(31);

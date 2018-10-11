@@ -24,6 +24,7 @@
 	<!--[if IE 9]>
 	<link href="{{ asset('assets/site/css/ie9.css') }}" rel="stylesheet" type="text/css" />
 	<![endif]-->
+	{{ Html::style('assets/panel-assets/css/sweetalert.css') }}
 
 	<link rel="shortcut icon" href="{{ asset('assets/site/img/favicon.ico') }}" />
 	<title>Pinto | The World's Most Comfortable Underwears</title>
@@ -59,11 +60,11 @@
 													<div class="row">
 														@foreach($categories as $category)
 														<div class="col-md-3">
-															<a href="products.html" class="title">{{ $category->name }}</a>
+															<a href="{{ route('web.products.shop' ,['section_id' => $category->id]) }}" class="title">{{ $category->name }}</a>
 															<span class="toggle-icon"></span>
 															<div class="rs-slide">
 																@foreach($category->subCategories as $sub_category)
-																<a href="products.html">{{ $sub_category->name }}</a>
+																<a href="{{ route('web.products.shop' ,['sub_category_id' => $sub_category->id]) }}">{{ $sub_category->name }}</a>
 																@endforeach
 															</div>
 														</div>
@@ -84,6 +85,13 @@
 										</li>
 										<li>
 											<a href="{{ route('web.contact') }}">Contact Us</a>
+										</li>
+										<li>
+											<?php if (!Auth::guard('client')->check()): ?>
+				                                <a href="{{ route('web.login') }}">Log in</a>
+				                            <?php else: ?>
+												<a href="{{ route('web.logout') }}">Log out</a>
+				                            <?php endif; ?>
 										</li>
 									</ul>
 								</nav>
@@ -188,6 +196,8 @@
 	<script src="{{ asset('assets/site/js/global.js') }}"></script>
 	<script src="{{ asset('assets/site/js/modernizr.custom.js') }}"></script>
 	<script src="{{ asset('assets/site/js/boxesFx.js') }}"></script>
+	{{ Html::script('assets/panel-assets/js/sweetalert.min.js') }}
+    @include('sweet::alert')
 	<script>
 	new BoxesFx(document.getElementById('boxgallery'));
 	</script>

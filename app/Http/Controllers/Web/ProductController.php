@@ -187,17 +187,19 @@ class ProductController extends Controller
             });
         }
         //
-        if ($request->has('color_id')) {
-            $color = $request->get('color_id');
-            $search_sql = $search_sql->whereHas('colors' ,function($q) use($color){
-                $q->where('colors.id' ,$color);
+        if ($request->has('size_id')) {
+            $size = Size::find($request->get('size_id'));
+            $search_sql = $search_sql->whereHas('stocks' ,function($q) use($size){
+                //match for $size where after can be a ",[XL,L,XXL,X]"
+                //and before "[XL,L,XXL,X],"
+                $q->where('size' ,'REGEXP' ,"^([A-Za-z],?)*" . $size->name . "(,?[A-Za-z])*$");
             });
         }
         //
-        if ($request->has('size_id')) {
-            $size = $request->get('size_id');
-            $search_sql = $search_sql->whereHas('sizes' ,function($q) use($size){
-                $q->where('sizes.id' ,$size);
+        if ($request->has('color_id')) {
+            $color = Color::find($request->get('color_id'));
+            $search_sql = $search_sql->whereHas('stocks' ,function($q) use($color){
+                $q->where('colors' ,'REGEXP' ,"^([A-Za-z],?)*" . $color->name . "(,?[A-Za-z])*$");
             });
         }
 
