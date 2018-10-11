@@ -39,7 +39,7 @@
     <?php endif; ?>
     <div class="cart-bottom" style="position: relative;">
         <?php if ($cart->count() > 0): ?>
-            <p class="total"><span>Subtotal</span> ${{ Cart::subtotal() }}</p>
+            <p class="total"><span>Subtotal</span> $ <span class="pull-right total-price-span">{{ Cart::subtotal() }}</span></p>
             <div class="cart-button">
                 <a class="checkout" href="{{ route('web.cart.checkout') }}" title="">Check Out</a>
                 <a class="edit-cart" href="{{ route('web.cart.index') }}" title="edit cart">View Cart</a>

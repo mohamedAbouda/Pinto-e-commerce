@@ -374,6 +374,14 @@
             input.val(quantity + 1);
             var price = parseInt(input.attr('data-initial-price'));
             $(this).parents('.text').find('.price-span').text(price * (quantity + 1));
+            var total_price = 0;
+            $('.price-span').each(function(){
+                var price = parseInt($(this).text());
+                total_price += price;
+            });
+            $('.total-price-span').text(total_price);
+            console.log('%c Total price:','color:orange;');
+            console.log({total_price});
         });
         $('.cart-js-minus').unbind('click').on("click", function(e) {
             var input = $(this).siblings('.cart-js-number');
@@ -382,6 +390,14 @@
                 input.val(quantity - 1);
                 var price = parseInt(input.attr('data-initial-price'));
                 $(this).parents('.text').find('.price-span').text(price * (quantity - 1));
+                var total_price = 0;
+                $('.price-span').each(function(){
+                    var price = parseInt($(this).text());
+                    total_price += price;
+                });
+                $('.total-price-span').text(total_price);
+                console.log('%c Total price:','color:orange;');
+                console.log({total_price});
             }
         });
     };
