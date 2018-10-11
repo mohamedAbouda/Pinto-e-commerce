@@ -13,6 +13,7 @@ use App\Models\Client;
 use App\Models\Address;
 use App\Models\PasswordReset;
 use Carbon\Carbon;
+use App\Mail\verficationCode;
 use Mail;
 use App\Mail\ClientResetPassword as ClientResetPasswordMail;
 class AuthController extends Controller
@@ -72,11 +73,13 @@ class AuthController extends Controller
 
 		if ($client = Client::create($user_data)) {
 			$client->update(['api_token'=> str_random(60),'phone_verfication_code'=>rand(10000,99999)]);
+			Mail::to($client->email)->send(new verficationCode($client->phone_verfication_code));
 			return response()->json(['token'=> $client->api_token,
 				'phone_verfication_code'=>$client->phone_verfication_code,
 			],200);
 			
 		}
+		
 		return response()->json([
 			'error' => 'something went wrong',
 		],422);
@@ -91,6 +94,7 @@ class AuthController extends Controller
 		$data['valid'] = 1;
 		$data['is_confirmed'] = 1;
 		$client = Client::create($data);
+		Mail::to($client->email)->send(new verficationCode($client->phone_verfication_code));
 		return response()->json(['token'=> $client->api_token,
 			'phone_verfication_code'=>$client->phone_verfication_code,
 		],200);
