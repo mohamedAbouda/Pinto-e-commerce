@@ -358,6 +358,7 @@
                 if (typeof data.side_bar_cart !== 'undefined') {
                     $('span.cart-count').removeClass('hidden').text(data.CartCount);
                     $('.cart-box-container').html(data.side_bar_cart);
+                    initialize_cart_counters();
                 }
             }
         }).done(function(data) {
@@ -366,19 +367,22 @@
     }
     </script>
     <script type="text/javascript">
-    $(document).ready(function(){
-        $('.cart-js-plus').on("click", function(e) {
+    var initialize_cart_counters = () => {
+        $('.cart-js-plus').unbind('click').on("click", function(e) {
             var input = $(this).siblings('.cart-js-number');
             var quantity = parseInt(input.val(), 10);
             input.val(quantity + 1);
         });
-        $('.cart-js-minus').on("click", function(e) {
+        $('.cart-js-minus').unbind('click').on("click", function(e) {
             var input = $(this).siblings('.cart-js-number');
             var quantity = parseInt(input.val(), 10);
             if (quantity > 0) {
                 input.val(quantity - 1);
             }
         });
+    };
+    $(document).ready(function(){
+        initialize_cart_counters();
     });
     </script>
 </body>
