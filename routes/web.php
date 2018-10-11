@@ -91,6 +91,15 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     Route::group(['middleware' => ['auth:client']] , function(){
         Route::post('/blog/comment/{post}','BlogController@comment')->name('blog.comment');
     });
+
+    Route::get('active/orders', 'OrderController@activeOrders')->name('active.orders');
+    Route::get('history/orders', 'OrderController@historyOrders')->name('history.orders');
+    Route::get('order/{order}/details', 'OrderController@orderDetails')->name('order.details');
+    Route::post('cancel/order', 'OrderController@cancelOrder')->name('cancel.order');
+    Route::post('user/reorder', 'OrderController@userReorder')->name('user.reorder');
+    Route::get('order/{order}/submit/dispute', 'OrderController@submitDispute')->name('order.submit.dispute');
+    Route::post('order/dispute/save', 'OrderController@orderDisputeSubmit')->name('order.dispute.store');
+    
     // Route::post('add/compare/product', 'CompareController@add')->name('add.compare.product');
     // Route::get('product/{id}/show', 'ProductController@show')->name('show.product');
     // Route::post('/products/review/{product?}', 'ProductController@review')->name('products.review');
@@ -99,13 +108,6 @@ Route::group(['as' => 'web.','middleware' => ['shareSessionItems'] ,'namespace' 
     // Route::get('map/locations', 'HomeController@locations')->name('store.locations');
     // Route::get('my/account', 'HomeController@myAccount')->name('user.account');
     // Route::post('my/account/edit', 'HomeController@submitAccountEdit')->name('submit.account.edit');
-    // Route::get('active/orders', 'OrderController@activeOrders')->name('active.orders');
-    // Route::get('history/orders', 'OrderController@historyOrders')->name('history.orders');
-    // Route::get('order/{order}/details', 'OrderController@orderDetails')->name('order.details');
-    // Route::post('cancel/order', 'OrderController@cancelOrder')->name('cancel.order');
-    // Route::post('user/reorder', 'OrderController@userReorder')->name('user.reorder');
-    // Route::get('order/{order}/submit/dispute', 'OrderController@submitDispute')->name('order.submit.dispute');
-    // Route::post('order/dispute/save', 'OrderController@orderDisputeSubmit')->name('order.dispute.store');
     // Route::get('/offers', 'HomeController@offers')->name('offers');
     // Route::group(['prefix' => '/auth/password' , 'as' => 'auth.'], function(){
     //     Route::get('/forget' , 'Auth\WebController@getForgetPassword')->name('getForgetPassword');

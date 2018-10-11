@@ -5,7 +5,9 @@
         <div class="nocart-list">
             <div class="empty-cart">
                 <h4 class="nocart-title">No products in the cart.</h4>
-                <a href="" class="btn-shop btn-arrow">Start shopping</a>
+                <a href="{{ route('web.products.shop') }}" class="btn-shop btn-arrow">Start shopping</a>
+                <a href="{{ route('web.active.orders') }}" class="btn-shop" style="margin-top : 20px;">Active orders</a>
+                <a href="{{ route('web.history.orders') }}" class="btn-shop" style="margin-top : 20px;">History orders</a>
             </div>
         </div>
     <?php else: ?>
@@ -40,6 +42,8 @@
                 <a class="checkout" href="{{ route('web.cart.checkout') }}" title="">Check Out</a>
                 <a class="edit-cart" href="{{ route('web.cart.index') }}" title="edit cart">View Cart</a>
             </div>
+            <a href="{{ route('web.active.orders') }}" class="btn-shop" style="margin-top : 20px;">Active orders</a>
+            <a href="{{ route('web.history.orders') }}" class="btn-shop" style="margin-top : 20px;margin-bottom: 20px;">History orders</a>
         <?php endif; ?>
         <a href="{{ route('web.shipping') }}" class="text">Our Shipping & Return Policy</a>
     </div>

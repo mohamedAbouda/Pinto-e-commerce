@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDisputeComment;
 use App\Models\OrderProduct;
-use App\Models\Item;
 use App\Models\Transaction;
 use App\Models\PaymentMethod;
 use App\Models\Merchant;
@@ -203,7 +202,7 @@ class OrderController extends BaseController
         $data = [];
 
         if (!$request->wantsJson()) {
-            $ordersId = Item::pluck('order_id')->toArray();
+            $ordersId = OrderProduct::pluck('order_id')->toArray();
             $data['orders'] = $filter_sql->whereIn('status',[3,5,6,7,8,9,10,11])->whereIn('id',$ordersId)->paginate(20);
             return view($this->views_path.'index',$data);
         }
@@ -247,7 +246,7 @@ class OrderController extends BaseController
         $data = [];
 
         if (!$request->wantsJson()) {
-            $ordersId = Item::pluck('order_id')->toArray();
+            $ordersId = OrderProduct::pluck('order_id')->toArray();
             $data['orders'] = $filter_sql->whereIn('status',[2,4])->whereIn('id',$ordersId)->paginate(20);
             return view($this->views_path.'index',$data);
         }
