@@ -20,6 +20,12 @@ class Order extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function orderDates()
+    {
+        return $this->hasMany(OrderDate::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(Client::class , 'user_id');

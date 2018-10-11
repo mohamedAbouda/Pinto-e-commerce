@@ -9,6 +9,7 @@ use App\Models\Stock;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\OrderProduct;
+use App\Models\OrderDate;
 use Cart;
 
 class CartController extends Controller
@@ -98,6 +99,7 @@ class CartController extends Controller
 
 	public function checkout(Request $request)
 	{
+		$data = $request->all();
 		$coupon_code = $request->input('coupon_code',null);
 		$cart = Cart::content();
 		$data['total_price'] = 0;
@@ -122,6 +124,16 @@ class CartController extends Controller
 				$updateOrder = $createOrder->update(['total_price_after_discount'=>$data['total_price_after_discount'],'coupon_id'=>$checkCode->id]);
 			}
 		}
+		if($data['delivery_dates']){
+			foreach ($data['delivery_dates'] as $key => $date) {
+				$createOrderDate = new OrderDate;
+				$createOrderDate->date_from = $date['date_from'];
+				$createOrderDate->date_to = $date['date_to'];
+				$createOrderDate->order_id = $createOrder->id;
+				$createOrderDate->save();
+			}
+		}
+		
 		Cart::destroy();
 		return response()->json([
 			'success' => 'your order has been submitted',
