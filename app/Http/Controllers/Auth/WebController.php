@@ -100,13 +100,12 @@ class WebController extends Controller
         PasswordReset::create([
             'email' => $email , 'token' => $token , 'created_at' => Carbon::now()->toDateTimeString()
         ]);
-        try {
+        // try {
             Mail::to($email)->send(new ClientResetPasswordMail($token));
-        } catch (\Exception $e) {
-
-            alert()->error('Something went wrong ! please try again.' , 'Error');
-            return redirect()->back();
-        }
+        // } catch (\Exception $e) {
+        //     alert()->error('Something went wrong ! please try again.' , 'Error');
+        //     return redirect()->back();
+        // }
 
         alert()->success('Reset link has been sent to your email for confirmation please check your mail.', 'Success');
         return redirect()->route('index');

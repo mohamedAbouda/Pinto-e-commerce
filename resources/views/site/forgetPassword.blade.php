@@ -15,15 +15,11 @@
                             <label for="email">Email address *</label>
                             <input type="email" class="form-control form-account" name="email" id="email" required>
                         </div>
-                   
                         <div class="form-check">
-                            <button type="submit" class="btn-login hover-white">Login</button>
-                         
-                           
+                            <button type="submit" class="btn-login hover-white">Send email</button>
                         </div>
                     </form>
                     <span class="divider"></span>
-                 
                 </div>
             </div>
         </div>
