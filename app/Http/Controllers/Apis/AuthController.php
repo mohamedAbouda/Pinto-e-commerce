@@ -33,6 +33,10 @@ class AuthController extends Controller
 		if($check){
 			$user = Auth::guard('client')->user();
 			if($user->is_phone_verfied == 0){
+				if(!$user->api_token){
+					$user->api_token = str_random(60);
+					$user->save();
+				}
 				return response()->json(['token'=> $user->api_token,
 					'phone_verfication_code'=>$user->phone_verfication_code,
 				],200);
@@ -119,6 +123,10 @@ class AuthController extends Controller
 				->toArray()
 			],200);
 		}else{
+			if(!$user->api_token){
+				$user->api_token = str_random(60);
+				$user->save();
+			}
 			return response()->json(['token'=> $user->api_token,
 				'phone_verfication_code'=>$user->phone_verfication_code,
 			],200);
