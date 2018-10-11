@@ -10,7 +10,7 @@ class Order extends Model
     protected $fillable = [
         'user_id' ,'email' ,'phone' ,'postal_code' ,'address_id' ,'gift_card_id' ,
         'total_price' ,'total_price_after_discount' ,'payment_method' ,'shipping_method_name' ,
-        'shipping_method_cost' ,'dispute_comment' ,'note' ,'status' ,'coupon_id'
+        'shipping_method_cost' ,'dispute_comment' ,'note' ,'status' ,'coupon_id','address'
     ];
 
     /**
