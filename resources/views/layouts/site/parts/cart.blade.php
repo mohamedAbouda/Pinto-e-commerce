@@ -5,7 +5,9 @@
         <div class="nocart-list">
             <div class="empty-cart">
                 <h4 class="nocart-title">No products in the cart.</h4>
-                <a href="" class="btn-shop btn-arrow">Start shopping</a>
+                <a href="{{ route('web.products.shop') }}" class="btn-shop btn-arrow">Start shopping</a>
+                <a href="{{ route('web.active.orders') }}" class="btn-shop" style="margin-top : 20px;">Active orders</a>
+                <a href="{{ route('web.history.orders') }}" class="btn-shop" style="margin-top : 20px;">History orders</a>
             </div>
         </div>
     <?php else: ?>
@@ -17,12 +19,14 @@
                     </a>
                     <div class="text">
                         <p class="product-name">{{ $item->options->obj && $item->options->obj->name ? $item->options->obj->name : '' }}</p>
-                        <p class="product-price">${{ $item->options->obj && $item->options->obj->price ? $item->options->obj->price * $item->qty : '' }}</p>
+                        <p class="product-price">
+                            $ <span class="price-span">{{ $item->options->obj && $item->options->obj->price ? $item->options->obj->price * $item->qty : '' }}</span>
+                        </p>
                         <div class="quantity input-group">
                             <button type="button" class="quantity-left-minus btn btn-number cart-js-minus" data-type="minus" data-field="">
                                 <span class="minus-icon">-</span>
                             </button>
-                            <input type="text" name="number" value="{{ $item->qty }}" class="product_quantity_number cart-js-number">
+                            <input type="text" name="number" value="{{ $item->qty }}" class="product_quantity_number cart-js-number" data-initial-price="{{ $item->options->obj->price }}">
                             <button type="button" class="quantity-right-plus btn btn-number cart-js-plus" data-type="plus" data-field="">
                                 <span class="plus-icon">+</span>
                             </button>
@@ -35,11 +39,13 @@
     <?php endif; ?>
     <div class="cart-bottom" style="position: relative;">
         <?php if ($cart->count() > 0): ?>
-            <p class="total"><span>Subtotal</span> ${{ Cart::subtotal() }}</p>
+            <p class="total"><span>Subtotal</span> $ <span class="pull-right total-price-span">{{ Cart::subtotal() }}</span></p>
             <div class="cart-button">
                 <a class="checkout" href="{{ route('web.cart.checkout') }}" title="">Check Out</a>
                 <a class="edit-cart" href="{{ route('web.cart.index') }}" title="edit cart">View Cart</a>
             </div>
+            <a href="{{ route('web.active.orders') }}" class="btn-shop" style="margin-top : 20px;">Active orders</a>
+            <a href="{{ route('web.history.orders') }}" class="btn-shop" style="margin-top : 20px;margin-bottom: 20px;">History orders</a>
         <?php endif; ?>
         <a href="{{ route('web.shipping') }}" class="text">Our Shipping & Return Policy</a>
     </div>

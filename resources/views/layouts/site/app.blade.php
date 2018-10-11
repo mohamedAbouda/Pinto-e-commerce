@@ -358,6 +358,7 @@
                 if (typeof data.side_bar_cart !== 'undefined') {
                     $('span.cart-count').removeClass('hidden').text(data.CartCount);
                     $('.cart-box-container').html(data.side_bar_cart);
+                    initialize_cart_counters();
                 }
             }
         }).done(function(data) {
@@ -366,19 +367,42 @@
     }
     </script>
     <script type="text/javascript">
-    $(document).ready(function(){
-        $('.cart-js-plus').on("click", function(e) {
+    var initialize_cart_counters = () => {
+        $('.cart-js-plus').unbind('click').on("click", function(e) {
             var input = $(this).siblings('.cart-js-number');
             var quantity = parseInt(input.val(), 10);
             input.val(quantity + 1);
+            var price = parseInt(input.attr('data-initial-price'));
+            $(this).parents('.text').find('.price-span').text(price * (quantity + 1));
+            var total_price = 0;
+            $('.price-span').each(function(){
+                var price = parseInt($(this).text());
+                total_price += price;
+            });
+            $('.total-price-span').text(total_price);
+            console.log('%c Total price:','color:orange;');
+            console.log({total_price});
         });
-        $('.cart-js-minus').on("click", function(e) {
+        $('.cart-js-minus').unbind('click').on("click", function(e) {
             var input = $(this).siblings('.cart-js-number');
             var quantity = parseInt(input.val(), 10);
             if (quantity > 0) {
                 input.val(quantity - 1);
+                var price = parseInt(input.attr('data-initial-price'));
+                $(this).parents('.text').find('.price-span').text(price * (quantity - 1));
+                var total_price = 0;
+                $('.price-span').each(function(){
+                    var price = parseInt($(this).text());
+                    total_price += price;
+                });
+                $('.total-price-span').text(total_price);
+                console.log('%c Total price:','color:orange;');
+                console.log({total_price});
             }
         });
+    };
+    $(document).ready(function(){
+        initialize_cart_counters();
     });
     </script>
 </body>

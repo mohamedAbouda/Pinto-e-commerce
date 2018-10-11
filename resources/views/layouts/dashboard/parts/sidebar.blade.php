@@ -240,7 +240,7 @@
                         </a>
                     </li>
 
-                    <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.orders.index') ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_orders') }}">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() ,'orders') !== FALSE ? 'is-active' : '' }}" data-toggle="tooltip" title="{{ trans('web.sidebar_links_orders') }}">
                         <a href="{{route('dashboard.orders.index')}}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-feed"></i>

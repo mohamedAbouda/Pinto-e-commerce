@@ -207,7 +207,6 @@ class ProductController extends Controller
             $search = $request->get('search');
             $search_sql = $search_sql->where(function($q) use($search){
                 $q->where('name' ,'LIKE' ,'%' . $search . '%')
-                ->orWhere('description' ,'LIKE' ,'%' . $search . '%')
                 ->orWhere('short_description' ,'LIKE' ,'%' . $search . '%');
             });
         }

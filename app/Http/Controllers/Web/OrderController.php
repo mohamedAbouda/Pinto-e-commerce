@@ -13,29 +13,29 @@ class OrderController extends Controller
 {
     public function activeOrders()
     {
-    	 $orders = Order::where('user_id',Auth::guard('client')->id())->whereIn('status',[2,4,5])->with('items')->get();
-    	return view('site.orders.active',compact('orders'));
+        $orders = Order::where('user_id',Auth::guard('client')->id())->whereIn('status',[2,4,5])->with('items')->get();
+        return view('site.orders.active',compact('orders'));
     }
 
     public function cancelOrder(Request $request)
     {
-    	$data = $request->all();
-    	$updateOrder = Order::where('id',$data['order_id'])->update([
-    		'status'=>3,
-    	]);
-    	return redirect()->back();
+        $data = $request->all();
+        $updateOrder = Order::where('id',$data['order_id'])->update([
+            'status'=>3,
+        ]);
+        return redirect()->back();
     }
 
     public function historyOrders()
     {
-    	$orders = Order::where('user_id',Auth::guard('client')->id())->whereIn('status',[3,6,7,8,9,10,11])->with('items')->get();
-    	return view('site.orders.history',compact('orders'));
+        $orders = Order::where('user_id',Auth::guard('client')->id())->whereIn('status',[3,6,7,8,9,10,11])->with('items')->get();
+        return view('site.orders.history',compact('orders'));
     }
 
     public function orderDetails($id)
     {
         $order = Order::where('id',$id)->with('items','user.address')->first();
-    	return view('site.orders.details',compact('order'));
+        return view('site.orders.details',compact('order'));
     }
 
     public function submitDispute($id)
@@ -46,17 +46,17 @@ class OrderController extends Controller
 
     public function orderDisputeSubmit(Request $request)
     {
-         $data = $request->all();
+        $data = $request->all();
         $updateOrder = Order::where('id',$data['order_id'])->update([
             'status'=>$data['status'],
         ]);
         if($request->input('dispute_comment')){
-           $updateOrderNote = Order::where('id',$data['order_id'])->update([
+            $updateOrderNote = Order::where('id',$data['order_id'])->update([
                 'dispute_comment'=>$data['dispute_comment'],
-            ]); 
+            ]);
         }
-         Alert::success('Your Dispute has been submited', 'Done!')->persistent('Close');
-          return redirect()->back();
+        Alert::success('Your Dispute has been submited', 'Done!')->persistent('Close');
+        return redirect()->back();
     }
 
     public function userReorder(Request $request)

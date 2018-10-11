@@ -13185,6 +13185,11 @@ var app = new Vue({
                 * Hide loading screen
                 */
                 vm.loading_screen = false;
+                // console.log('%c Debugging:' ,'color: orange');
+                // console.log({'length' : vm.products.length, 'products': vm.products});
+                if (vm.products.length == 0) {
+                    return window.swal("Error!", 'There are no products for this section', "error");
+                }
             });
         }
     }
