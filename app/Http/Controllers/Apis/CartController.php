@@ -107,6 +107,11 @@ class CartController extends Controller
 		$data['payment_method'] = 1;
 		$data['user_id'] = $request->user()->id;
 		$createOrder = Order::create($data);
+		if(Cart::count() == 0){
+			return response()->json([
+				'error' => 'Your cart is empty',
+			],422);
+		}
 		foreach ($cart as $key => $item) {
 			$createOrderItem = new OrderProduct;
 			$createOrderItem->product_id = $item->options->obj->id;
