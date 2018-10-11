@@ -19,12 +19,14 @@
                     </a>
                     <div class="text">
                         <p class="product-name">{{ $item->options->obj && $item->options->obj->name ? $item->options->obj->name : '' }}</p>
-                        <p class="product-price">${{ $item->options->obj && $item->options->obj->price ? $item->options->obj->price * $item->qty : '' }}</p>
+                        <p class="product-price">
+                            $ <span class="price-span">{{ $item->options->obj && $item->options->obj->price ? $item->options->obj->price * $item->qty : '' }}</span>
+                        </p>
                         <div class="quantity input-group">
                             <button type="button" class="quantity-left-minus btn btn-number cart-js-minus" data-type="minus" data-field="">
                                 <span class="minus-icon">-</span>
                             </button>
-                            <input type="text" name="number" value="{{ $item->qty }}" class="product_quantity_number cart-js-number">
+                            <input type="text" name="number" value="{{ $item->qty }}" class="product_quantity_number cart-js-number" data-initial-price="{{ $item->options->obj->price }}">
                             <button type="button" class="quantity-right-plus btn btn-number cart-js-plus" data-type="plus" data-field="">
                                 <span class="plus-icon">+</span>
                             </button>

@@ -372,12 +372,16 @@
             var input = $(this).siblings('.cart-js-number');
             var quantity = parseInt(input.val(), 10);
             input.val(quantity + 1);
+            var price = parseInt(input.attr('data-initial-price'));
+            $(this).parents('.text').find('.price-span').text(price * (quantity + 1));
         });
         $('.cart-js-minus').unbind('click').on("click", function(e) {
             var input = $(this).siblings('.cart-js-number');
             var quantity = parseInt(input.val(), 10);
             if (quantity > 0) {
                 input.val(quantity - 1);
+                var price = parseInt(input.attr('data-initial-price'));
+                $(this).parents('.text').find('.price-span').text(price * (quantity - 1));
             }
         });
     };
