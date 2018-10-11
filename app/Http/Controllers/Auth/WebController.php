@@ -100,12 +100,12 @@ class WebController extends Controller
         PasswordReset::create([
             'email' => $email , 'token' => $token , 'created_at' => Carbon::now()->toDateTimeString()
         ]);
-        // try {
+        try {
             Mail::to($email)->send(new ClientResetPasswordMail($token));
-        // } catch (\Exception $e) {
-        //     alert()->error('Something went wrong ! please try again.' , 'Error');
-        //     return redirect()->back();
-        // }
+        } catch (\Exception $e) {
+            alert()->error('Something went wrong ! please try again.' , 'Error');
+            return redirect()->back();
+        }
 
         alert()->success('Reset link has been sent to your email for confirmation please check your mail.', 'Success');
         return redirect()->route('index');
@@ -154,12 +154,12 @@ class WebController extends Controller
         $client->password = $request->get('password');
         $client->save();
 
-        try {
+        // try {
             $client->notify(new ResetPassword);
-        } catch (\Exception $e) {
-            alert()->error('Something went wrong ! please try again.' , 'Error');
-            return redirect()->back();
-        }
+        // } catch (\Exception $e) {
+        //     alert()->error('Something went wrong ! please try again.' , 'Error');
+        //     return redirect()->back();
+        // }
 
         alert()->success('Your password has been changed', 'Success');
         return redirect()->route('web.index');
