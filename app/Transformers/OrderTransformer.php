@@ -16,6 +16,7 @@ class OrderTransformer extends TransformerAbstract
             'total_price' => $order->total_price,
             'dispute_comment' => $order->dispute_comment,
             'total_price_after_discount' => $order->total_price_after_discount,
+            'address'=>$order->address,
 
         ];
     }

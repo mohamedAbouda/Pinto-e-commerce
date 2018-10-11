@@ -33,6 +33,10 @@ class AuthController extends Controller
 		if($check){
 			$user = Auth::guard('client')->user();
 			if($user->is_phone_verfied == 0){
+				if(!$user->api_token){
+					$user->api_token = str_random(60);
+					$user->save();
+				}
 				return response()->json(['token'=> $user->api_token,
 					'phone_verfication_code'=>$user->phone_verfication_code,
 				],200);
@@ -67,7 +71,7 @@ class AuthController extends Controller
 		}
 
 		if ($client = Client::create($user_data)) {
-			$client->update(['api_token'=> str_random(60),'phone_verfication_code'=>str_random(6)]);
+			$client->update(['api_token'=> str_random(60),'phone_verfication_code'=>rand(10000,99999)]);
 			return response()->json(['token'=> $client->api_token,
 				'phone_verfication_code'=>$client->phone_verfication_code,
 			],200);
@@ -83,7 +87,7 @@ class AuthController extends Controller
 		$data = $request->all();
 		$data['api_token'] = str_random(60);
 		$data['is_phone_verfied'] = 0;
-		$data['phone_verfication_code'] = str_random(6);
+		$data['phone_verfication_code'] = rand(10000,99999);
 		$data['valid'] = 1;
 		$data['is_confirmed'] = 1;
 		$client = Client::create($data);
@@ -119,6 +123,10 @@ class AuthController extends Controller
 				->toArray()
 			],200);
 		}else{
+			if(!$user->api_token){
+				$user->api_token = str_random(60);
+				$user->save();
+			}
 			return response()->json(['token'=> $user->api_token,
 				'phone_verfication_code'=>$user->phone_verfication_code,
 			],200);

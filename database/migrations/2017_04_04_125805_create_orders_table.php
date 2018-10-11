@@ -39,6 +39,7 @@ class CreateOrdersTable extends Migration
             $table->text('dispute_comment')->nullable();
             $table->text('note')->nullable();
             $table->integer('status')->nullable();
+            $table->text('address')->nullable();
 
             $table->timestamps();
         });
