@@ -76,9 +76,7 @@ class AuthController extends Controller
 			try {
 				Mail::to($client->email)->send(new verficationCode($client->phone_verfication_code));
 			} catch (Exception $e) {
-				return response()->json([
-					'error' => 'something went wrong',
-				],422);
+				
 			}
 			
 			return response()->json(['token'=> $client->api_token,
@@ -104,9 +102,7 @@ class AuthController extends Controller
 		try {
 			Mail::to($client->email)->send(new verficationCode($client->phone_verfication_code));
 		} catch (Exception $e) {
-			return response()->json([
-				'error' => 'something went wrong',
-			],422);
+			
 		}
 		
 		return response()->json(['token'=> $client->api_token,
@@ -169,9 +165,7 @@ class AuthController extends Controller
 			Mail::to($email)->send(new ClientResetPasswordMail($token));
 		} catch (\Exception $e) {
 
-			return response()->json([
-				'error' => 'something went wrong',
-			],422);
+			
 		}
 
 		return response()->json([
