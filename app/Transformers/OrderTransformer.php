@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 use App\Models\Order;
 class OrderTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['items','orderDates'];
+    protected $defaultIncludes = ['items','orderDates','disputes'];
     public function transform(Order $order)
     {
         return [
@@ -32,6 +32,13 @@ class OrderTransformer extends TransformerAbstract
     {
         if($order->orderDates){
             return $this->collection($order->orderDates,new OrderDateTransformer);
+        }
+    }
+
+    public function includeDisputes(Order $order)
+    {
+        if($order->disputes){
+            return $this->collection($order->disputes,new DisputeTransformer);
         }
     }
 

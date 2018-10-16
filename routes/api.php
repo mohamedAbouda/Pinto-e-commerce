@@ -48,6 +48,8 @@ Route::group(['namespace' => 'Apis' ,'middleware' => 'auth:api_clients'] ,functi
 	Route::post('history/orders','OrderController@historyOrders');
 	Route::post('active/orders','OrderController@activeOrders');
 	Route::post('order/details','OrderController@orderDetails');
+	Route::post('update/order/status','OrderController@updateStatus');
+	Route::post('store/order/dispute','OrderController@storeOrderDispute');
 	Route::post('phone/verfiy' ,'AuthController@phoneVerfiy');
 	Route::post('checkout' ,'CartController@checkout');
 	Route::post('get/coupon' ,'CartController@getCoupon');

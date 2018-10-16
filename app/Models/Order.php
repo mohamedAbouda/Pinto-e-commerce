@@ -26,6 +26,11 @@ class Order extends Model
         return $this->hasMany(OrderDate::class);
     }
 
+    public function disputes()
+    {
+        return $this->hasMany(OrderDisputeComment::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(Client::class , 'user_id');
