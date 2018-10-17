@@ -121,8 +121,9 @@ class CartController extends Controller
 			$createOrderItem->save();
 			$data['total_price'] += $item->qty * $item->price;
 		}
-		$data['total_price_after_discount'] = $data['total_price'];
-		$updateOrder = $createOrder->update(['total_price'=>$data['total_price']]);
+
+
+		$updateOrder = $createOrder->update(['total_price'=>$data['total_price'],'total_price_after_discount'=>$data['total_price']]);
 		if($coupon_code != null){
 			$checkCode = Coupon::where('code',$request->input('coupon_code'))->first();
 			if($checkCode){
@@ -130,7 +131,7 @@ class CartController extends Controller
 				$updateOrder = $createOrder->update(['total_price_after_discount'=>$data['total_price_after_discount'],'coupon_id'=>$checkCode->id]);
 			}
 		}
-		if($data['delivery_dates']){
+	/*	if($data['delivery_dates']){
 			foreach ($data['delivery_dates'] as $key => $date) {
 				$createOrderDate = new OrderDate;
 				$createOrderDate->date_from = $date['date_from'];
@@ -138,7 +139,7 @@ class CartController extends Controller
 				$createOrderDate->order_id = $createOrder->id;
 				$createOrderDate->save();
 			}
-		}
+		}*/
 		
 		Cart::destroy();
 		return response()->json([
