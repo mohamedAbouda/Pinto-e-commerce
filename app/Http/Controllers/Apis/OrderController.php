@@ -91,6 +91,9 @@ class OrderController extends Controller
 				'error' => 'Please provide the order id and dispute Comment',
 			],422);
 		}
+		if($request->input('status')){
+			$updateOrderStatus = Order::where('id',$request->input('order_id'))->update(['status'=>$request->input('status')]);
+		}
 		$data = $request->all();
 		$data['client_id'] = $request->user()->id;
 		$createDisputeComment = OrderDisputeComment::create($data);
