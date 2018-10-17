@@ -12,7 +12,12 @@ class OrderController extends Controller
 {
 	public function historyOrders(Request $request)
 	{
-		$historyOrders = Order::where('user_id',$request->user()->id)->where('status',3)->get();
+		if(!$request->input('status')){
+			return response()->json([
+				'error' => 'Please provide the status',
+			],422);
+		}
+		$historyOrders = Order::where('user_id',$request->user()->id)->whereIn('status',$request->input('status'))->get();
 		return response()->json(
 			fractal()
 			->collection($historyOrders)
@@ -24,7 +29,14 @@ class OrderController extends Controller
 
 	public function activeOrders(Request $request)
 	{
-		$activeOrders = Order::where('user_id',$request->user()->id)->whereIn('status',[1,2])->get();
+		if(!$request->input('status')){
+			return response()->json([
+				'error' => 'Please provide the status',
+			],422);
+		}
+
+
+		$activeOrders = Order::where('user_id',$request->user()->id)->whereIn('status',$request->input('status'))->get();
 		return response()->json(
 			fractal()
 			->collection($activeOrders)
