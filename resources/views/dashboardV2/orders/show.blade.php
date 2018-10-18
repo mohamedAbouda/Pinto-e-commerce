@@ -117,9 +117,10 @@ body {
                         </td>
                         <td>
                             @if($order->address)
-                            Address : {{$order->address->address}}<br>
-                            Country : {{$order->address->country}}<br>
-                            City    : {{$order->address->city}}
+
+                            {{$order->address}}
+                           
+
                             @else
                             No Address Yet.
                             @endif

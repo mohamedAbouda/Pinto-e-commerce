@@ -35,8 +35,8 @@ class Order extends Model
     {
         return $this->belongsTo(Client::class , 'user_id');
     }
-    public function address()
+   /* public function addres()
     {
         return $this->belongsTo(Address::class);
-    }
+    }*/
 }

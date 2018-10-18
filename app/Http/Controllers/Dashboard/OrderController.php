@@ -101,7 +101,7 @@ class OrderController extends BaseController
     */
     public function show($id)
     {
-        $order = Order::where('id',$id)->with('items','user','address')->first();
+        $order = Order::where('id',$id)->with('items','user')->first();
         return view($this->views_path.'show' )->with(['order'=>$order]);
     }
 
