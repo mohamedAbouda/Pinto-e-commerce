@@ -80,4 +80,20 @@ class ProductController extends Controller
 			'success' => 'review added successfully',
 		],200);
 	}
+
+	public function searchProducts(Request $request)
+	{
+		$products = Product::where('id','!=',null);
+		if($request->input('product_name')){
+			$products->where('name','like','%'.$request->input('product_name').'%');
+		}
+		$products = $products->get();
+		return response()->json(
+			fractal()
+			->collection($products)
+			->transformWith(new SimpleProductTransformer)
+			->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+			->toArray()
+			,200);
+	}
 }

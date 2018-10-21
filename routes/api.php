@@ -29,6 +29,7 @@ Route::group(['namespace' => 'Apis' ,'middleware' => 'auth:api_clients'] ,functi
 	});
 	Route::get('all/categories','CategoryController@allCategories');
 	Route::post('featured/products','ProductController@featuredProducts');
+	Route::post('search/products','ProductController@searchProducts');
 	Route::post('popular/products','ProductController@popularProducts');
 	Route::post('category/products','ProductController@categoryProducts');
 	Route::post('user/profile','ProfileController@userProfile');
