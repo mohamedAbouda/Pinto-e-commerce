@@ -225,7 +225,7 @@ class CartController extends Controller
             $createOrderProduct->order_id = $createOrder->id;
             $createOrderProduct->save();
 
-            $createOrder->total_price += $createOrderProduct->price_per_item;
+            $createOrder->total_price += $createOrderProduct->price_per_item * $cartItem->qty;
         }
 
         $createOrder->save();
