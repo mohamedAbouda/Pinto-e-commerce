@@ -41,8 +41,14 @@ class WebController extends Controller
         if ($address) {
             $user_data['address_id'] = $address->id;
         }
+        $user_data['phone_verfication_code'] = rand(10000,99999);
+
 
         if ($client = Client::create($user_data)) {
+            try {
+                Mail::to($client->email)->send(new verficationCode($client->phone_verfication_code));
+            } catch (Exception $e) {
+            }
             alert()->success('You\'ve signed up successfully', 'Success');
             return redirect()->route('web.login');
         }

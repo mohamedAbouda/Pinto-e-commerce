@@ -97,6 +97,8 @@ class AdminController extends BaseController
         $data = $request->all();
         if($request->input('password')){
             $data['password'] = bcrypt($data['password']);
+        }elseif(isset($data['password'])){
+            unset($data['password']);
         }
         $admin->update($data);
 
