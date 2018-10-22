@@ -224,7 +224,11 @@ class CartController extends Controller
             $createOrderProduct->size = $cartItem->options->size ? $cartItem->options->size : null;
             $createOrderProduct->order_id = $createOrder->id;
             $createOrderProduct->save();
+
+            $createOrder->total_price += $createOrderProduct->price_per_item;
         }
+
+        $createOrder->save();
 
         Session::forget('giftCardId');
         Cart::destroy();
