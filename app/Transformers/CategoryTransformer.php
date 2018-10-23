@@ -13,6 +13,7 @@ class CategoryTransformer extends TransformerAbstract
             'id'=>$category->id,
             'name' => $category->name,
             'icon' => $category->icon,
+            'unicode' =>$category->unicode,
             'image' => $category->image_url,
             'navBar' => $category->navBar,
             'payment_withhold' => $category->payment_withhold,
