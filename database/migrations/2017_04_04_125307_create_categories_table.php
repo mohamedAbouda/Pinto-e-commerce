@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
+            $table->string('unicode')->nullable();
             $table->integer('navBar')->default(0);
             $table->integer('payment_withhold')->unsigned()->default(0);
             $table->integer('payment_due_percentage')->unsigned()->default(0);

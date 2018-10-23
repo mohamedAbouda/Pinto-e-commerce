@@ -9,7 +9,7 @@ class Category extends Model
 {
     protected $table = 'categories';
     protected $fillable = [
-        'name' ,'image' ,'icon' ,
+        'name' ,'image' ,'icon' ,'unicode',
         'navBar','payment_withhold', 'payment_due_percentage', 'shipping_cost',
         'has_size', 'has_color', 'has_brand','key_word_id'
     ];
