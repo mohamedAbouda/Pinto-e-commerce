@@ -64,6 +64,8 @@
                     <input type="checkbox" name="has_brand" value="1" {{ $category->has_brand ? 'checked' : '' }}> {{ trans('web.dashboard_sections_pages_create_page_form_has_brand') }}<br>
                 </div>
             </div>
+                             <input type="hidden" name="unicode" class="unicode">
+
             <div class="col-md-12">
                 <div class="form-group margin-bottom20">
                     <label class="control-label" for="payment_withhold">{{ trans('web.dashboard_sections_pages_create_page_form_payment_withhold') }}</label>
@@ -90,7 +92,7 @@
 
             <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 padding-bottom-30">
                 <div class="text-left">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" id="submitButton" class="btn btn-primary">
                         {{ trans('web.dashboard_create_page_save_button') }}
                     </button>
                 </div>
@@ -109,5 +111,28 @@
 {{ Html::script('assets/panel-assets/plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js') }}
 <script type="text/javascript">
 $('#icon').iconpicker();
+$('#submitButton').click(function(e){
+    e.preventDefault();
+    var icon =  document.getElementsByClassName("icon")[0].value;
+    console.log(icon);
+    $('.unicode').val(faUnicode(icon));
+    $('#create-category').submit();
+   
+});
+
+function faUnicode(name) {
+  var testI = document.createElement('i');
+  var char;
+
+  testI.className = name;
+  document.body.appendChild(testI);
+
+  char = window.getComputedStyle( testI, ':before' )
+           .content.replace(/'|"/g, '');
+
+  testI.remove();
+
+  return "\\u" + char.charCodeAt(0).toString(16);
+}
 </script>
 @stop
