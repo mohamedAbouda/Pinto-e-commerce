@@ -8,21 +8,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\UserRegisterRequest;
 use App\Http\Requests\Web\ClientResetPassword;
 use App\Http\Requests\Web\PasswordForgetRequest;
+use App\Http\Requests\Dashboard\CreateMerchantRequest;
 use App\Models\Client;
 use App\Models\Address;
 use App\Models\PasswordReset;
 use App\Models\ClientPasswordReset;
-use App\Mail\ClientResetPassword as ClientResetPasswordMail;
-use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\OrderProduct;
-use Cart;
 use App\Models\Merchant;
 use App\Models\MerchantAdmin;
-use Mail;
+use App\Mail\ClientResetPassword as ClientResetPasswordMail;
+use App\Mail\verficationCode;
 use App\Notifications\ResetPassword;
 use App\Notifications\ForgetPassword;
-use App\Http\Requests\Dashboard\CreateMerchantRequest;
+use Carbon\Carbon;
+use Cart;
+use Mail;
 
 
 class WebController extends Controller
@@ -41,8 +42,14 @@ class WebController extends Controller
         if ($address) {
             $user_data['address_id'] = $address->id;
         }
+        $user_data['phone_verfication_code'] = rand(10000,99999);
+
 
         if ($client = Client::create($user_data)) {
+            try {
+                Mail::to($client->email)->send(new verficationCode($client->phone_verfication_code));
+            } catch (Exception $e) {
+            }
             alert()->success('You\'ve signed up successfully', 'Success');
             return redirect()->route('web.login');
         }

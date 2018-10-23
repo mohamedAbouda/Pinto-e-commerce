@@ -101,6 +101,10 @@ class UserController extends Controller
             }
         }
         $data = $request->all();
+
+        if(!$request->input('password') && isset($data['password'])){
+            unset($data['password']);
+        }
         $user = Client::where('id',$id)->first();
 
         if ($request->has('addresses')) {
