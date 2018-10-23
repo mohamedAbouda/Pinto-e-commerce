@@ -42,7 +42,7 @@
                             <span class="text-danger">*</span>
                             Icon
                         </label>
-                        {{ Form::text('icon',old('icon'),['id'=>'icon','required'=>'required','class' => 'form-control']) }}
+                        {{ Form::text('icon',old('icon'),['id'=>'icon','required'=>'required','class' => 'form-control icon']) }}
                         <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('icon') }}</p>
                     </div>
                 </div>
