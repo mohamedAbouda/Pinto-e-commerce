@@ -39,6 +39,7 @@ Route::group(['namespace' => 'Apis' ,'middleware' => 'auth:api_clients'] ,functi
 	Route::post('user/add/wish/list','WishListcontroller@userAddWishList');
 	Route::post('user/delete/wish/list','WishListcontroller@userDeleteWishList');
 	Route::post('user/add/cart','CartController@AddCart');
+	Route::post('user/update/cart','CartController@updateCart');
 	Route::get('get/cart','CartController@getCart');
 	Route::post('cart/remove/item','CartController@cartRemoveItem');
 	Route::post('user/add/address','AddressController@userAddAddress');

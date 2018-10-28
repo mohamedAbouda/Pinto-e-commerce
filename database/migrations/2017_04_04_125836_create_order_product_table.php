@@ -20,8 +20,8 @@ class CreateOrderProductTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('amount')->unsigned();
             $table->decimal('price_per_item' , 15 ,2)->default(0);
-            $table->string('color')->default('')->nullable();
-            $table->string('size')->default('')->nullable();
+            $table->integer('color_id')->default(0)->nullable();
+            $table->integer('size_id')->default(0)->nullable();
             $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->onDelete('cascade');
 

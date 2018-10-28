@@ -8,7 +8,11 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Models\Order;
 use App\Models\Coupon;
+use App\Models\Color;
+use App\Models\Size;
 use App\Models\OrderProduct;
+use App\Transformers\ProductSizeTransformer;
+use App\Transformers\ProductColorTransformer;
 use App\Models\OrderDate;
 use App\Transformers\ProductTransformer;
 use Cart;
@@ -45,14 +49,14 @@ class CartController extends Controller
 			'price' =>$price,
 			'options' => [
 				'obj' =>
-					fractal()
-					->item($product)
-					->transformWith(new ProductTransformer)
-					->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
-					->toArray()
+				fractal()
+				->item($product)
+				->transformWith(new ProductTransformer)
+				->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+				->toArray()
 				,
-				'color' => $request->input('color' , NULL),
-				'size' => $request->input('size' , NULL),
+				'color_id' => $request->input('color_id' , NULL),
+				'size_id' => $request->input('size_id' , NULL),
 			]
 		]);
 		return response()->json([
@@ -65,7 +69,27 @@ class CartController extends Controller
 		Cart::content();
 		$data = array();
 		foreach (Cart::content() as $key => $cartItem) {
-			$data[] = array('row_id'=>$cartItem->rowId,'name'=>$cartItem->name,'qty'=>$cartItem->qty,'price'=>$cartItem->price,'product'=>$cartItem->options->obj,'color'=>$cartItem->options->color,'size'=>$cartItem->options->size);
+			if($cartItem->options->size_id != null){
+				$size = Size::where('id',$cartItem->options->size_id)->first();
+				if($size){
+					$size = fractal()
+					->item($size)
+					->transformWith(new ProductSizeTransformer)
+					->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+					->toArray();
+				}
+			}
+			if($cartItem->options->color_id != null){
+				$color = Color::where('id',$cartItem->options->color_id)->first();
+				if($color){
+					$color = fractal()
+					->item($color)
+					->transformWith(new ProductColorTransformer)
+					->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+					->toArray();
+				}
+			}
+			$data[] = array('row_id'=>$cartItem->rowId,'name'=>$cartItem->name,'qty'=>$cartItem->qty,'price'=>$cartItem->price,'product'=>$cartItem->options->obj,'size'=>$size,'color'=>$color);
 		}
 		return response()->json([
 			'data' =>  (array) $data,
@@ -121,12 +145,12 @@ class CartController extends Controller
 		}
 		foreach ($cart as $key => $item) {
 			$createOrderItem = new OrderProduct;
-			$createOrderItem->product_id = $item->options->obj->id;
+			$createOrderItem->product_id = $item->options->obj['id'];
 			$createOrderItem->order_id = $createOrder->id;
 			$createOrderItem->amount = $item->qty;
 			$createOrderItem->price_per_item = $item->price;
-			$createOrderItem->color = $item->options->color;
-			$createOrderItem->size = $item->options->size;
+			$createOrderItem->color_id = $item->options->color_id;
+			$createOrderItem->size_id = $item->options->size_id;
 			$createOrderItem->save();
 			$data['total_price'] += $item->qty * $item->price;
 		}
@@ -153,6 +177,31 @@ class CartController extends Controller
 		Cart::destroy();
 		return response()->json([
 			'success' => 'your order has been submitted',
+		],200);
+	}
+
+	public function updateCart(Request $request)
+	{
+		if(!$request->input('row_id')){
+			return response()->json([
+				'error' => 'Please provide row id',
+			],422);
+		}
+		if($request->input('qty')){
+			Cart::update($request->input('row_id'), $request->input('qty'));
+		}
+		if($request->input('color_id')){
+			$item = Cart::get($request->input('row_id'));
+			$options = $item->options->merge(['color_id' => $request->input('color_id')]);
+			Cart::update($request->input('row_id'), ['options'=>$options]);
+		}
+		if($request->input('size_id')){
+			$item = Cart::get($request->input('row_id'));
+			$options = $item->options->merge(['size_id' => $request->input('size_id')]);
+			Cart::update($request->input('row_id'), ['options'=>$options]);
+		}
+		return response()->json([
+			'success' => 'Cart item updated',
 		],200);
 	}
 }
