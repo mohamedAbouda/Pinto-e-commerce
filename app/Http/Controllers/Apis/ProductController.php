@@ -56,6 +56,8 @@ class ProductController extends Controller
 	public function productDetails(Request $request)
 	{
 		$product = Product::where('id',$request->input('product_id'))->first();
+		$product->views += 1;
+		$product->save(); 
 		return response()->json(
 			fractal()
 			->item($product)

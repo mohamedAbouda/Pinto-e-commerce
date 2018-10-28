@@ -65,7 +65,7 @@ class CartController extends Controller
 		Cart::content();
 		$data = array();
 		foreach (Cart::content() as $key => $cartItem) {
-			$data[] = array('row_id'=>$cartItem->rowId,'name'=>$cartItem->name,'qty'=>$cartItem->qty,'price'=>$cartItem->price,'product'=>$cartItem->options->obj);
+			$data[] = array('row_id'=>$cartItem->rowId,'name'=>$cartItem->name,'qty'=>$cartItem->qty,'price'=>$cartItem->price,'product'=>$cartItem->options->obj,'color'=>$cartItem->options->color,'size'=>$cartItem->options->size);
 		}
 		return response()->json([
 			'data' =>  (array) $data,
@@ -125,6 +125,8 @@ class CartController extends Controller
 			$createOrderItem->order_id = $createOrder->id;
 			$createOrderItem->amount = $item->qty;
 			$createOrderItem->price_per_item = $item->price;
+			$createOrderItem->color = $item->options->color;
+			$createOrderItem->size = $item->options->size;
 			$createOrderItem->save();
 			$data['total_price'] += $item->qty * $item->price;
 		}
