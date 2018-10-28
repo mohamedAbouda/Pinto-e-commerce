@@ -68,6 +68,8 @@ class CartController extends Controller
 	{
 		Cart::content();
 		$data = array();
+		$color = null;
+		$size = null;
 		foreach (Cart::content() as $key => $cartItem) {
 			if($cartItem->options->size_id != null){
 				$size = Size::where('id',$cartItem->options->size_id)->first();
@@ -77,8 +79,6 @@ class CartController extends Controller
 					->transformWith(new ProductSizeTransformer)
 					->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
 					->toArray();
-				}else{
-					$size = null;
 				}
 			}
 			if($cartItem->options->color_id != null){
@@ -89,8 +89,6 @@ class CartController extends Controller
 					->transformWith(new ProductColorTransformer)
 					->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
 					->toArray();
-				}else{
-					$color = null;
 				}
 			}
 			$data[] = array('row_id'=>$cartItem->rowId,'name'=>$cartItem->name,'qty'=>$cartItem->qty,'price'=>$cartItem->price,'product'=>$cartItem->options->obj,'size'=>$size,'color'=>$color);
