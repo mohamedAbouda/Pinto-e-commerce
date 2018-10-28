@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\OrderProduct;
 use App\Models\OrderDate;
+use App\Transformers\ProductTransformer;
 use Cart;
 
 class CartController extends Controller
@@ -43,7 +44,13 @@ class CartController extends Controller
 			'qty' => $request->get('qty' ,1),
 			'price' =>$price,
 			'options' => [
-				'obj' => $product,
+				'obj' =>
+					fractal()
+					->item($product)
+					->transformWith(new ProductTransformer)
+					->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+					->toArray()
+				,
 				'color' => $request->input('color' , NULL),
 				'size' => $request->input('size' , NULL),
 			]
