@@ -31,7 +31,7 @@ class CartController extends Controller
 				'error' => 'Not Available Amount',
 			],404);
 		}
-		$product = Product::where('id',$request->input('product_id'))->with('discount')->first();
+		$product = Product::where('id',$request->input('product_id'))->with('discount','brand','images','subcategory','reviews','sizes','tags','colors')->first();
 		$price = $product->price;
 		if($product->discount){
 			$discountPrice = ($product->price * $product->discount->percentage)/100;
