@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use App\Http\Requests\Dashboard\CreateCouponCode;
 
 class CouponController extends BaseController
 {
@@ -15,8 +16,8 @@ class CouponController extends BaseController
      */
     public function index()
     {
-        $data['resources'] = Coupon::orderBy('created_at' , 'DESC')->paginate(20);
-        return view('dashboard.coupons.index' , $data);
+        $data['coupons'] = Coupon::orderBy('created_at' , 'DESC')->paginate(20);
+        return view('dashboardV2.coupons.index' , $data);
     }
 
     /**
@@ -26,7 +27,7 @@ class CouponController extends BaseController
      */
     public function create()
     {
-        return view('dashboard.coupons.create');
+        return view('dashboardV2.coupons.create');
     }
 
     /**
@@ -35,7 +36,7 @@ class CouponController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCouponCode $request)
     {
         $coupon = Coupon::create($request->all());
         if ($coupon) {
@@ -52,7 +53,7 @@ class CouponController extends BaseController
      */
     public function show(Coupon $coupon)
     {
-        return view('dashboard.coupons.show' , ['resource' => $coupon]);
+        return view('dashboardV2.coupons.show' , ['resource' => $coupon]);
     }
 
     /**
@@ -63,7 +64,7 @@ class CouponController extends BaseController
      */
     public function edit(Coupon $coupon)
     {
-        return view('dashboard.coupons.edit' , ['resource' => $coupon]);
+        return view('dashboardV2.coupons.edit' , ['coupon' => $coupon]);
     }
 
     /**

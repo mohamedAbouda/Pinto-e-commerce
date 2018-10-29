@@ -198,16 +198,26 @@
                         </a>
                     </li> -->
 
-                    <!-- <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.gift_cards.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Gift Cards">
-                        <a href="{{route('dashboard.gift_cards.index')}}" style="text-decoration: none;">
-                            <div class="c-menu__item__inner">
-                                <i class="fa fa-files-o"></i>
-                                <div class="c-menu-item__title">
-                                    <span>Gift Cards</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li> -->
+                 <!--   <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.gift_cards.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Gift Cards">
+                      <a href="{{route('dashboard.gift_cards.index')}}" style="text-decoration: none;">
+                          <div class="c-menu__item__inner">
+                              <i class="fa fa-files-o"></i>
+                              <div class="c-menu-item__title">
+                                  <span>Gift Cards</span>
+                              </div>
+                          </div>
+                      </a>
+                  </li>  -->
+                  <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.coupons.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Coupon">
+                      <a href="{{route('dashboard.coupons.index')}}" style="text-decoration: none;">
+                          <div class="c-menu__item__inner">
+                              <i class="fa fa-files-o"></i>
+                              <div class="c-menu-item__title">
+                                  <span>Coupon</span>
+                              </div>
+                          </div>
+                      </a>
+                  </li> 
 
                     <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.products.index') ? 'is-active' : '' }}" data-toggle="tooltip" title="Products">
                         <a href="{{route('dashboard.products.index')}}" style="text-decoration: none;">
