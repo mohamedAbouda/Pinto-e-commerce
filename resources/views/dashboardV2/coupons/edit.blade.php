@@ -45,6 +45,7 @@
                            Coupon Code
                         </label>
                         <input type="text" class="form-control" id="formInput25" required name="code" value="{{$coupon->code}}">
+                          <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('code') }}</p>
                     </div>
 
                 </div>
@@ -56,6 +57,7 @@
                            Coupon Percentage
                         </label>
                         <input type="number" min="0" step="any" name="percentage"  class="form-control" value="{{$coupon->percentage}}">
+                          <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('percentage') }}</p>
                       
                     </div>
                 </div>

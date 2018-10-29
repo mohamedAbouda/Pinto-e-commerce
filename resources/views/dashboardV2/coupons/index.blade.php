@@ -12,7 +12,7 @@ body {
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <h3 class="section-title contacts-section-title">
-            {{ trans('web.dashboard_gift_cards_pages_index_page_section_header_gift_cards') }}
+           Coupons
         </h3>
     </div>
     <div class="col-xs-12 col-md-3">
@@ -39,7 +39,7 @@ body {
             <div class="col-md-4 margin-bottom10 margin-top20">
                 <div class="total-customer-col pad5 pad-bottom5 col-md-12">
                     <div class="col-md-9 customer-stat-col-pad">
-                        <h5 class="customer-stat-text pad5">{{ trans('web.dashboard_gift_cards_pages_index_page_total_gift_cards_count') }}</h5>
+                        <h5 class="customer-stat-text pad5">Total Coupon Count</h5>
                     </div>
                     <div class="col-md-3 text-center">
                         <h5 class="customer-stat-num pad5">{{count($coupons)}}</h5>

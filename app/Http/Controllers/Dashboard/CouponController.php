@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Http\Requests\Dashboard\CreateCouponCode;
-
+use App\Http\Requests\Dashboard\EditCouponCode;
 class CouponController extends BaseController
 {
-    /**
+    /**EditCouponCode
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -74,7 +74,7 @@ class CouponController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coupon $coupon)
+    public function update(EditCouponCode $request, Coupon $coupon)
     {
         $coupon->update($request->all());
         return redirect()->back()->with('success', 'Coupon updated successfully');

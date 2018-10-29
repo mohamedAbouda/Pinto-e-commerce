@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <h3 class="section-title contacts-section-title">
-            {{ trans('web.dashboard_gift_cards_pages_create_page_section_header_create_gift_card') }}
+          Create Coupon
         </h3>
     </div>
     <div class="col-xs-12 col-md-3">
@@ -32,13 +32,13 @@
                 {{csrf_field()}}
                 <div class="col-md-12">
                     <h3 class="secondry-title">
-                        {{ trans('web.dashboard_gift_cards_pages_create_page_gift_card_info') }}.
+                        Create Coupon
                     </h3>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
                         <label class="control-label" for="formInput25">
-                            {{ trans('web.dashboard_gift_cards_pages_create_page_gift_card_code') }}
+                            Coupon Code
                         </label>
                         <input type="text" class="form-control" id="formInput25" required name="code" value="{{old('code')}}">
                          <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('code') }}</p>
