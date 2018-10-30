@@ -32,7 +32,7 @@
                 <div class="col-md-12">
                     <h3 class="secondry-title">{{ trans('web.dashboard_products_create_inve_inven') }}.</h3>
                 </div>
-                @if($subCategory && $subCategory->category && $subCategory->category->has_size == 1)
+                @if($subCategory && $subCategory->category)
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label">{{ trans('web.dashboard_products_create_inve_size') }}</label>
@@ -42,7 +42,7 @@
                 @endif
 
 
-                @if($subCategory && $subCategory->category && $subCategory->category->has_color == 1)
+                @if($subCategory && $subCategory->category)
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label">{{ trans('web.dashboard_products_create_inve_color') }}</label>
