@@ -314,8 +314,12 @@ class ProductController extends BaseController
     public function saveInventory(Request $request)
     {
         $data = $request->all();
-        $data['size'] = implode(',', $data['size']);
-        $data['color'] = implode(',', $data['color']);
+        if (isset($data['size'])) {
+            $data['size'] = implode(',', $data['size']);
+        }
+        if (isset($data['color'])) {
+            $data['color'] = implode(',', $data['color']);
+        }
         $createStock = Stock::create($data);
         return $stock = Stock::where('id',$createStock->id)->with('product')->first();
     }
