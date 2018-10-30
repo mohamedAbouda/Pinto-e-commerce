@@ -111,8 +111,8 @@ class ProductController extends BaseController
 
             $categories = Category::with('subCategories')->get();
             $subcategories = SubCategory::pluck('name','id')->toArray();
-            $sizes = Size::all();
-            $colors = Color::all();
+            $sizes = Size::pluck('name' ,'name')->toArray();
+            $colors = Color::pluck('name' ,'name')->toArray();
             $brands = Brand::all();
             $subCategory = SubCategory::where('id',$product->sub_category_id)->first();
             $productIds = GeneralProduct::where('product_id',$id)->pluck('related_products')->first();
