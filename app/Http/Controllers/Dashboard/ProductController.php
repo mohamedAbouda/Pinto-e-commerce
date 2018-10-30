@@ -168,6 +168,12 @@ class ProductController extends BaseController
             ]);
             $data['key_word_id'] = $key_word->id;
         }
+        if (isset($data['size'])) {
+            $data['size'] = implode(',', $data['size']);
+        }
+        if (isset($data['color'])) {
+            $data['color'] = implode(',', $data['color']);
+        }
         if($stock){
             $stock->update($data);
         }
@@ -202,9 +208,7 @@ class ProductController extends BaseController
 
         }
 
-
         if ($product->update($data)) {
-
             return redirect('dashboard/products/index')->with('success', 'Item updated.');
         }
         return back()->with('info', 'Item did not update.');
