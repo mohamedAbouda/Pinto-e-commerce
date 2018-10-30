@@ -63,7 +63,7 @@ body {
                            Code
                         </th>
                         <th>
-                           Percentage 
+                           Discount 
                         </th>
 
 
@@ -77,7 +77,11 @@ body {
                             {{$coupon->code}}
                         </td>
                         <td>
-                             {{$coupon->percentage}} %
+                             @if($coupon->percentage < 1)
+                             {{$coupon->percentage *100}} %
+                             @else
+                             {{$coupon->percentage}} L.E
+                             @endif
                             
                         </td>
                         <td>

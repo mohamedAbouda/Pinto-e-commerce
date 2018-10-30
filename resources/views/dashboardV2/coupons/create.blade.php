@@ -50,9 +50,10 @@
 
                     <div class="form-group margin-bottom20">
                         <label class="control-label" for="formInput25">
-                            Discount Percentage
+                            Discount 
                         </label>
                         <input type="number" min="0" step="any" name="percentage" value="{{old('percentage')}}" class="form-control">
+                        ** if the discount less than 1 it will be precentage and if it's more than 1 it will be amount
                         <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('percentage') }}</p>
                     </div>
                 </div>

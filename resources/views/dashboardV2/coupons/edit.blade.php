@@ -57,6 +57,7 @@
                            Coupon Percentage
                         </label>
                         <input type="number" min="0" step="any" name="percentage"  class="form-control" value="{{$coupon->percentage}}">
+                         ** if the discount less than 1 it will be precentage and if it's more than 1 it will be amount
                           <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('percentage') }}</p>
                       
                     </div>

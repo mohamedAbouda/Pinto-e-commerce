@@ -157,12 +157,15 @@ class CartController extends Controller
 			$data['total_price'] += $item->qty * $item->price;
 		}
 
-		//return $data['total_price'];
 		$updateOrder = $createOrder->update(['total_price'=>$data['total_price'],'total_price_after_discount'=>$data['total_price']]);
 		if($coupon_code != null){
 			$checkCode = Coupon::where('code',$request->input('coupon_code'))->first();
 			if($checkCode){
-				$data['total_price_after_discount'] = $createOrder->total_price - (($createOrder->total_price * $checkCode->percentage) / 100);
+				if($checkCode->percentage < 1){
+				$data['total_price_after_discount'] = $createOrder->total_price - (($createOrder->total_price * ($checkCode->percentage*100)) / 100);
+				}else{
+					$data['total_price_after_discount'] = $createOrder->total_price - $checkCode->percentage;
+				}
 				$updateOrder = $createOrder->update(['total_price_after_discount'=>$data['total_price_after_discount'],'coupon_id'=>$checkCode->id]);
 			}
 		}
