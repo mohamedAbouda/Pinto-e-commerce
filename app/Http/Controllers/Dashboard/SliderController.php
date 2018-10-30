@@ -6,8 +6,10 @@ use App\Http\Requests\Dashboard\SliderUpdateRequest;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\createSliderRequest;
 use Image;
 use Alert;
+
 
 class SliderController extends BaseController
 {
@@ -39,8 +41,9 @@ class SliderController extends BaseController
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(createSliderRequest $request)
     {
+        
         $data = $request->all();
         $create = Slider::create($data);
         Alert::success('Your data has been saved', 'Done!')->persistent('Close');
@@ -68,7 +71,7 @@ class SliderController extends BaseController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(createSliderRequest $request, $id)
     {
         $data = $request->all();
         $slider = Slider::where('id',$id)->first();
