@@ -41,7 +41,7 @@
                 </div>
                 @endif
 
-                
+
                 @if($subCategory && $subCategory->category && $subCategory->category->has_color == 1)
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
