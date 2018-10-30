@@ -55,20 +55,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25"> {{ trans('web.dashboard_products_add_stock_size') }}</label>
-                        <input type="text" min="1" class="form-control" id="formInput25" required name="size">
-                    </div>
-
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group margin-bottom20">
-                        <label class="control-label" for="formInput25"> {{ trans('web.dashboard_products_add_stock_color') }}</label>
-                        <input type="text" min="1" class="form-control" id="formInput25" required name="color">
-                    </div>
-
-                </div>
+                
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
                         <label class="control-label"> {{ trans('web.dashboard_products_add_stock_size') }}</label>
