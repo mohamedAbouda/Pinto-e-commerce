@@ -36,7 +36,11 @@
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_inve_size') }}</label>
-                        <input type="text" class="form-control" id="formInput25"  name="size">
+                        <select class="form-control select" name="size">
+                            @foreach($sizes as $size)
+                                <option value="{{$size->name}}">{{$size->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>
@@ -48,12 +52,16 @@
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_inve_color') }}</label>
-                        <input type="text" name="color"   class="form-control">
+                        <select class="form-control select" name="color">
+                            @foreach($colors as $color)
+                                <option value="{{$color->name}}">{{$color->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>
 
-@endif
+                @endif
                  <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label" for="formInput25">{{ trans('web.dashboard_products_create_inve_sku') }}</label>
@@ -138,13 +146,15 @@
 @stop
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-<script type="text/javascript" src="{{ asset('assets/panel-assets/js/jquery-1.11.1.min.js') }}"></script>
 <script type="text/javascript">
-$(".select2").select2();
+$(".select").select2();
 
 
 </script>
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script type="text/javascript" src="{{ asset('assets/panel-assets/js/jquery-1.11.1.min.js') }}">
+</script>
+
 <script type="text/javascript">
     $('#create-inventory').submit(function(e){
     e.preventDefault();

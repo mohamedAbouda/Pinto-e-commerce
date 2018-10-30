@@ -90,8 +90,10 @@ class ProductController extends BaseController
 
             $productId = $product->id;
             $brands = Brand::all();
+            $sizes = Size::all();
+            $colors = Color::all();
             $subCategory = SubCategory::where('id',$request->input('sub_category_id'))->with('category')->first();
-            return view('dashboardV2.products.createInventory',compact('productId','brands','subCategory'));
+            return view('dashboardV2.products.createInventory',compact('productId','brands','subCategory','sizes','colors'));
         }
         return back()->with('info', 'Product did not create.');
     }

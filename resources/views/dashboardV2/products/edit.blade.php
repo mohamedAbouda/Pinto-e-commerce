@@ -299,7 +299,12 @@
                             <div class="col-md-6">
                                 <div class="form-group margin-bottom20">
                                     <label class="control-label" for="">{{ trans('web.dashboard_products_edit_p_size') }}</label>
-                                    <input type="text" class="form-control" id=""  name="size">
+                                    <select class="form-control select2" name="size" style="width: 200px;">
+                                        <option selected disabled>Select Size</option>
+                            @foreach($sizes as $size)
+                                <option value="{{$size->name}}">{{$size->name}}</option>
+                            @endforeach
+                        </select>
                                 </div>
                             </div>
                             @endif
@@ -308,7 +313,12 @@
                             <div class="col-md-6">
                                 <div class="form-group margin-bottom20">
                                     <label class="control-label" for="">{{ trans('web.dashboard_products_edit_p_color') }}</label>
-                                    <input type="text" name="color"   class="form-control">
+                                   <select class="form-control select2" name="color" style="width: 200px;">
+                                    <option selected disabled>Select Color</option>
+                            @foreach($colors as $color)
+                                <option value="{{$color->name}}">{{$color->name}}</option>
+                            @endforeach
+                        </select>
                                 </div>
                             </div>
                             @endif
@@ -386,7 +396,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
-$(".select2").select2();
+$(".select2").select2({
+    placeholder:'choose an option',
+});
 CKEDITOR.replace( 'description' );
 CKEDITOR.replace( 'technical_specs' );
 
