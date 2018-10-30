@@ -2,7 +2,7 @@
 
 
 @section('stylesheets')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('assets/panel-assets/plugins/select2/dist/css/select2.min.css') }}">
 @stop
 
 
@@ -292,19 +292,14 @@
                     <div class="tab-pane fade" id="inventory">
                         <form id="create-inventory" action="{{route('dashboard.save.product.inventory')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <h3 class="secondry-title">{{ trans('web.dashboard_products_edit_product_inventory') }}.</h3>
                             </div>
                             @if($subCategory && $subCategory->category && $subCategory->category->has_size == 1)
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group margin-bottom20">
-                                    <label class="control-label" for="">{{ trans('web.dashboard_products_edit_p_size') }}</label>
-                                    <select class="form-control select2" name="size" style="width: 200px;">
-                                        <option selected disabled>Select Size</option>
-                            @foreach($sizes as $size)
-                                <option value="{{$size->name}}">{{$size->name}}</option>
-                            @endforeach
-                        </select>
+                                    <label class="control-label"> {{ trans('web.dashboard_products_add_stock_size') }}</label>
+                                    {{ Form::select('size[]' ,$sizes ,NULL ,['class' => 'form-control' ,'multiple' => 'multiple' ,'required' => 'required']) }}
                                 </div>
                             </div>
                             @endif
@@ -312,13 +307,8 @@
                             @if($subCategory && $subCategory->category && $subCategory->category->has_color == 1)
                             <div class="col-md-6">
                                 <div class="form-group margin-bottom20">
-                                    <label class="control-label" for="">{{ trans('web.dashboard_products_edit_p_color') }}</label>
-                                   <select class="form-control select2" name="color" style="width: 200px;">
-                                    <option selected disabled>Select Color</option>
-                            @foreach($colors as $color)
-                                <option value="{{$color->name}}">{{$color->name}}</option>
-                            @endforeach
-                        </select>
+                                    <label class="control-label"> {{ trans('web.dashboard_products_add_stock_color') }}</label>
+                                    {{ Form::select('color[]' ,$colors ,NULL ,['class' => 'form-control' ,'multiple' => 'multiple' ,'required' => 'required']) }}
                                 </div>
                             </div>
                             @endif
@@ -393,7 +383,7 @@
 </div>
 @stop
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript" src="{{ asset('assets/panel-assets/plugins/select2/dist/js/select2.full.min.js') }}"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
 $(".select2").select2({
@@ -433,14 +423,9 @@ $('.deleteImage-form').submit(function(e){
 
 </script>
 <script type="text/javascript">
-$(".size-select").select2({
-    placeholder:'choose a size',
-
-
-
-
+$("select[name='size[]'] ,select[name='color[]']").select2({
+    tags: true
 });
-
 CKEDITOR.replace('info');
 CKEDITOR.replace('stylist');
 CKEDITOR.replace('delivery');
@@ -669,5 +654,5 @@ function onCategoryChangeSub() {
                 }
             });
         }
-    </script>
-    @stop
+        </script>
+        @stop

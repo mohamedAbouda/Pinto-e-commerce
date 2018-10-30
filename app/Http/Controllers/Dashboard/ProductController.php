@@ -88,12 +88,13 @@ class ProductController extends BaseController
             $data['product_id'] = $product->id;
             $createGeneralProduct = GeneralProduct::create($data);
 
-            $productId = $product->id;
-            $brands = Brand::all();
-            $sizes = Size::all();
-            $colors = Color::all();
-            $subCategory = SubCategory::where('id',$request->input('sub_category_id'))->with('category')->first();
-            return view('dashboardV2.products.createInventory',compact('productId','brands','subCategory','sizes','colors'));
+            $data['productId'] = $product->id;
+            $data['brands'] = Brand::all();
+            $data['subCategory'] = SubCategory::where('id',$request->input('sub_category_id'))->with('category')->first();
+            $data['sizes'] = Size::pluck('name' ,'name')->toArray();
+            $data['colors'] = Color::pluck('name' ,'name')->toArray();
+
+            return view('dashboardV2.products.createInventory' ,$data);
         }
         return back()->with('info', 'Product did not create.');
     }
@@ -110,8 +111,8 @@ class ProductController extends BaseController
 
             $categories = Category::with('subCategories')->get();
             $subcategories = SubCategory::pluck('name','id')->toArray();
-            $sizes = Size::all();
-            $colors = Color::all();
+            $sizes = Size::pluck('name' ,'name')->toArray();
+            $colors = Color::pluck('name' ,'name')->toArray();
             $brands = Brand::all();
             $subCategory = SubCategory::where('id',$product->sub_category_id)->first();
             $productIds = GeneralProduct::where('product_id',$id)->pluck('related_products')->first();
@@ -167,6 +168,12 @@ class ProductController extends BaseController
             ]);
             $data['key_word_id'] = $key_word->id;
         }
+        if (isset($data['size'])) {
+            $data['size'] = implode(',', $data['size']);
+        }
+        if (isset($data['color'])) {
+            $data['color'] = implode(',', $data['color']);
+        }
         if($stock){
             $stock->update($data);
         }
@@ -201,9 +208,7 @@ class ProductController extends BaseController
 
         }
 
-
         if ($product->update($data)) {
-
             return redirect('dashboard/products/index')->with('success', 'Item updated.');
         }
         return back()->with('info', 'Item did not update.');
@@ -278,7 +283,11 @@ class ProductController extends BaseController
     }
     public function addStock($id)
     {
-        return view('dashboardV2.products.addStock')->with('id',$id);
+        $data['id'] = $id;
+        $data['sizes'] = Size::pluck('name' ,'id')->toArray();
+        $data['colors'] = Color::pluck('name' ,'id')->toArray();
+
+        return view('dashboardV2.products.addStock' ,$data);
     }
 
     public function removeStock($id)
@@ -305,9 +314,14 @@ class ProductController extends BaseController
     public function saveInventory(Request $request)
     {
         $data = $request->all();
+        if (isset($data['size'])) {
+            $data['size'] = implode(',', $data['size']);
+        }
+        if (isset($data['color'])) {
+            $data['color'] = implode(',', $data['color']);
+        }
         $createStock = Stock::create($data);
         return $stock = Stock::where('id',$createStock->id)->with('product')->first();
-
     }
 
     public function deleteInventory(Request $request)
