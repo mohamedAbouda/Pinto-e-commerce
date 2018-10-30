@@ -2,7 +2,7 @@
 
 
 @section('stylesheets')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('dashboard/plugins/select2.css') }}">
 @stop
 
 
@@ -383,7 +383,7 @@
 </div>
 @stop
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript" src="{{ asset('assets/panel-assets/plugins/select2/dist/js/select2.full.min.js') }}"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
 $(".select2").select2({
@@ -423,13 +423,9 @@ $('.deleteImage-form').submit(function(e){
 
 </script>
 <script type="text/javascript">
-$(".size-select").select2({
-    placeholder:'choose a size',
+$('select[name=size] ,select[name=color]').select2({
+    tags: true
 });
-$(".color-select").select2({
-    placeholder:'choose a color',
-});
-
 CKEDITOR.replace('info');
 CKEDITOR.replace('stylist');
 CKEDITOR.replace('delivery');
