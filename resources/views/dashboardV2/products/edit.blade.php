@@ -423,7 +423,7 @@ $('.deleteImage-form').submit(function(e){
 
 </script>
 <script type="text/javascript">
-$('select[name=size] ,select[name=color]').select2({
+$("select[name='size[]'] ,select[name='color[]']").select2({
     tags: true
 });
 CKEDITOR.replace('info');
