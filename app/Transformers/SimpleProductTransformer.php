@@ -15,6 +15,7 @@ class SimpleProductTransformer extends TransformerAbstract
             'description' => $product->description,
             'image' => $product->cover_image_url,
             'short_description' => $product->short_description,
+            'views'=>$product->views,
             'rate'=>$product->rate,
         ];
     }
