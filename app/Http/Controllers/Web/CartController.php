@@ -220,8 +220,8 @@ class CartController extends Controller
             $createOrderProduct->product_id = $cartItem->id;
             $createOrderProduct->amount = $cartItem->qty;
             $createOrderProduct->price_per_item = $cartItem->options->obj->price;
-            $createOrderProduct->color = $cartItem->options->color ? $cartItem->options->color : null;
-            $createOrderProduct->size = $cartItem->options->size ? $cartItem->options->size : null;
+            $createOrderProduct->color_id = $cartItem->options->color_id ? $cartItem->options->color_id : null;
+            $createOrderProduct->size_id = $cartItem->options->size_id ? $cartItem->options->size_id : null;
             $createOrderProduct->order_id = $createOrder->id;
             $createOrderProduct->save();
 

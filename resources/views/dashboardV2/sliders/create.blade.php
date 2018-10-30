@@ -62,6 +62,7 @@
                             {{ trans('web.dashboard_sliders_create_page_form_url') }}
                         </label>
                         <input type="text" name="url" id="url" class="form-control" value="{{ old('url') }}">
+                         <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('url') }}</p>
                     </div>
                 </div>
                 <div class="col-md-12">
