@@ -149,14 +149,21 @@ class AuthController extends Controller
 
 	public function forgetPassword(Request $request)
 	{
-		if(!$request->input('email')){
+		$validator = Validator::make($request->all(), [
+			'email' => 'required|email',
+		]);
+		if ($validator->fails()) {
 			return response()->json([
-				'error' => 'please provide email address',
+				'error' => 'Please enter a valid email'
 			],422);
 		}
-
 		$email = $request->get('email');
 		$client = Client::where('email' , $email)->first();
+		if(!$client){
+			return response()->json([
+				'error' => 'No client found with this email'
+			],422);
+		}
 		$token = str_random(16);
 		PasswordReset::create([
 			'email' => $email , 'token' => $token , 'created_at' => Carbon::now()->toDateTimeString()
