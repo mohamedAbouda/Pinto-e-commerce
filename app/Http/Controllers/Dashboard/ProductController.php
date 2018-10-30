@@ -88,10 +88,13 @@ class ProductController extends BaseController
             $data['product_id'] = $product->id;
             $createGeneralProduct = GeneralProduct::create($data);
 
-            $productId = $product->id;
-            $brands = Brand::all();
-            $subCategory = SubCategory::where('id',$request->input('sub_category_id'))->with('category')->first();
-            return view('dashboardV2.products.createInventory',compact('productId','brands','subCategory'));
+            $data['productId'] = $product->id;
+            $data['brands'] = Brand::all();
+            $data['subCategory'] = SubCategory::where('id',$request->input('sub_category_id'))->with('category')->first();
+            $data['sizes'] = Size::pluck('name' ,'name')->toArray();
+            $data['colors'] = Color::pluck('name' ,'name')->toArray();
+
+            return view('dashboardV2.products.createInventory' ,$data);
         }
         return back()->with('info', 'Product did not create.');
     }
@@ -276,7 +279,11 @@ class ProductController extends BaseController
     }
     public function addStock($id)
     {
-        return view('dashboardV2.products.addStock')->with('id',$id);
+        $data['id'] = $id;
+        $data['sizes'] = Size::pluck('name' ,'id')->toArray();
+        $data['colors'] = Color::pluck('name' ,'id')->toArray();
+
+        return view('dashboardV2.products.addStock' ,$data);
     }
 
     public function removeStock($id)
