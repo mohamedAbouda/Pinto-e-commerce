@@ -2,7 +2,7 @@
 
 
 @section('stylesheets')
-<link rel="stylesheet" href="{{ asset('dashboard/plugins/select2.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/panel-assets/plugins/select2/dist/css/select2.min.css') }}">
 @stop
 
 
