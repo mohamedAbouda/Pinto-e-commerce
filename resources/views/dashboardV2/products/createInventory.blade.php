@@ -36,7 +36,7 @@
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label">{{ trans('web.dashboard_products_create_inve_size') }}</label>
-                        {{ Form::select('size[]' ,$sizes ,NULL ,['class' => 'form-control' ,'multiple' => 'multiple' ,'required' => 'required']) }}
+                        {{ Form::select('size' ,$sizes ,NULL ,['class' => 'form-control' ,'required' => 'required']) }}
                     </div>
                 </div>
                 @endif
@@ -46,7 +46,7 @@
                 <div class="col-md-6">
                     <div class="form-group margin-bottom20">
                         <label class="control-label">{{ trans('web.dashboard_products_create_inve_color') }}</label>
-                        {{ Form::select('color[]' ,$colors ,NULL ,['class' => 'form-control' ,'multiple' => 'multiple' ,'required' => 'required']) }}
+                        {{ Form::select('color' ,$colors ,NULL ,['class' => 'form-control' ,'required' => 'required']) }}
                     </div>
                 </div>
                 @endif
@@ -139,7 +139,7 @@
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
 $(function(){
-    $("select[name='size[]'] ,select[name='color[]']").select2({
+    $("select[name='size'] ,select[name='color']").select2({
         tags: true
     });
 });

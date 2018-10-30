@@ -168,12 +168,12 @@ class ProductController extends BaseController
             ]);
             $data['key_word_id'] = $key_word->id;
         }
-        if (isset($data['size'])) {
-            $data['size'] = implode(',', $data['size']);
-        }
-        if (isset($data['color'])) {
-            $data['color'] = implode(',', $data['color']);
-        }
+        // if (isset($data['size'])) {
+        //     $data['size'] = implode(',', $data['size']);
+        // }
+        // if (isset($data['color'])) {
+        //     $data['color'] = implode(',', $data['color']);
+        // }
         if($stock){
             $stock->update($data);
         }
@@ -314,12 +314,12 @@ class ProductController extends BaseController
     public function saveInventory(Request $request)
     {
         $data = $request->all();
-        if (isset($data['size'])) {
-            $data['size'] = implode(',', $data['size']);
-        }
-        if (isset($data['color'])) {
-            $data['color'] = implode(',', $data['color']);
-        }
+        // if (isset($data['size'])) {
+        //     $data['size'] = implode(',', $data['size']);
+        // }
+        // if (isset($data['color'])) {
+        //     $data['color'] = implode(',', $data['color']);
+        // }
         $createStock = Stock::create($data);
         return $stock = Stock::where('id',$createStock->id)->with('product')->first();
     }
