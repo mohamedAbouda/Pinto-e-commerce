@@ -315,6 +315,7 @@ class ProductController extends BaseController
     {
         $data = $request->all();
         if (isset($data['size'])) {
+            dd($data['size']);
             $data['size'] = implode(',', $data['size']);
         }
         if (isset($data['color'])) {
