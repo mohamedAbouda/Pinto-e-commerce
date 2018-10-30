@@ -59,13 +59,13 @@
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
                         <label class="control-label"> {{ trans('web.dashboard_products_add_stock_size') }}</label>
-                        {{ Form::select('size' ,$sizes ,NULL ,['class' => 'form-control' ,'multiple' => 'multiple' ,'required' => 'required']) }}
+                        {{ Form::select('size' ,$sizes ,NULL ,['class' => 'form-control' ,'required' => 'required']) }}
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group margin-bottom20">
                         <label class="control-label"> {{ trans('web.dashboard_products_add_stock_color') }}</label>
-                        {{ Form::select('color' ,$colors ,NULL ,['class' => 'form-control' ,'multiple' => 'multiple' ,'required' => 'required']) }}
+                        {{ Form::select('color' ,$colors ,NULL ,['class' => 'form-control' ,'required' => 'required']) }}
                     </div>
                 </div>
                 <input type="hidden" name="value" value="positive">
