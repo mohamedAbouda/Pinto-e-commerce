@@ -110,7 +110,7 @@ export default {
             step: 5,
             value: [10, 1000],
         };
-        new slider(".price-slider", slider_options);
+        // new slider(".price-slider", slider_options);
         var vm = this;
         this.price_slider = new slider("#parameters-price-slider", slider_options).on('slideStop' ,function(){
             vm.change({});

@@ -199,7 +199,7 @@ class ProductController extends Controller
         if ($request->has('color_id')) {
             $color = Color::find($request->get('color_id'));
             $search_sql = $search_sql->whereHas('stocks' ,function($q) use($color){
-                $q->where('colors' ,'REGEXP' ,"^([A-Za-z],?)*" . $color->name . "(,?[A-Za-z])*$");
+                $q->where('color' ,'REGEXP' ,"^([A-Za-z],?)*" . $color->name . "(,?[A-Za-z])*$");
             });
         }
 

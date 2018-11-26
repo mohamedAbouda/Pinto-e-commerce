@@ -33,77 +33,7 @@
 
     <div class="wrap-filter-box text-center js-filter">
         <a class="filter-title"><i class="icon-equalizer"></i></a>
-        <form action="#" method="get" class="form-filter-product js-filter-open">
-            <span class="close-left js-close"><i class="icon-close f-20"></i></span>
-            <div class="product-filter-wrapper">
-                <div class="product-filter-inner text-left">
-                    <div class="product-filter">
-                        <div class="form-group">
-                            <span class="title-filter">Category</span>
-                            <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Select a category
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>Select a category</li>
-                                <li>Backpacks</li>
-                                <li>Decoration</li>
-                                <li>Essentials</li>
-                                <li>Interior</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-filter">
-                        <div class="form-group">
-                            <span class="title-filter">Color</span>
-                            <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Choose color
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>Choose color</li>
-                                <li>Red</li>
-                                <li>Blue</li>
-                                <li>Gray</li>
-                                <li>White</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-filter">
-                        <div class="form-group">
-                            <span class="title-filter">Size</span>
-                            <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Choose size
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>Choose size</li>
-                                <li>S</li>
-                                <li>M</li>
-                                <li>L</li>
-                                <li>XL</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-filter">
-                        <div class="form-group">
-                            <span class="title-filter">Price</span>
-                            <div class="filter-content">
-                                <div class="price-range-holder">
-                                    <input type="text" class="price-slider" value="">
-                                </div>
-                                <span class="min-max">
-                                    Price: $30 — $3450
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="product-filter-button-group clearfix">
-                    <div class="product-filter-button">
-                        <a href="" class="btn-submit">Fillter </a>
-                    </div>
-                    <div class="product-filter-button">
-                        <a href="" class="btn-submit">Clear </a>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <search-filter url="{{ route('web.products.ajax.search.parameters') }}"></search-filter>
     </div>
     <div class="wrap-filter-box text-center view-mode">
         <a class="list" onClick="return false;"><span class="icon-list-img"></span></a>

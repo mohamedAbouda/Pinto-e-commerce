@@ -8,6 +8,7 @@ window.axios.defaults.headers.common = {
 };
 
 Vue.component('search-parameters', require('./components/parameters.vue'));
+Vue.component('search-filter', require('./components/filters.vue'));
 Vue.component('product-grid', require('./components/product-grid.vue'));
 Vue.component('grid', require('./components/grid.vue'));
 Vue.component('pagination', require('../components/pagination.vue'));
