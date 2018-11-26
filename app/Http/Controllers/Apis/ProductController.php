@@ -69,9 +69,9 @@ class ProductController extends Controller
 
 	public function addProductReview(Request $request)
 	{
-		if(!$request->input('review')){
+		if(!$request->input('rate')){
 			return response()->json([
-				'error' => 'Please provide the review'
+				'error' => 'Please provide the rate'
 			],404);
 		}
 		$data = $request->all();

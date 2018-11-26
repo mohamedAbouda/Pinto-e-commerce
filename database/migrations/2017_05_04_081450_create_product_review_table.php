@@ -23,7 +23,7 @@ class CreateProductReviewTable extends Migration
             $table->foreign('client_id')->references('id')->on('clients')
             ->onDelete('cascade');
             $table->string('name')->default('');
-            $table->text('review')->default('');
+            $table->text('review')->nullable();
             $table->integer('rate')->default(0);
             $table->integer('approved')->default(0);
 
